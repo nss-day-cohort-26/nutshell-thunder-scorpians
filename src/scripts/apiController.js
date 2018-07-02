@@ -14,16 +14,21 @@ const apiController = Object.create({}, {
         }
     },
     addNewTask: {
-        value: function(userId, dueDate, taskDescription){
-            return $.ajax({
+        value: function(param){
+            $.ajax({
                 url: "http://localhost:3000/tasks",
                 type: "POST",
                 data: {
-                    userId: userId,
-                    dueDate: dueDate,
-                    desc: taskDescription,
+                    userId: param.userId,
+                    dueDate: param.dueDate,
+                    desc: param.taskDescription,
                 }
             })
+        }
+    },
+    getTasks:{
+        value: function(userId) {
+            return $.ajax(`http://localhost:3000/tasks?userId=${userId}`)
         }
     }
 })
