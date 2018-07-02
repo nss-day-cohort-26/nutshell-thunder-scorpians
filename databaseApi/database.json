@@ -1,47 +1,19 @@
 {
   "users": [
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Test",
+      "email": "test@gmail.com",
       "id": 1
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Friend",
+      "email": "friend@gmail.com",
       "id": 2
-    },
-    {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
-      "id": 3
-    },
-    {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
-      "id": 4
-    },
-    {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
-      "id": 5
     }
   ],
   "artciles": [],
   "events": [],
-  "tasks": [
-    {
-      "userId": "1",
-      "dueDate": "2018-10-10",
-      "desc": "this is a test task",
-      "complete": "false",
-      "id": 1
-    },
-    {
-      "dueDate": "2018-12-20",
-      "desc": "this is a second test task",
-      "id": 2
-    }
-  ],
+  "tasks": [],
   "friends": [],
   "messages": []
 }
