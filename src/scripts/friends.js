@@ -5,13 +5,14 @@ const createObject = require("./objectConstructors")
 const currentUser = sessionStorage.getItem("activeUser")
 
 const friendsList = $(".friends")
+const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
+
 
 const friendActions = Object.create({},{
     displayFriendList: {
         value: function(){
             $("#friendListContainer").remove()
-            if (addFriendBtn.prop(hide)){addFriendBtn.show()}
-            else{
+            addFriendBtn.show()
             friendsList.append($("<div id='friendListContainer'><ul id='friendUL'></ul></div>"))
             apiController.getFriendsList(currentUser)
             console.log("currentuserID", currentUser)
@@ -22,7 +23,6 @@ const friendActions = Object.create({},{
                     $("#friendUL").append(liElement)
                 })
             })
-        }
         }
     },
     addFriend: {
@@ -48,7 +48,6 @@ const friendActions = Object.create({},{
         }
     }
 })
-const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
 addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend()})
 friendsList.append(addFriendBtn)
 
