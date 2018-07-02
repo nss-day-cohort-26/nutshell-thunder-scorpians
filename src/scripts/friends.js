@@ -14,7 +14,7 @@ const friendActions = Object.create({},{
             $("#friendListContainer").remove()
             addFriendBtn.show()
             friendsList.append($("<div id='friendListContainer'><ul id='friendUL'></ul></div>"))
-            apiController.getFriendsList(currentUser)
+            // apiController.getFriendsList(currentUser)
             console.log("currentuserID", currentUser)
             let currentFriendsList = apiController.getFriendsList(currentUser).then((response) =>{
                 response.forEach(friend =>{
@@ -31,19 +31,35 @@ const friendActions = Object.create({},{
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
             friendsList.append(saveButton)
+            let friendsToCheck = []
+            apiController.getFriendsList(currentUser).then( (response) =>{friendsToCheck = response})
             saveButton.click(() => {
                 const friendNameToAdd = friendNameInput.val()
+                console.log(friendsToCheck)
+                for (let i=0; i<friendsToCheck.length; i++){
+                    if (friendNameToAdd === friendsToCheck[i].user.name){
+                        alert(`You've already added ${friendNameToAdd} as a friend`)
+                        friendNameInput.remove()
+                        saveButton.remove()
+                        friendActions.displayFriendList()
+                        return
+                    }
+                }
                 apiController.getUserId(friendNameToAdd).then(response => {
                     if (response.length === 0){
-                        alert("I'm sorry, that user doesn't exist")
-                        return null
+                        alert(`I'm sorry, user ${friendNameToAdd} doesn't exist`)
+                        friendNameInput.remove()
+                        saveButton.remove()
+                        friendActions.displayFriendList()
                     }
-                    else {apiController.addNewFriend(currentUser, response[0].id)
-                    friendNameInput.remove()
-                    saveButton.remove()
-                    friendActions.displayFriendList()
+                    else {
+                        apiController.addNewFriend(currentUser, response[0].id)
+                        friendNameInput.remove()
+                        saveButton.remove()
+                        friendActions.displayFriendList()
                     }
-                })})
+                })
+            })
             friendsList.append(friendNameInput)
         }
     }
