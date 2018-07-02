@@ -6,22 +6,22 @@
       "id": 1
     },
     {
-      "name": "Phil",
+      "name": "Tom",
       "email": "ppatton@phil.net",
       "id": 2
     },
     {
-      "name": "Phil",
+      "name": "Sue",
       "email": "ppatton@phil.net",
       "id": 3
     },
     {
-      "name": "Phil",
+      "name": "Been",
       "email": "ppatton@phil.net",
       "id": 4
     },
     {
-      "name": "Phil",
+      "name": "Chi Chi",
       "email": "ppatton@phil.net",
       "id": 5
     }
@@ -46,8 +46,18 @@
   "messages": [
     {
       "userId": "2",
-      "message": "clown",
-      "id": 1
+      "message": "Duck",
+      "id": 2
+    },
+    {
+      "userId": "3",
+      "message": "Duck",
+      "id": 3
+    },
+    {
+      "userId": "1",
+      "message": "asdf",
+      "id": 4
     }
   ]
 }

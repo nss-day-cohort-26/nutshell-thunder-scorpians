@@ -1,7 +1,18 @@
-
 const $ = require("jquery");
-const apiController = require("./apiController")
-const messagesApi = apiController["messages"]
+const apiController = require("./apiController");
+const messagesApi = apiController["messages"];
+// console.log(apiController);
+// console.log(messagesApi);
+// console.log(messagesApi["read"]);
+// console.log(messagesApi.read)
+
+let currentUser = null;
+if (sessionStorage.getItem("activeUser")) {
+    currentUser = sessionStorage.getItem("activeUser")
+} else {
+    currentUser = 1
+}
+
 
 // API
 const Messages = {
@@ -33,58 +44,87 @@ const Messages = {
 // DOM BUILD
 var buildMessagesDOM = function (messages) {
 
+    // SELECT DIV AND WIPE
     const messageDiv = $("#messagesDiv");
     messageDiv.empty();
 
+    // ADD MESSENGER HEADER
+    messageDiv.append($("<h2>").text("Messenger"));
+
+    // ITERATE MESSAGES
     messages.forEach(message => {
-        const msgItem = $("<div>").text(`User ${message["userId"]} said: ${message["message"]}`);
 
-        const deleteButton = $("<button>").text("delete").attr("messageId",message["id"]);
-        deleteButton.on("click", (e) => {
-            const button = e["target"];
-            const msgId = button.getAttribute("messageid");
-            //console.log(msgId);
-            Messages.delete(msgId)
-        });
+        //CREATE MESSAGE ITEM
+        const messageText = message["message"];
+        const messageUserId = message["userId"];
+        const messageUserName = message["user"]["name"];
+        const messageId = message["id"];
+        const msgItem = $("<div>").attr("id", "msg" + messageId);
 
-        const editButton = $("<button>").text("edit").attr("messageId",message["id"]);
-        editButton.attr("userId",message["userId"]);
-        editButton.on("click", (e) => {
-            const button = e["target"];
-            const msgId = button.getAttribute("messageid");
-            const userId = button.getAttribute("userId");
-            const message = $(`#editInput${msgId}`).val()
-            //console.log(msgId, message)
-            Messages.update(msgId, userId, message)
-        });
+        msgItem.text(`${messageUserName}: ${messageText}`);
 
-        const editInput = $("<input>").attr("id",`editInput${message["id"]}`);
+        //IF MESSAGE BELONGS TO CURRENT USER, ALLOW TO CONFIGURE
+        if (messageUserId === currentUser) {
 
-        msgItem.append(deleteButton);
-        msgItem.append(editButton);
-        msgItem.append(editInput);
+            // EDIT BUTTON
+            const editButton = $("<button>").text("edit");
 
+            // EDIT INPUT
+            const editInput = $("<input>").attr("placeholder", messageText)
+
+            // SAVE BUTTON
+            const saveButton = $("<button>").text("Save").on("click", (e) => {
+                Messages.update(messageId, messageUserId, editInput.val())
+            });
+
+            // CANCEL BUTTON
+            const cancelButton = $("<button>").text("Save").on("click", (e) => {
+                Messages.read();
+            });
+
+            // DELETE BUTTON
+            const deleteButton = $("<button>").text("Save").on("click", (e) => {
+                Messages.delete(messageId);
+            });
+
+            // EDITING OPTIONS MINIMIZED BY DEFAULT
+            editInput.style.display = "none";
+            saveButton.style.display = "none";
+            cancelButton.style.display = "none";
+            deleteButton.style.display = "none";
+
+            // TOGGLE EDIT OPTIONS
+            editButton.on("click", (e) => {
+                msgItem.text(`${messageUserName}: `);
+                e.target.style.display = "none";
+                editInput.style.display = "block";
+                saveButton.style.display = "block";
+                cancelButton.style.display = "block";
+                deleteButton.style.display = "block";
+            });
+
+            msgItem.append(editButton).append(editInput).append(saveButton).append(cancelButton).append(deleteButton);
+        }
+
+        //APPEND MESSAGE ITEM
         messageDiv.append(msgItem);
     });
 
-    const newMessageDiv = $("div");
-    const newMessageInput = $("<input>").attr("id","newMessageInput");
-    const newMessageButton = $("<button>").attr("id","newMessageSubmitButton");
+    // CREATE NEW MESSAGE AREA AT BOTTOM OF BOX
+    const newMessageDiv = $("<div>");
+    const newMessageInput = $("<input>").attr("id", "newMessageInput");
+    const newMessageButton = $("<button>").text("submit").attr("id", "newMessageSubmitButton");
     newMessageButton.on("click", (e) => {
-        
+        const message = $("#newMessageInput").val()
+        Messages.create(currentUser, message)
     })
 
+    // APPEND NEW MESSAGE AREA TO MESSENER DIV
     newMessageDiv.append(newMessageInput);
     newMessageDiv.append(newMessageButton);
-
     messageDiv.append(newMessageDiv);
-
 }
 
 // INITIALIZE
 
 Messages.read()
-Messages.create(2,"Duck");
-Messages.create(1,"Moose");
-
-

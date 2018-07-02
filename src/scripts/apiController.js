@@ -28,43 +28,51 @@ const apiController = Object.create({}, {
     },
     messages: {
         // READ
-        read: function () {
-            return $.ajax("http://localhost:3000/messages")
-        },
-        // CREATE
-        create: function (userId, message) {
-            return $.ajax({
-                url: "http://localhost:3000/messages",
-                method: "POST",
-                data: {
-                    "userId": userId,
-                    "message": message
-                }
-            })
-        },
+        value: {
+            // READ
+            read: function () {
+                return $.ajax("http://localhost:3000/messages?_expand=user")
+                // ADD
+                // USER
+                // DATA
+                // HERE
+            },
+            // CREATE
+            create: function (userId, message) {
+                return $.ajax({
+                    url: "http://localhost:3000/messages",
+                    method: "POST",
+                    data: {
+                        "userId": userId,
+                        "message": message
+                    }
+                })
+            },
 
-        // UPDATE
-        update: function (msgId, userId, newMessage) {
+            // UPDATE
+            update: function (msgId, userId, newMessage) {
 
-            return $.ajax({
-                url: `http://localhost:3000/Messages/${msgId}`,
-                method: "PUT",
-                data: {
-                    "userId": userId,
-                    "message": newMessage
-                }
-            })
-        },
+                return $.ajax({
+                    url: `http://localhost:3000/Messages/${msgId}`,
+                    method: "PUT",
+                    data: {
+                        "userId": userId,
+                        "message": newMessage
+                    }
+                })
+            },
+            // DELETE
+            delete: function (msgId) {
 
-        // DELETE
-        delete: function (msgId) {
+                return $.ajax({
+                    url: `http://localhost:3000/Messages/${msgId}`,
+                    method: "DELETE"
+                })
 
-            return $.ajax({
-                url: `http://localhost:3000/Messages/${msgId}`,
-                method: "DELETE"
-            })
+            }
         }
     }
 })
+
 
 module.exports = apiController
