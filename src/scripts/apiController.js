@@ -25,6 +25,22 @@ const apiController = Object.create({}, {
                 }
             })
         }
+    },
+
+    events: {
+        value: {
+            addNewEvent: (eventObject) => {
+                return $.ajax({
+                    url: "http://localhost:3000/events",
+                    type: "POST",
+                    data: {
+                        name: eventObject.name,
+                        date: eventObject.date,
+                        location: eventObject.location
+                    }
+                });
+            }
+        }
     }
 })
 

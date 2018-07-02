@@ -53,6 +53,9 @@ const submitEvent = () => {
     console.log(newEvent);
 
 // Make an api call here with the new event I just made
+    apiController.events.addNewEvent(newEvent).then(
+      allInputs.each((i, element) => {element.value = ""})
+    );
 
   } else {
     alert("You must fill all input fields to submit a new event");

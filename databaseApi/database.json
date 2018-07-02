@@ -12,7 +12,32 @@
     }
   ],
   "artciles": [],
-  "events": [],
+  "events": [
+    {
+      "name": "asdf",
+      "date": "2018-07-19",
+      "location": "wer",
+      "id": 1
+    },
+    {
+      "name": "asdf",
+      "date": "2018-07-19",
+      "location": "wer",
+      "id": 2
+    },
+    {
+      "name": "wer",
+      "date": "2018-07-10",
+      "location": "asdfweqwe",
+      "id": 3
+    },
+    {
+      "name": "ttwere",
+      "date": "2018-07-11",
+      "location": "sdfsdfasdf",
+      "id": 4
+    }
+  ],
   "tasks": [],
   "friends": [],
   "messages": []
