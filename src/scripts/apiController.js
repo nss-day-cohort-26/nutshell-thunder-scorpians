@@ -30,6 +30,14 @@ const apiController = Object.create({}, {
         value: function(userId) {
             return $.ajax(`http://localhost:3000/tasks?userId=${userId}`)
         }
+    },
+    deleteTask:{
+        value: function(id) {
+            $.ajax({
+                url: `http://localhost:3000/tasks/${id}`,
+                type: "DELETE"
+            })
+        }
     }
 })
 
