@@ -2,17 +2,7 @@
 
 const $ = require("jquery");
 const apiController = require("../apiController");
-
-
-class Event {
-  constructor(userId, name, date, location) {
-    this.userId = userId;
-    this.name = name;
-    this.date = date;
-    this.location = location;
-  }
-}
-
+const Event = require("./event-class");
 
 const loadEvents = () => {
   console.log("load events running")
@@ -21,6 +11,8 @@ const loadEvents = () => {
   newThing.name = "this";
   console.log(newThing);
   console.log("load events running")
+
+  apiController.events.getAllEvents().then(response => console.log(response));
 };
 
 module.exports = loadEvents;

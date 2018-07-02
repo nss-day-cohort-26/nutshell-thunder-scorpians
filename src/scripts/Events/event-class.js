@@ -1,4 +1,5 @@
 
+// Required by: event-submit, events, event-load
 class Event {
   constructor(userId, name, date, location) {
     this.userId = userId;

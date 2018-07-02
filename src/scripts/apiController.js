@@ -39,9 +39,14 @@ const apiController = Object.create({}, {
                         location: eventObject.location
                     }
                 });
+            },
+            getAllEvents: () => {
+                return $.ajax("http://localhost:3000/events?name=asdf&_sort=date&_order=asc");
             }
         }
     }
 })
+
+// _sort=date&_order=asc
 
 module.exports = apiController

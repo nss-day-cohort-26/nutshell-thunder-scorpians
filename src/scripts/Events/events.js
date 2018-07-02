@@ -20,4 +20,4 @@ console.log("events page is working");
 */
 
 loadEvents();
-createNewEvent();
+// createNewEvent();
