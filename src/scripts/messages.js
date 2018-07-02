@@ -55,13 +55,17 @@ var buildMessagesDOM = function (messages) {
     messages.forEach(message => {
 
         //CREATE MESSAGE ITEM
+
+
         const messageText = message["message"];
         const messageUserId = message["userId"];
         const messageUserName = message["user"]["name"];
         const messageId = message["id"];
-        const msgItem = $("<div>").attr("id", "msg" + messageId);
 
-        msgItem.text(`${messageUserName}: ${messageText}`);
+        const msgItem = $("<div>").attr("id", "msg" + messageId);
+        const msgSpan = $("<span>").text(`${messageUserName}: ${messageText}`);
+
+        msgItem.append(msgSpan);
 
         //IF MESSAGE BELONGS TO CURRENT USER, ALLOW TO CONFIGURE
         if (messageUserId === currentUser) {
@@ -78,29 +82,29 @@ var buildMessagesDOM = function (messages) {
             });
 
             // CANCEL BUTTON
-            const cancelButton = $("<button>").text("Save").on("click", (e) => {
+            const cancelButton = $("<button>").text("Cancel").on("click", (e) => {
                 Messages.read();
             });
 
             // DELETE BUTTON
-            const deleteButton = $("<button>").text("Save").on("click", (e) => {
+            const deleteButton = $("<button>").text("Delete").on("click", (e) => {
                 Messages.delete(messageId);
             });
 
             // EDITING OPTIONS MINIMIZED BY DEFAULT
-            editInput.style.display = "none";
-            saveButton.style.display = "none";
-            cancelButton.style.display = "none";
-            deleteButton.style.display = "none";
+            editInput.hide();
+            saveButton.hide();
+            cancelButton.hide();
+            deleteButton.hide();
 
             // TOGGLE EDIT OPTIONS
             editButton.on("click", (e) => {
-                msgItem.text(`${messageUserName}: `);
+                msgItem.children("span").text(`${messageUserName}: `);
                 e.target.style.display = "none";
-                editInput.style.display = "block";
-                saveButton.style.display = "block";
-                cancelButton.style.display = "block";
-                deleteButton.style.display = "block";
+                editInput.show();
+                saveButton.show();
+                cancelButton.show();
+                deleteButton.show();
             });
 
             msgItem.append(editButton).append(editInput).append(saveButton).append(cancelButton).append(deleteButton);
