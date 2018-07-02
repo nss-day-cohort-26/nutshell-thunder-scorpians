@@ -1,47 +1,80 @@
 {
   "users": [
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Brenna Green",
+      "email": "Vicenta_Leuschke@gmail.com",
       "id": 1
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Mr. Agustina Hills",
+      "email": "Leland_Windler@yahoo.com",
       "id": 2
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Nathan Mueller",
+      "email": "Lauretta.Casper89@yahoo.com",
       "id": 3
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Josefa Kihn",
+      "email": "Natalie_Shanahan75@hotmail.com",
       "id": 4
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Hailie Wolff",
+      "email": "Carson.Pacocha@yahoo.com",
       "id": 5
+    },
+    {
+      "name": "Eldon Predovic",
+      "email": "Aron38@gmail.com",
+      "id": 6
+    },
+    {
+      "name": "Anastacio Kreiger",
+      "email": "Sharon_Larkin43@gmail.com",
+      "id": 7
+    },
+    {
+      "name": "Tianna Raynor",
+      "email": "Jayme_Mueller11@gmail.com",
+      "id": 8
+    },
+    {
+      "name": "Octavia Osinski",
+      "email": "Heloise.Lehner@gmail.com",
+      "id": 9
+    },
+    {
+      "name": "Triston Wolff",
+      "email": "Clinton_Rutherford56@yahoo.com",
+      "id": 10
     }
   ],
   "artciles": [],
   "events": [],
-  "tasks": [
+  "tasks": [],
+  "friends": [
     {
-      "userId": "1",
-      "dueDate": "2018-10-10",
-      "desc": "this is a test task",
-      "complete": "false",
+      "userId": "2",
+      "friendId": "1",
       "id": 1
     },
     {
-      "dueDate": "2018-12-20",
-      "desc": "this is a second test task",
+      "userId": "4",
+      "friendId": "1",
       "id": 2
+    },
+    {
+      "userId": "5",
+      "friendId": "1",
+      "id": 3
+    },
+    {
+      "userId": "5",
+      "friendId": "1",
+      "id": 4
     }
   ],
-  "friends": [],
   "messages": []
 }

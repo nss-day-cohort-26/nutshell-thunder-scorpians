@@ -1,5 +1,7 @@
 const createNewForm = require("./createInputForm")
+const friends = require("./friends")
+const makeData = require("./populateFakeData")
 
-createNewForm.userForm("User")
-createNewForm.userForm("Task")
-createNewForm.userForm("Event")
+sessionStorage.setItem("activeUser", 1)
+friends.displayFriendList()
+// makeData(5)
