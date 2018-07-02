@@ -1,50 +1,32 @@
 
 const $ = require("jquery");
+const apiController = require("./apiController")
+const messagesApi = apiController["messages"]
 
 // API
 const Messages = {
     // READ
     read: function () {
-        return $.ajax("http://localhost:3000/messages").then(msgArr => {
+        messagesApi.read().then(msgArr => {
             buildMessagesDOM(msgArr);
         })
     },
 
     // CREATE
     create: function (userId, message) {
-        $.ajax({
-            url: "http://localhost:3000/messages",
-            method: "POST",
-            data: {
-                "userId": userId,
-                "message": message
-            }
-        })
-        .then(this.read)
+        messagesApi.create(userId, message).then(this.read)
     },
 
     // UPDATE
     update: function (msgId, userId, newMessage) {
 
-        $.ajax({
-                url: `http://localhost:3000/Messages/${msgId}`,
-                method: "PUT",
-                data: {
-                    "userId": userId,
-                    "message": newMessage
-                }
-            })
-            .then(this.read)
+        messagesApi.update(msgId, userId, newMessage).then(this.read)
     },
 
     // DELETE
     delete: function (msgId) {
 
-        $.ajax({
-                url: `http://localhost:3000/Messages/${msgId}`,
-                method: "DELETE"
-            })
-            .then(this.read)
+        messagesApi.delete(msgId).then(this.read)
     }
 }
 
