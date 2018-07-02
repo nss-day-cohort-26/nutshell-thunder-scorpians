@@ -17,6 +17,12 @@ console.log("events page is working");
 /* Page Has Loaded:
 1. Add New Event Button
 */
-
+const $eventsArticle = $("<article>").addClass("article--events");
 loadEvents();
 createNewEvent();
+
+/*
+Currently working; next steps include...
+making the submit button reload the events
+adding a create new event button to bring up the new event form
+*/

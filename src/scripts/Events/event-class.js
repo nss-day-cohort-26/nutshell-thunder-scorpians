@@ -1,3 +1,4 @@
+// Author: Elliot Huck
 
 // Required by: event-submit, events, event-load
 class Event {

@@ -1,4 +1,6 @@
 // This module creates the form for submitting a new event
+// Author: Elliot Huck
+
 const $ = require("jquery");
 const apiController = require("../apiController");
 
