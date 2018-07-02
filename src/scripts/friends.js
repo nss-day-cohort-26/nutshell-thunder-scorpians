@@ -10,6 +10,8 @@ const friendActions = Object.create({},{
     displayFriendList: {
         value: function(){
             $("#friendListContainer").remove()
+            if (addFriendBtn.prop(hide)){addFriendBtn.show()}
+            else{
             friendsList.append($("<div id='friendListContainer'><ul id='friendUL'></ul></div>"))
             apiController.getFriendsList(currentUser)
             console.log("currentuserID", currentUser)
@@ -19,13 +21,13 @@ const friendActions = Object.create({},{
                     liElement.text(`${friend.user.name}`)
                     $("#friendUL").append(liElement)
                 })
-                // console.log(response)
             })
+        }
         }
     },
     addFriend: {
         value: function(){
-            const friendNameInput = $("<input type='text' value='Enter Friend Name'></input>")
+            const friendNameInput = $("<input type='text' placeholder='Enter Friend Name'></input>")
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
             friendsList.append(saveButton)
@@ -43,12 +45,11 @@ const friendActions = Object.create({},{
                     }
                 })})
             friendsList.append(friendNameInput)
-            console.log("You clicked me")
         }
     }
 })
 const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
-addFriendBtn.click(friendActions.addFriend)
+addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend()})
 friendsList.append(addFriendBtn)
 
 module.exports = friendActions
