@@ -5,6 +5,7 @@ const messagesApi = apiController["messages"];
 // console.log(messagesApi);
 // console.log(messagesApi["read"]);
 // console.log(messagesApi.read)
+// const currentUser = sessionStorage.getItem("activeUser")
 
 let currentUser = null;
 if (sessionStorage.getItem("activeUser")) {

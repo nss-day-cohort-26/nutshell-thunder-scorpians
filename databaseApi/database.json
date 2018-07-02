@@ -56,8 +56,13 @@
     },
     {
       "userId": "1",
-      "message": "Fucks",
+      "message": "New message",
       "id": 4
+    },
+    {
+      "userId": "1",
+      "message": "Ducky Ducky",
+      "id": 5
     }
   ]
 }
