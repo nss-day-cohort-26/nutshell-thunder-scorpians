@@ -45,11 +45,14 @@ const submitEvent = () => {
   });
   console.log(allValues);
   if (!allValues.includes("")) {
-    console.log("if condition running");
+    console.log("Creating new event...");
     const name = allValues[0];
     const date = allValues[1];
     const location = allValues[2];
     const newEvent = new Event(currentUser, name, date, location);
+    console.log(newEvent);
+
+// Make an api call here with the new event I just made
 
   } else {
     alert("You must fill all input fields to submit a new event");
