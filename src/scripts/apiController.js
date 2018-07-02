@@ -29,7 +29,7 @@ const apiController = Object.create({}, {
     addNewArticle: {
         value: function(title, synopsis, url, timeStamp) {
             return $.ajax({
-                url: "http://localhost:3000/news",
+                url: "http://localhost:3000/articles",
                 type: "POST",
                 data: {
                     title: title,

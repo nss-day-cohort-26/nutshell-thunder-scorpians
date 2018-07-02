@@ -26,7 +26,15 @@
       "id": 5
     }
   ],
-  "artciles": [],
+  "articles": [
+    {
+      "title": "test",
+      "synopsis": "test",
+      "url": "test",
+      "timestamp": "2018-07-02 01:35:46 pm",
+      "id": 1
+    }
+  ],
   "events": [],
   "tasks": [
     {
