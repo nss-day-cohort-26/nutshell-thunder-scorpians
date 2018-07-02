@@ -43,5 +43,11 @@
     }
   ],
   "friends": [],
-  "messages": []
+  "messages": [
+    {
+      "userId": "2",
+      "message": "clown",
+      "id": 1
+    }
+  ]
 }

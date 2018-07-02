@@ -90,7 +90,7 @@ var buildMessagesDOM = function (messages) {
 // INITIALIZE
 
 Messages.read()
-// Messages.create(2,"Duck");
-// Messages.create(1,"Moose");
+Messages.create(2,"Duck");
+Messages.create(1,"Moose");
 
 
