@@ -25,6 +25,20 @@ const apiController = Object.create({}, {
                 }
             })
         }
+    },
+    addNewArticle: {
+        value: function(title, synopsis, url, timeStamp) {
+            return $.ajax({
+                url: "http://localhost:3000/news",
+                type: "POST",
+                data: {
+                    title: title,
+                    synopsis: synopsis,
+                    url: url,
+                    timestamp: timeStamp
+                }
+            })
+        }
     }
 })
 
