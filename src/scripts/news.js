@@ -10,30 +10,53 @@ const $ = require("jquery")
 const moment = require("moment")
 const apiController = require("./apiController")
 
-$("<article>").addClass("test").appendTo("#news-test")
-$("<button>").addClass("add-news").text("New Article").appendTo($(".test"))
-const saveNews = $("<button>").addClass("save-news").text("Save Article")
+$("<article>").attr("id", "test").appendTo("#news-test")
+//create New Article button
+const addNewsButton = $("<button>").attr("id", "add-news-button").text("New Article").appendTo($("#test"))
+//create Save Article button
+const saveNewsButton = $("<button>").addClass("save-news-button").text("Save Article")
+//create elements for news inputs and append to DOM
+const newsContainer = $("<section>")
+$("#news-test").append(newsContainer)
+const addNews = $("<div>").attr("id", "news")
+newsContainer.append(addNews)
+const titleInput = $("<input>").attr("id", "title").text("Title").appendTo(addNews)
+titleInput.attr("placeholder", "Enter article title")
+const synopsisInput = $("<input>").attr("id", "synopsis").text("Synopsis").appendTo(addNews)
+synopsisInput.attr("placeholder", "Enter article summary")
+const urlInput = $("<input>").attr("id", "url").text("URL").appendTo(addNews)
+addNews.hide()
+urlInput.attr("placeholder", "Enter article URL")
 
-$(".add-news").click(() => {
-    const $newsContainer = $("<section>")
-    const $addNews = $("<div>").addClass("news")
-    $("body").append($newsContainer)
-    $newsContainer.append($addNews)
-    $("<input>").addClass("title").text("Title").appendTo($addNews)
-    $("<input>").addClass("synopsis").text("Synopsis").appendTo($addNews)
-    $("<input>").addClass("url").text("URL").appendTo($addNews)
-    saveNews.appendTo($addNews)
+//event handler on New Article button.  hides button when pressed and shows input fields
+addNewsButton.click(() => {
+    addNews.show()
+    saveNewsButton.appendTo(addNews)
+    addNewsButton.hide()
 })
-
 
 // Given a user has entered in all field values for storing a new article
 // When the user performs a gesture on the Save Article affordance
 // Then the article should be saved in the database, and assigned to the user
 // And should have a property of the current timestamp
 
-$(saveNews).click(() => {
-    console.log($(".title").val());
-    apiController.addNewArticle($(".title").val(), $(".synopsis").val(), $(".url").val(), moment().format("YYYY-MM-DD hh:mm:ss a"))
+//event handler on Save article button
+$(saveNewsButton).click(() => {
+    //checks to make sure all fields are filled in and alerts to fill in if not
+    if (titleInput.val() === "" || synopsisInput.val() === "" || urlInput.val() === "") {
+        alert("Please fill in all fields.")
+    } else {
+    //adds values of input fields to database
+    apiController.addNewArticle(titleInput.val(), synopsisInput.val(), urlInput.val(), moment().format("YYYY-MM-DD hh:mm:ss a"))
+    //hides input fields and button
+    $("#news").hide()
+    //shows New Article button
+    addNewsButton.show()
+    //clears input values
+    titleInput.val("")
+    synopsisInput.val("")
+    urlInput.val("")
+    }
 })
 
 console.log("working")

@@ -27,28 +27,6 @@
     }
   ],
   "articles": [
-    {
-      "title": "test",
-      "synopsis": "test",
-      "url": "test",
-      "timestamp": "2018-07-02 01:35:46 pm",
-      "id": 1
-    }
-  ],
-  "events": [],
-  "tasks": [
-    {
-      "userId": "1",
-      "dueDate": "2018-10-10",
-      "desc": "this is a test task",
-      "complete": "false",
-      "id": 1
-    },
-    {
-      "dueDate": "2018-12-20",
-      "desc": "this is a second test task",
-      "id": 2
-    }
   ],
   "friends": [],
   "messages": []
