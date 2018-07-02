@@ -13,7 +13,7 @@ const apiController = require("../apiController");
 const Event = require("./event-class");
 // Required by: event-form
 
-const currentUser = 1;
+const currentUser = 2;
 
 const submitEvent = () => {
   const allInputs = $("#event-form input");

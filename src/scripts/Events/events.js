@@ -3,7 +3,6 @@ const $ = require("jquery");
 const apiController = require("../apiController");
 const loadEvents = require("./event-load");
 const createNewEvent = require("./event-form");
-const currentUser = 1;
 
 console.log("events page is working");
 
@@ -20,4 +19,4 @@ console.log("events page is working");
 */
 
 loadEvents();
-// createNewEvent();
+createNewEvent();

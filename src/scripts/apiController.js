@@ -34,6 +34,7 @@ const apiController = Object.create({}, {
                     url: "http://localhost:3000/events",
                     type: "POST",
                     data: {
+                        userId: eventObject.userId,
                         name: eventObject.name,
                         date: eventObject.date,
                         location: eventObject.location
@@ -41,7 +42,7 @@ const apiController = Object.create({}, {
                 });
             },
             getAllEvents: () => {
-                return $.ajax("http://localhost:3000/events?name=asdf&_sort=date&_order=asc");
+                return $.ajax("http://localhost:3000/events?userId=1&userId=2&_sort=date&_order=asc");
             }
         }
     }
