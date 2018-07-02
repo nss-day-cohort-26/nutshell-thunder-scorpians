@@ -67,6 +67,13 @@ var buildMessagesDOM = function (messages) {
         messageDiv.append(msgItem);
     });
 
+    const newMessageDiv = $("div");
+    const newMessageInput = $("<input>").attr("id","newMessageInput");
+    const newMessageButton = $("<button>").attr("id","newMessageSubmitButton")
+
+    newMessageDiv.append(newMessageInput);
+    newMessageDiv.append(newMessageButton);
+
 }
 
 // INITIALIZE
