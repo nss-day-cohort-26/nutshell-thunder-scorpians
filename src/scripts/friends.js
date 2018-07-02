@@ -5,16 +5,17 @@ const createObject = require("./objectConstructors")
 const currentUser = sessionStorage.getItem("activeUser")
 
 const friendsList = $(".friends")
-const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
 
+const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
 
 const friendActions = Object.create({},{
     displayFriendList: {
         value: function(){
             $("#friendListContainer").remove()
+            addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend() })
+            friendsList.append(addFriendBtn)
             addFriendBtn.show()
             friendsList.append($("<div id='friendListContainer'><ul id='friendUL'></ul></div>"))
-            // apiController.getFriendsList(currentUser)
             console.log("currentuserID", currentUser)
             let currentFriendsList = apiController.getFriendsList(currentUser).then((response) =>{
                 response.forEach(friend =>{
@@ -47,7 +48,7 @@ const friendActions = Object.create({},{
                 }
                 apiController.getUserId(friendNameToAdd).then(response => {
                     if (response.length === 0){
-                        alert(`I'm sorry, user ${friendNameToAdd} doesn't exist`)
+                        alert(`I'm sorry, user ${friendNametoAdd} doesn't exist`)
                         friendNameInput.remove()
                         saveButton.remove()
                         friendActions.displayFriendList()
@@ -64,7 +65,6 @@ const friendActions = Object.create({},{
         }
     }
 })
-addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend()})
-friendsList.append(addFriendBtn)
+
 
 module.exports = friendActions

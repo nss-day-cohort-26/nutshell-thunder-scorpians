@@ -60,6 +60,11 @@ const apiController = Object.create({}, {
         value: function(userName){
             return $.ajax(`http://localhost:3000/users?name=${userName}`)
         }
+    },
+    queryUsers: {
+        value: function(){
+            return $.ajax("http://localhost:3000/users")
+        }
     }
 })
 
