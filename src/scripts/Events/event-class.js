@@ -1,3 +1,4 @@
+// This module creates an Event class that can be used in other modules
 // Author: Elliot Huck
 
 // Required by: event-submit, events, event-load
