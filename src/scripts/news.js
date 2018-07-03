@@ -61,10 +61,25 @@ $(saveNewsButton).click(() => {
     }
 })
 
+//append articles database to dom
+const printArticles = () => {
 apiController.getArticleList()
 .then((articleList) => {
-    console.log("articleList", articleList);
-})
+    const articleOutput = $("<section>").attr("id", "article-output")
+    articleList.forEach(articleText => {
+        console.log("articleText", articleText)
+        console.log("list.text", articleText.title);
+        const titleText = $("<h3>").text(articleText.title)
+        const synopsisText = $("<h5>").text(articleText.synopsis)
+        const urlText = $("<a>").text(articleText.url)
+        const timeText = $("<p>").text(articleText.timestamp)
+        const newsText = $("<div>").append(titleText).append(synopsisText).append(urlText).append(timeText)
+        newsContainer.append(articleOutput).append(newsText)
+        });
+    })
+}
 
+//calling function to print to dom.  needs to be moved to save article button, clear dom and reprint
+printArticles()
 
 console.log("working")
