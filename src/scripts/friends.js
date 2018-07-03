@@ -5,7 +5,6 @@ const createObject = require("./objectConstructors")
 const currentUser = sessionStorage.getItem("activeUser")
 
 const friendsList = $(".friends")
-
 const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
 
 const friendActions = Object.create({},{
@@ -66,5 +65,6 @@ const friendActions = Object.create({},{
     }
 })
 
+friendActions.displayFriendList()
 
 module.exports = friendActions

@@ -64,7 +64,8 @@ const apiController = Object.create({}, {
     queryUsers: {
         value: function(){
             return $.ajax("http://localhost:3000/users")
-        },
+        }
+    },
     events: {
         value: {
             addNewEvent: (eventObject) => {
@@ -80,7 +81,7 @@ const apiController = Object.create({}, {
                 });
             },
             getAllEvents: () => {
-                return $.ajax("http://localhost:3000/events?userId=1&userId=2&_sort=date&_order=asc");
+                return $.ajax("http://localhost:3000/events?userId=1&_sort=date&_order=asc");
             }
         }
     },
@@ -98,6 +99,6 @@ const apiController = Object.create({}, {
             })
         }
     }
-}})
+})
 
 module.exports = apiController
