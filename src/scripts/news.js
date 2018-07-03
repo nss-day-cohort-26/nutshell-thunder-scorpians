@@ -37,6 +37,24 @@ addNewsButton.click(() => {
     addNewsButton.hide()
 })
 
+//append articles database to dom
+const printArticles = () => {
+    apiController.getArticleList()
+    .then((articleList) => {
+        const articleOutput = $("<section>").attr("id", "article-output")
+        articleList.forEach(articleText => {
+            console.log("articleText", articleText)
+            console.log("list.text", articleText.title);
+            const titleText = $("<h3>").text(articleText.title)
+            const synopsisText = $("<h5>").text(articleText.synopsis)
+            const urlText = $("<a>").text(articleText.url)
+            const timeText = $("<p>").text(articleText.timestamp)
+            const newsText = $("<div>").append(titleText).append(synopsisText).append(urlText).append(timeText)
+            newsContainer.append(articleOutput).append(newsText)
+            });
+        })
+    }
+
 // Given a user has entered in all field values for storing a new article
 // When the user performs a gesture on the Save Article affordance
 // Then the article should be saved in the database, and assigned to the user
@@ -58,28 +76,11 @@ $(saveNewsButton).click(() => {
     titleInput.val("")
     synopsisInput.val("")
     urlInput.val("")
+    printArticles()
     }
 })
 
-//append articles database to dom
-const printArticles = () => {
-apiController.getArticleList()
-.then((articleList) => {
-    const articleOutput = $("<section>").attr("id", "article-output")
-    articleList.forEach(articleText => {
-        console.log("articleText", articleText)
-        console.log("list.text", articleText.title);
-        const titleText = $("<h3>").text(articleText.title)
-        const synopsisText = $("<h5>").text(articleText.synopsis)
-        const urlText = $("<a>").text(articleText.url)
-        const timeText = $("<p>").text(articleText.timestamp)
-        const newsText = $("<div>").append(titleText).append(synopsisText).append(urlText).append(timeText)
-        newsContainer.append(articleOutput).append(newsText)
-        });
-    })
-}
 
 //calling function to print to dom.  needs to be moved to save article button, clear dom and reprint
-printArticles()
 
 console.log("working")
