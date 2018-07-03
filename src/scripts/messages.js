@@ -75,7 +75,7 @@ var buildMessagesDOM = function (messages) {
             const editButton = $("<button>").text("edit");
 
             // EDIT INPUT
-            const editInput = $("<input>").attr("placeholder", messageText)
+            const editInput = $("<input>").attr("value", messageText)
 
             // SAVE BUTTON
             const saveButton = $("<button>").text("Save").on("click", (e) => {

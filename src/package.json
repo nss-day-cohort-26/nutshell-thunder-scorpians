@@ -17,6 +17,8 @@
     "grunt-eslint": "^20.2.0"
   },
   "dependencies": {
-    "jquery": "^3.3.1"
+    "faker": "^4.1.0",
+    "jquery": "^3.3.1",
+    "moment": "^2.22.2"
   }
 }
