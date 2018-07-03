@@ -1,33 +1,85 @@
 {
   "users": [
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Test",
+      "email": "test@gmail.com",
       "id": 1
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Friend",
+      "email": "friend@gmail.com",
+      "id": 2
+    }
+  ],
+  "artciles": [],
+  "events": [
+    {
+      "userId": "1",
+      "name": "One third",
+      "date": "2018-07-17",
+      "location": "Here",
+      "id": 1
+    },
+    {
+      "userId": "1",
+      "name": "One first",
+      "date": "2018-07-03",
+      "location": "There",
       "id": 2
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "userId": "1",
+      "name": "One second",
+      "date": "2018-07-10",
+      "location": "Anywhere",
       "id": 3
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "userId": "2",
+      "name": "Two after first",
+      "date": "2018-07-05",
+      "location": "Elsewhere",
       "id": 4
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "userId": "2",
+      "name": "Two before second",
+      "date": "2018-07-09",
+      "location": "Somewhere",
       "id": 5
+    },
+    {
+      "userId": "2",
+      "name": "Two after third",
+      "date": "2018-07-26",
+      "location": "Over Yonder",
+      "id": 6
+    },
+    {
+      "userId": "1",
+      "name": "One fourth",
+      "date": "2018-07-31",
+      "location": "Thence",
+      "id": 7
+    },
+    {
+      "userId": "1",
+      "name": "asdfasdfa",
+      "date": "2018-08-03",
+      "location": "erwrewre",
+      "id": 8
     }
   ],
   "articles": [
+    {
+      "title": "asdf",
+      "synopsis": "wer",
+      "url": "sagargaw",
+      "timestamp": "2018-07-03 01:58:42 pm",
+      "id": 1
+    }
   ],
+  "tasks": [],
   "friends": [],
   "messages": []
 }
