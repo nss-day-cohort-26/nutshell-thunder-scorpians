@@ -1,73 +1,75 @@
 {
   "users": [
     {
-      "name": "Test",
-      "email": "test@gmail.com",
+      "name": "Brenna Green",
+      "email": "Vicenta_Leuschke@gmail.com",
       "id": 1
     },
     {
-      "name": "Friend",
-      "email": "friend@gmail.com",
-      "id": 2
-    }
-  ],
-  "artciles": [],
-  "events": [
-    {
-      "userId": "1",
-      "name": "One third",
-      "date": "2018-07-17",
-      "location": "Here",
-      "id": 1
-    },
-    {
-      "userId": "1",
-      "name": "One first",
-      "date": "2018-07-03",
-      "location": "There",
+      "name": "Mr. Agustina Hills",
+      "email": "Leland_Windler@yahoo.com",
       "id": 2
     },
     {
-      "userId": "1",
-      "name": "One second",
-      "date": "2018-07-10",
-      "location": "Anywhere",
+      "name": "Nathan Mueller",
+      "email": "Lauretta.Casper89@yahoo.com",
       "id": 3
     },
     {
-      "userId": "2",
-      "name": "Two after first",
-      "date": "2018-07-05",
-      "location": "Elsewhere",
+      "name": "Josefa Kihn",
+      "email": "Natalie_Shanahan75@hotmail.com",
       "id": 4
     },
     {
-      "userId": "2",
-      "name": "Two before second",
-      "date": "2018-07-09",
-      "location": "Somewhere",
+      "name": "Hailie Wolff",
+      "email": "Carson.Pacocha@yahoo.com",
       "id": 5
     },
     {
-      "userId": "2",
-      "name": "Two after third",
-      "date": "2018-07-26",
-      "location": "Over Yonder",
+      "name": "Eldon Predovic",
+      "email": "Aron38@gmail.com",
       "id": 6
     },
     {
-      "userId": "1",
-      "name": "One fourth",
-      "date": "2018-07-31",
-      "location": "Thence",
+      "name": "Anastacio Kreiger",
+      "email": "Sharon_Larkin43@gmail.com",
       "id": 7
     },
     {
-      "userId": "1",
-      "name": "asdfasdfa",
-      "date": "2018-08-03",
-      "location": "erwrewre",
+      "name": "Tianna Raynor",
+      "email": "Jayme_Mueller11@gmail.com",
       "id": 8
+    },
+    {
+      "name": "Octavia Osinski",
+      "email": "Heloise.Lehner@gmail.com",
+      "id": 9
+    },
+    {
+      "name": "Triston Wolff",
+      "email": "Clinton_Rutherford56@yahoo.com",
+      "id": 10
+    }
+  ],
+  "events": [
+    {
+      "userId": 1,
+      "name": "Nothing",
+      "date": "2018-03-05",
+      "location": "Anywhere"
+    }
+  ],
+  "tasks": [],
+  "friends": [
+    {
+      "userId": "2",
+      "friendId": "1",
+      "id": 1
+    },
+    {
+      "userId": "4",
+      "friendId": "1",
+      "id": 2
     }
   ],
   "articles": [
@@ -79,7 +81,5 @@
       "id": 1
     }
   ],
-  "tasks": [],
-  "friends": [],
   "messages": []
 }

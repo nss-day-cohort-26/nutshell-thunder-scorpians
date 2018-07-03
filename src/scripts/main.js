@@ -1,5 +1,9 @@
 const createNewForm = require("./createInputForm")
+const friends = require("./friends")
+const makeData = require("./populateFakeData")
+const loginPage = require("./loginPage")
 
-// createNewForm.userForm("User")
-// createNewForm.userForm("Task")
-// createNewForm.userForm("Event")
+// sessionStorage.setItem("activeUser", 1)
+// friends.displayFriendList()
+loginPage.createForms()
+// makeData(5)
