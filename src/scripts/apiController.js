@@ -15,13 +15,14 @@ const apiController = Object.create({}, {
     },
     addNewTask: {
         value: function(param){
-            $.ajax({
+            return $.ajax({
                 url: "http://localhost:3000/tasks",
                 type: "POST",
                 data: {
                     userId: param.userId,
                     dueDate: param.dueDate,
                     desc: param.taskDescription,
+                    complete: param.complete
                 }
             })
         }
@@ -36,6 +37,20 @@ const apiController = Object.create({}, {
             $.ajax({
                 url: `http://localhost:3000/tasks/${id}`,
                 type: "DELETE"
+            })
+        }
+    },
+    editTask:{
+        value: function(id, param) {
+            return $.ajax({
+                url:`http://localhost:3000/tasks/${id}`,
+                type: "PUT",
+                data:{
+                    userId: param.userId,
+                    dueDate: param.dueDate,
+                    desc: param.desc,
+                    complete: param.complete
+                }
             })
         }
     }
