@@ -36,7 +36,7 @@ const createNewEvent = () => {
   $submitButton.appendTo($submitSection);
   $submitSection.appendTo($newEventForm);
 
-  $newEventForm.prependTo($("body"));
+  $newEventForm.prependTo($(".events"));
 };
 
 module.exports = createNewEvent;

@@ -47,7 +47,7 @@ const loadEvents = () => {
 
       $eventSection.appendTo($eventsArticle);
     });
-    $eventsArticle.prependTo($("body"));
+    $eventsArticle.prependTo($(".events"));
   });
 };
 
