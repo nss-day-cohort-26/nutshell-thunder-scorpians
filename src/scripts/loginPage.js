@@ -14,27 +14,21 @@ const loginControl = Object.create({},{
         }
     },
     submitLogin: {
-        value: function(userName, userEmail){
-            apiController.queryUsers().then(response => {
-                // console.log(response)
-                //USE .MAP TO LOOP THROUGH RETURNED USERS ARRAY AND CREATE NEW ARRAY OF ONLY USERNAMES, THEN USE .CONTAINS TO CHECK USERNAME
-                response.contains(userName =>{
-                    // console.log(user.name)
-                    if (user.name === userName){
-                        $("body").children().remove()
-                        $("body").append(`<h1>Welcome ${userName}</h1>`)
-                        sessionStorage.setItem("activeUser", user.id)
-                        console.log(`Welcome, ${userName}`)
-                        friends.displayFriendList()
-                        return
-                    }
-                    else {
-                        alert("Please enter a valid username")
-                        return
-                    }
-                })
+        value: function(userName){
+            apiController.getUserId(userName).then(user => {
+                console.log(user)
+                if (user.length === 0){
+                    alert("I'm sorry, that username is incorrect or non-existent. Please try again.")
+                    return
+                }
+                else {
+                    sessionStorage.setItem("activeUser", user[0].id)
+                    $("body").children().remove()
+                    $("body").append($(`<h1>Welcome to Nutshell ${user[0].name}!</h1>`))
+                    friends.displayFriendList()
+                }
             })
-        }
+         }
     }
 })
 
