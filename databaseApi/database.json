@@ -52,7 +52,6 @@
     }
   ],
   "artciles": [],
-  "events": [],
   "tasks": [],
   "friends": [
     {
@@ -74,6 +73,15 @@
       "userId": "5",
       "friendId": "1",
       "id": 4
+    }
+  ],
+  "articles": [
+    {
+      "title": "asdf",
+      "synopsis": "wer",
+      "url": "sagargaw",
+      "timestamp": "2018-07-03 01:58:42 pm",
+      "id": 1
     }
   ],
   "messages": []
