@@ -56,7 +56,7 @@
       "userId": 1,
       "name": "Nothing",
       "date": "2018-03-05",
-      "localtion": "Anywhere"
+      "location": "Anywhere"
     }
   ],
   "tasks": [],
@@ -70,16 +70,6 @@
       "userId": "4",
       "friendId": "1",
       "id": 2
-    },
-    {
-      "userId": "5",
-      "friendId": "1",
-      "id": 3
-    },
-    {
-      "userId": "5",
-      "friendId": "1",
-      "id": 4
     }
   ],
   "articles": [
