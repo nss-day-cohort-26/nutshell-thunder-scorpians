@@ -5,12 +5,13 @@ const friends = require("./friends")
 const loginControl = Object.create({},{
     createForms: {
         value: function(){
+            let headline = $("<h1>Welcome to Nutshell</h1><br><h2>Please enter username to login</h2>")
             let userNameInput = $("<input type='text' placeholder='User Name'>")
             let emailInput = $("<input type='text' placeholder='E-Mail Address'>")
             let submitLoginBtn = $("<button>")
             submitLoginBtn.text("Submit")
             submitLoginBtn.click(() => {loginControl.submitLogin(userNameInput.val())})
-            $("body").append(userNameInput).append(submitLoginBtn)
+            $("body").append(headline).append(userNameInput).append(submitLoginBtn)
         }
     },
     submitLogin: {

@@ -51,7 +51,14 @@
       "id": 10
     }
   ],
-  "artciles": [],
+  "events": [
+    {
+      "userId": 1,
+      "name": "Nothing",
+      "date": "2018-03-05",
+      "localtion": "Anywhere"
+    }
+  ],
   "tasks": [],
   "friends": [
     {
