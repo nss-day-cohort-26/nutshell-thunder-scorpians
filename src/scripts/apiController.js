@@ -39,6 +39,11 @@ const apiController = Object.create({}, {
                 }
             })
         }
+    },
+    getArticleList: {
+        value: function() {
+            return $.ajax("http://localhost:3000/articles")
+        }
     }
 })
 

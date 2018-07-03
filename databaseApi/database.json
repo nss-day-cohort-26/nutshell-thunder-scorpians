@@ -27,6 +27,13 @@
     }
   ],
   "articles": [
+    {
+      "title": "get",
+      "synopsis": "test",
+      "url": "now",
+      "timestamp": "2018-07-03 12:58:01 pm",
+      "id": 1
+    }
   ],
   "friends": [],
   "messages": []

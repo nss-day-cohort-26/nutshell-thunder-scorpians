@@ -1,3 +1,5 @@
+//Author - Robert Leedy
+
 // Given a user wants to record a news article on their dashboard
 // When the user performs a gesture on a New Article affordance
 // Then a form should be presented to the user in which the following information can be entered
@@ -58,5 +60,11 @@ $(saveNewsButton).click(() => {
     urlInput.val("")
     }
 })
+
+apiController.getArticleList()
+.then((articleList) => {
+    console.log("articleList", articleList);
+})
+
 
 console.log("working")
