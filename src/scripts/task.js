@@ -11,6 +11,31 @@ const taskObject = Object.create({},{
                 // console.log(element);
                 const $div = $("<div>").appendTo($wrapper);
                 if (element.complete === "false") {
+                    const editBtn = $("<button>").text("Edit").appendTo($div).click(()=>{
+
+                        // console.log($(event.target).siblings().eq(2))
+                        // targets element.desc and "replaces" it with an input field filled with the value of it
+                        const $replacement = $("<input>").attr("value",element.desc)
+                        $(event.target).siblings().eq(2).replaceWith($replacement)
+                        // console.log($(event.target).siblings().eq(2))
+                        if ($(event.target).siblings().eq(2).is("input")) {
+                            $(event.target).siblings().eq(2).keypress((e)=>{
+                                if (e.which === 13) {
+                                    const editBtnUpdateObj = {
+                                        userId: element.userId,
+                                        dueDate: element.dueDate,
+                                        desc: $replacement.val(),
+                                        complete: "false"
+                                    }
+                                    console.log("yee");
+                                    apiController.editTask(element.id,editBtnUpdateObj).then((response)=>{
+                                        $wrapper.empty()
+                                        taskObject.printTasks()
+                                    })
+                                }
+                            })
+                        }
+                    })
                     const $checkbox = $("<input>").attr("type","checkbox").appendTo($div).click(()=>{
                         const checkboxDbUpdate = {
                             userId: element.userId,
@@ -60,8 +85,8 @@ const taskObject = Object.create({},{
                     $subBtn.show();
                 })
             })
-    })}
-}
+        })}
+    }
 })
 
 // console.log(taskObject);
