@@ -1,6 +1,7 @@
 const $ = require("jquery");
 const apiController = require("./apiController");
 const messagesApi = apiController["messages"];
+const friends = require("./friends");
 // console.log(apiController);
 // console.log(messagesApi);
 // console.log(messagesApi["read"]);
@@ -64,15 +65,17 @@ var buildMessagesDOM = function (messages) {
         const messageId = message["id"];
 
         const msgItem = $("<div>").attr("id", "msg" + messageId);
-        const msgSpan = $("<span>").text(`${messageUserName}: ${messageText}`);
+        const userSpan = $("<span>").text(`${messageUserName}`);
+        const msgSpan = $("<span>").text(`: ${messageText}`).addClass("msgSpan");
 
+        msgItem.append(userSpan);
         msgItem.append(msgSpan);
 
         //IF MESSAGE BELONGS TO CURRENT USER, ALLOW TO CONFIGURE
         if (messageUserId === currentUser) {
 
             // EDIT BUTTON
-            const editButton = $("<button>").text("edit");
+            const editButton = $("<button>").text("edit").addClass("editMsgButton");
 
             // EDIT INPUT
             const editInput = $("<input>").attr("value", messageText)
@@ -93,6 +96,7 @@ var buildMessagesDOM = function (messages) {
             });
 
             // EDITING OPTIONS MINIMIZED BY DEFAULT
+            editButton.hide();
             editInput.hide();
             saveButton.hide();
             cancelButton.hide();
@@ -100,7 +104,7 @@ var buildMessagesDOM = function (messages) {
 
             // TOGGLE EDIT OPTIONS
             editButton.on("click", (e) => {
-                msgItem.children("span").text(`${messageUserName}: `);
+                msgItem.children(".msgSpan").hide();
                 e.target.style.display = "none";
                 editInput.show();
                 saveButton.show();
@@ -109,6 +113,11 @@ var buildMessagesDOM = function (messages) {
             });
 
             msgItem.append(editButton).append(editInput).append(saveButton).append(cancelButton).append(deleteButton);
+        } else {
+            userSpan.on("click", (e) => {
+                // alert(e.target.textContent);
+                friends.addFriend(e.target.textContent);
+            });
         }
 
         //APPEND MESSAGE ITEM
@@ -119,14 +128,24 @@ var buildMessagesDOM = function (messages) {
     const newMessageDiv = $("<div>");
     const newMessageInput = $("<input>").attr("id", "newMessageInput");
     const newMessageButton = $("<button>").text("submit").attr("id", "newMessageSubmitButton");
+    const msgOptionButton = $("<button>").text("Options").attr("id", "msgOptionButton");
     newMessageButton.on("click", (e) => {
         const message = $("#newMessageInput").val()
         Messages.create(currentUser, message)
+    })
+    msgOptionButton.on("click", (e) => {
+        if ($(".editMsgButton").is(":visible")) {
+            $(".editMsgButton").hide();
+        } else {
+            $(".editMsgButton").show();
+        }
+
     })
 
     // APPEND NEW MESSAGE AREA TO MESSENER DIV
     newMessageDiv.append(newMessageInput);
     newMessageDiv.append(newMessageButton);
+    newMessageDiv.append(msgOptionButton);
     messageDiv.append(newMessageDiv);
 }
 
