@@ -1,3 +1,6 @@
+// AUTHOR: Phil Patton
+// PURPOSE: Retrieve user messages from the database then build a chat box for messaging between users
+
 const $ = require("jquery");
 const apiController = require("./apiController");
 const messagesApi = apiController["messages"];
@@ -7,8 +10,16 @@ const friends = require("./friends");
 const Messages = {
     // READ
     read: function () {
+
+        let currentUser = null;
+        if (sessionStorage.getItem("activeUser")) {
+            currentUser = sessionStorage.getItem("activeUser")
+        } else {
+            return;
+        }
+
         messagesApi.read().then(msgArr => {
-            buildMessagesDOM(msgArr);
+            buildMessagesDOM(msgArr, currentUser);
         })
     },
 
@@ -31,14 +42,7 @@ const Messages = {
 }
 
 // DOM BUILD
-var buildMessagesDOM = function (messages) {
-
-    let currentUser = null;
-    if (sessionStorage.getItem("activeUser")) {
-        currentUser = sessionStorage.getItem("activeUser")
-    } else {
-        return;
-    }
+var buildMessagesDOM = function (messages, currentUser) {
 
     // SELECT DIV AND WIPE
     const messengerDiv = $("#messagesDiv");
