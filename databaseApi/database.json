@@ -35,11 +35,5 @@
       "id": 3
     }
   ],
-  "messages": [
-    // {
-    //   "userId": "2",
-    //   "message": "Duck",
-    //   "id": 2
-    // }
-  ]
+  "messages": []
 }
