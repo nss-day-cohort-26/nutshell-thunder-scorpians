@@ -1,0 +1,58 @@
+/* This module sets the grid layout of the page */
+/* Author: Elliot Huck */
+
+.grid__wrapper {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr 3fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  max-height: 100vh;
+}
+
+.grid__wrapper > div {
+  border: 1px solid black;
+  margin: .5em;
+  padding: .5em;
+  overflow: scroll;
+}
+
+.grid__wrapper> div:nth-child(1) { /* header */
+  overflow: hidden;
+  margin: 0;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  background-color: black;
+  color: white;
+}
+.grid__wrapper > div:nth-child(2) { /* tasks */
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 6;
+}
+.grid__wrapper > div:nth-child(3) { /* messages */
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 6;
+}
+.grid__wrapper > div :nth-child(4) { /* friends */
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+.grid__wrapper > div:nth-child(5) { /* events */
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 6;
+}
+.grid__wrapper > div:nth-child(6) { /* news articles */
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
