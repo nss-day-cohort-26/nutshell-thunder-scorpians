@@ -13,26 +13,22 @@ const $ = require("jquery");
 const apiController = require("../apiController");
 const Event = require("./event-class");
 // Required by: events, event-submit
-const currentUser = 1;
+const currentUser = sessionStorage.getItem("activeUser");
 
 // Needs to accept the parameter for the currentUserId and his friends
-const loadEvents = () => {
-  console.log("load events running")
-
-  const newThing = new Event();
-  newThing.name = "this";
-  console.log(newThing);
-  console.log("load events running")
-
+const loadEvents = (currentUser) => {
+  console.log("Load events running")
+  console.log("Current User: ", currentUser);
   // New function here to get all the users friends
 
   apiController.events.getAllEvents().then(sortedEvents => {
     console.log(sortedEvents);
     const $eventsArticle = $("<article>");
+    $eventsArticle.append($("<h3>").text("Events"));
     sortedEvents.forEach(event => {
       console.log("for each running");
       const $eventSection = $("<section>");
-      $("<h3>").text(event.name).appendTo($eventSection);
+      $("<h5>").text(event.name).appendTo($eventSection);
 
       if (parseInt(event.userId) === currentUser) {
         $eventSection.addClass("event--yours");
