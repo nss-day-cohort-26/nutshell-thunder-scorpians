@@ -11,7 +11,6 @@ const friendActions = Object.create({},{
     displayFriendList: {
         value: function(){
             $("#friendListContainer").remove()
-            addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend() })
             friendsList.append(addFriendBtn)
             addFriendBtn.show()
             friendsList.append($("<div id='friendListContainer'><ul id='friendUL'></ul></div>"))
@@ -30,40 +29,40 @@ const friendActions = Object.create({},{
             const friendNameInput = $("<input type='text' placeholder='Enter Friend Name'></input>")
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
-            friendsList.append(saveButton)
+            friendsList.append(saveButton).append(friendNameInput)
             let friendsToCheck = []
             apiController.getFriendsList(currentUser).then( (response) =>{friendsToCheck = response})
             saveButton.click(() => {
-                const friendNameToAdd = friendNameInput.val()
-                console.log(friendsToCheck)
-                for (let i=0; i<friendsToCheck.length; i++){
-                    if (friendNameToAdd === friendsToCheck[i].user.name){
-                        alert(`You've already added ${friendNameToAdd} as a friend`)
-                        friendNameInput.remove()
-                        saveButton.remove()
-                        friendActions.displayFriendList()
-                        return
-                    }
+                if (friendNameInput.val() === ""){
+                    alert("Please enter a valid username")
+                    saveButton.remove()
+                    friendNameInput.remove()
+                    addFriendBtn.show()
+                    return
                 }
-                apiController.getUserId(friendNameToAdd).then(response => {
+                else {apiController.getUserId(friendNameInput.val()).then(response => {
                     if (response.length === 0){
-                        alert(`I'm sorry, user ${friendNametoAdd} doesn't exist`)
+                        alert(`I'm sorry, user ${friendNameInput.val()} doesn't exist`)
                         friendNameInput.remove()
                         saveButton.remove()
                         friendActions.displayFriendList()
-                    }
+                        // addFriendBtn.show()
+                        }
                     else {
                         apiController.addNewFriend(currentUser, response[0].id)
                         friendNameInput.remove()
                         saveButton.remove()
                         friendActions.displayFriendList()
-                    }
-                })
+                        // addFriendBtn.show()
+                        }
+                    })
+                }
             })
-            friendsList.append(friendNameInput)
         }
     }
 })
+
+addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend() })
 
 friendActions.displayFriendList()
 
