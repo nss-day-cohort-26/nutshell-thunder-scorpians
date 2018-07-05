@@ -4,6 +4,8 @@ const apiController = require("../apiController");
 const loadEvents = require("./event-load");
 const createNewEvent = require("./event-form");
 
+const events = () => {
+
 console.log("events page is working");
 
 
@@ -23,3 +25,9 @@ createNewEvent();
 /*
 After a new event is created, clicking the Submit button should reload all the events on the page
 */
+
+}
+
+events();
+
+module.exports = events;
