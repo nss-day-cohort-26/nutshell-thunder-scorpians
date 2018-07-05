@@ -1,29 +1,54 @@
 {
   "users": [
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Brenna Green",
+      "email": "Vicenta_Leuschke@gmail.com",
       "id": 1
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Mr. Agustina Hills",
+      "email": "Leland_Windler@yahoo.com",
       "id": 2
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Nathan Mueller",
+      "email": "Lauretta.Casper89@yahoo.com",
       "id": 3
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Josefa Kihn",
+      "email": "Natalie_Shanahan75@hotmail.com",
       "id": 4
     },
     {
-      "name": "Phil",
-      "email": "ppatton@phil.net",
+      "name": "Hailie Wolff",
+      "email": "Carson.Pacocha@yahoo.com",
       "id": 5
+    },
+    {
+      "name": "Eldon Predovic",
+      "email": "Aron38@gmail.com",
+      "id": 6
+    },
+    {
+      "name": "Anastacio Kreiger",
+      "email": "Sharon_Larkin43@gmail.com",
+      "id": 7
+    },
+    {
+      "name": "Tianna Raynor",
+      "email": "Jayme_Mueller11@gmail.com",
+      "id": 8
+    },
+    {
+      "name": "Octavia Osinski",
+      "email": "Heloise.Lehner@gmail.com",
+      "id": 9
+    },
+    {
+      "name": "Triston Wolff",
+      "email": "Clinton_Rutherford56@yahoo.com",
+      "id": 10
     }
   ],
   "articles": [
@@ -77,6 +102,58 @@
       "id": 7
     }
   ],
-  "friends": [],
-  "messages": []
+  "events": [
+    {
+      "userId": 1,
+      "name": "Nothing",
+      "date": "2018-03-05",
+      "location": "Anywhere"
+    }
+  ],
+  "tasks": [],
+  "friends": [
+    {
+      "userId": "2",
+      "friendId": "1",
+      "id": 1
+    },
+    {
+      "userId": "4",
+      "friendId": "1",
+      "id": 2
+    }
+  ],
+
+  "messages": [
+    {
+      "userId": "2",
+      "message": "Duck",
+      "id": 2
+    },
+    {
+      "userId": "3",
+      "message": "Duck",
+      "id": 3
+    },
+    {
+      "userId": "1",
+      "message": "New message",
+      "id": 4
+    },
+    {
+      "userId": "1",
+      "message": "Ducky Ducky",
+      "id": 5
+    },
+    {
+      "userId": "1",
+      "message": "Moose Tracks",
+      "id": 6
+    },
+    {
+      "userId": "1",
+      "message": "Bear Facts",
+      "id": 7
+    }
+  ]
 }
