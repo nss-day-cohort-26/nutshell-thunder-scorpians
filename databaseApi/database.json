@@ -98,13 +98,23 @@
     },
     {
       "userId": "1",
-      "message": "Bear Facts",
+      "message": "Bear Facts 456",
       "id": 7
     },
     {
       "userId": "1",
       "message": "Tucker",
       "id": 8
+    },
+    {
+      "userId": "1",
+      "message": "Brave New Message",
+      "id": 9
+    },
+    {
+      "userId": "1",
+      "message": "brazen",
+      "id": 10
     }
   ],
   "articles": []
