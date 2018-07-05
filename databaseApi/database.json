@@ -1,54 +1,19 @@
 {
-  "users": [
+
+  "articles": [
     {
-      "name": "Brenna Green",
-      "email": "Vicenta_Leuschke@gmail.com",
-      "id": 1
-    },
-    {
-      "name": "Mr. Agustina Hills",
-      "email": "Leland_Windler@yahoo.com",
+      "title": "test1",
+      "synopsis": "test1",
+      "url": "test1",
+      "timestamp": "2018-07-05 01:31:52 pm",
       "id": 2
     },
     {
-      "name": "Nathan Mueller",
-      "email": "Lauretta.Casper89@yahoo.com",
-      "id": 3
-    },
-    {
-      "name": "Josefa Kihn",
-      "email": "Natalie_Shanahan75@hotmail.com",
+      "title": "test2",
+      "synopsis": "test2",
+      "url": "test2",
+      "timestamp": "2018-07-05 01:33:23 pm",
       "id": 4
-    },
-    {
-      "name": "Hailie Wolff",
-      "email": "Carson.Pacocha@yahoo.com",
-      "id": 5
-    },
-    {
-      "name": "Eldon Predovic",
-      "email": "Aron38@gmail.com",
-      "id": 6
-    },
-    {
-      "name": "Anastacio Kreiger",
-      "email": "Sharon_Larkin43@gmail.com",
-      "id": 7
-    },
-    {
-      "name": "Tianna Raynor",
-      "email": "Jayme_Mueller11@gmail.com",
-      "id": 8
-    },
-    {
-      "name": "Octavia Osinski",
-      "email": "Heloise.Lehner@gmail.com",
-      "id": 9
-    },
-    {
-      "name": "Triston Wolff",
-      "email": "Clinton_Rutherford56@yahoo.com",
-      "id": 10
     }
   ],
   "events": [],
@@ -116,6 +81,5 @@
       "message": "brazen",
       "id": 10
     }
-  ],
-  "articles": []
+  ]
 }

@@ -1,3 +1,5 @@
+//Author - Robert Leedy
+
 // Given a user wants to record a news article on their dashboard
 // When the user performs a gesture on a New Article affordance
 // Then a form should be presented to the user in which the following information can be entered
@@ -10,13 +12,12 @@ const $ = require("jquery")
 const moment = require("moment")
 const apiController = require("./apiController")
 
-$("<article>").attr("id", "test").appendTo("#news-test")
 //create New Article button
-const addNewsButton = $("<button>").attr("id", "add-news-button").text("New Article").appendTo($("#test"))
+const addNewsButton = $("<button>").attr("id", "add-news-button").text("New Article").appendTo($("#news-test"))
 //create Save Article button
 const saveNewsButton = $("<button>").addClass("save-news-button").text("Save Article")
 //create elements for news inputs and append to DOM
-const newsContainer = $("<section>")
+const newsContainer = $("<section>").attr("id", "newsContainer")
 $("#news-test").append(newsContainer)
 const addNews = $("<div>").attr("id", "news")
 newsContainer.append(addNews)
@@ -25,6 +26,7 @@ titleInput.attr("placeholder", "Enter article title")
 const synopsisInput = $("<input>").attr("id", "synopsis").text("Synopsis").appendTo(addNews)
 synopsisInput.attr("placeholder", "Enter article summary")
 const urlInput = $("<input>").attr("id", "url").text("URL").appendTo(addNews)
+const articleOutput = $("<section>").attr("id", "article-output").appendTo(newsContainer)
 addNews.hide()
 urlInput.attr("placeholder", "Enter article URL")
 
@@ -34,6 +36,33 @@ addNewsButton.click(() => {
     saveNewsButton.appendTo(addNews)
     addNewsButton.hide()
 })
+
+//append articles database to dom
+const printArticles = () => {
+    if (articleOutput) {
+        articleOutput.empty()
+    }
+    apiController.getArticleList()
+    .then((articleList) => {
+        articleList.forEach(articleText => {
+            console.log("articletext", articleText);
+            const titleText = $("<h3>").text(articleText.title)
+            const synopsisText = $("<h5>").text(articleText.synopsis)
+            const urlText = $("<a>").text(articleText.url)
+            const timeText = $("<p>").text(articleText.timestamp)
+            const newsText = $(`<div id=${articleText.id}>`).addClass("news-text-div").append(titleText).append(synopsisText).append(urlText).append(timeText)
+            newsText.prependTo(articleOutput).prependTo(newsContainer)
+            articleOutput.prepend(newsText)
+            const deleteNewsButton = $("<button>").addClass("delete-news-button").text("Delete Article")
+            deleteNewsButton.appendTo(newsText)
+            deleteNewsButton.click(() => {
+            apiController.deleteArticle(event.target.parentNode.id).then((response) => {
+                printArticles()
+                })
+            })
+        });
+    })
+}
 
 // Given a user has entered in all field values for storing a new article
 // When the user performs a gesture on the Save Article affordance
@@ -57,6 +86,13 @@ $(saveNewsButton).click(() => {
     synopsisInput.val("")
     urlInput.val("")
     }
+    //run print articles to update article list
+    printArticles()
 })
+
+printArticles()
+
+
+//calling function to print to dom.  needs to be moved to save article button, clear dom and reprint
 
 console.log("working")
