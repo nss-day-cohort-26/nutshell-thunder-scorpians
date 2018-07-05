@@ -9,6 +9,7 @@ const loginControl = Object.create({},{
             let userNameInput = $("<input type='text' placeholder='User Name'>")
             let emailInput = $("<input type='text' placeholder='E-Mail Address'>")
             let submitLoginBtn = $("<button>")
+            let registerBtn = $("<button>")
             submitLoginBtn.text("Submit")
             submitLoginBtn.click(() => {
                 if (emailInput.val() === "" || userNameInput.val() === ""){
@@ -20,6 +21,8 @@ const loginControl = Object.create({},{
                 }
             })
             $("body").append(headline).append(userNameInput).append(emailInput) .append(submitLoginBtn)
+            registerBtn.click(() =>{
+            })
         }
     },
     submitLogin: {
@@ -32,7 +35,7 @@ const loginControl = Object.create({},{
                 }
                 else if (user[0].email === emailVal && user[0].name === userName){
                     sessionStorage.setItem("activeUser", user[0].id)
-                    $("body").children().remove()
+                    $("#login-stuff").children().remove()
                     $("body").append($(`<h1>Welcome to Nutshell ${user[0].name}!</h1>`))
                     friends.displayFriendList()
                 }
@@ -45,6 +48,11 @@ const loginControl = Object.create({},{
                 }
             })
          }
+    },
+    registerUser: {
+        value: function(userName, emailValue){
+
+        }
     }
 })
 

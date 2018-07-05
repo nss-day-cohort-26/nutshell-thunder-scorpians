@@ -6,15 +6,18 @@ const apiController = require("./apiController")
 const createObject = require("./objectConstructors")
 
 //Get current active user ID from session storage
-const currentUser = sessionStorage.getItem("activeUser")
+// const currentUser = sessionStorage.getItem("activeUser")
 
 //capture DIV from DOM to append stuff to
-const friendsList = $(".friends")
-const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
 
 const friendActions = Object.create({},{
     displayFriendList: {
         value: function(){
+            const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
+            addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.makeDomComponents() })
+            const friendsList = $("#friends")
+            console.log("im ran so far away")
+            const currentUser = sessionStorage.getItem("activeUser")
             $("#friendListContainer").remove()
             friendsList.append(addFriendBtn)
             addFriendBtn.show()
@@ -31,20 +34,23 @@ const friendActions = Object.create({},{
     },
     makeDomComponents: {
         value: function(){
+            const addFriendBtn = $("#add-friend-btn")
+            const currentUser = sessionStorage.getItem("activeUser")
             const friendNameInput = $("<input type='text' placeholder='Enter Friend Name' autofocus></input>")
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
             // $("<form type='submit'></form>").append(saveButton).append(friendNameInput)
             // friendsList.append(saveButton).append(friendNameInput)
             $("#friendUL").prepend((saveButton)).append(friendNameInput)
-            saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput)})
+            saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)})
             friendNameInput.keyup((event)=>{
-                if (event.which === 13) {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput)}
+                if (event.which === 13) {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)}
             })
         }
     },
     addFriend: {
-        value: function(friendName, saveButton, friendNameInput){
+        value: function(friendName, saveButton, friendNameInput, addFriendBtn){
+            const currentUser = sessionStorage.getItem("activeUser")
             let friendsToCheck = []
             apiController.getFriendsList(currentUser).then( (response) =>{
                 //populate array with response from API
@@ -99,8 +105,8 @@ const friendActions = Object.create({},{
 }
 })
 
+// addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.makeDomComponents() })
 // addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend() })
-addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.makeDomComponents() })
 
 friendActions.displayFriendList()
 
