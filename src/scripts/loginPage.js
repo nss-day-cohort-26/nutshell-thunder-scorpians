@@ -20,7 +20,7 @@ const loginControl = Object.create({},{
                     loginControl.submitLogin(userNameInput.val(), emailInput.val())
                 }
             })
-            $("body").append(headline).append(userNameInput).append(emailInput) .append(submitLoginBtn)
+            $("#login-stuff").append(headline).append(userNameInput).append(emailInput) .append(submitLoginBtn)
             registerBtn.click(() =>{
             })
         }
@@ -35,8 +35,9 @@ const loginControl = Object.create({},{
                 }
                 else if (user[0].email === emailVal && user[0].name === userName){
                     sessionStorage.setItem("activeUser", user[0].id)
-                    $("#login-stuff").children().remove()
-                    $("body").append($(`<h1>Welcome to Nutshell ${user[0].name}!</h1>`))
+                    $("#login-stuff").remove()
+                    $("#header").append($(`<h1>Welcome to Nutshell ${user[0].name}!</h1>`))
+                    $(".grid__wrapper").css("display", "grid")
                     friends.displayFriendList()
                 }
                 else if (user[0].email !== emailVal || user[0].name !== userName) {

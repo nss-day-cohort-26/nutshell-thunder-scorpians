@@ -9,3 +9,6 @@ body {
   padding: 0;
 }
 
+.grid__wrapper {
+  display: none;
+}
