@@ -23,26 +23,27 @@ const loadEvents = (currentUser) => {
 
   apiController.events.getAllEvents().then(sortedEvents => {
     console.log(sortedEvents);
-    const $eventsArticle = $("<article>").addClass("event-article");
+    const $eventArticle = $("#event-article");
+    $eventArticle.empty();
     sortedEvents.forEach(event => {
       console.log("for each running");
       const $eventSection = $("<section>");
-      $("<h5>").text(event.name).appendTo($eventSection);
+      $("<h4>").text(event.name).appendTo($eventSection);
 
       if (parseInt(event.userId) === currentUser) {
-        $eventSection.addClass("event--yours");
+        $eventSection.addClass("event event--yours");
         $("<p>").text("Posted by: You").appendTo($eventSection);
       } else {
-        $eventSection.addClass("event--others");
+        $eventSection.addClass("event event--others");
         $("<p>").text("Posted by: A friend").appendTo($eventSection);
       }
 
       $("<p>").text(event.date).appendTo($eventSection);
       $("<p>").text(event.location).appendTo($eventSection);
 
-      $eventSection.appendTo($eventsArticle);
+      $eventSection.appendTo($eventArticle);
     });
-    $eventsArticle.appendTo($(".events"));
+    $eventArticle.appendTo($(".events"));
   });
 };
 

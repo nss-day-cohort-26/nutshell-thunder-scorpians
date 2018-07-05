@@ -12,12 +12,16 @@ console.log("events page is working");
 1. Add New Event Button
 */
 
-const $eventsHeader = $("<h3>").text("Events");
-$(".events").append($eventsHeader);
+const $eventHeader = $("<h3>").attr("id", "event-header")
+$eventHeader.text("Events");
+$(".events").append($eventHeader);
 
 const $newEventButton = $("<button>").attr("id", "add-event");
 $newEventButton.text("Add Event").click(createNewEvent);
 $(".events").append($newEventButton);
+
+const $eventArticle = $("<article>").attr("id", "event-article");
+$(".events").append($eventArticle);
 
 loadEvents();
 
