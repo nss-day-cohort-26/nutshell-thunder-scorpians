@@ -8,6 +8,7 @@ const submitEvent = require("./event-submit");
 // Required by: events
 
 const createNewEvent = () => {
+  $("#")
   const $newEventForm = $("<article>").attr("id", "event-form");
 
   const $nameSection = $("<section>");
@@ -36,7 +37,7 @@ const createNewEvent = () => {
   $submitButton.appendTo($submitSection);
   $submitSection.appendTo($newEventForm);
 
-  $newEventForm.prependTo($(".events"));
+  $newEventForm.prependTo($(".event-article"));
 };
 
 module.exports = createNewEvent;

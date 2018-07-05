@@ -23,8 +23,7 @@ const loadEvents = (currentUser) => {
 
   apiController.events.getAllEvents().then(sortedEvents => {
     console.log(sortedEvents);
-    const $eventsArticle = $("<article>");
-    $eventsArticle.append($("<h3>").text("Events"));
+    const $eventsArticle = $("<article>").addClass("event-article");
     sortedEvents.forEach(event => {
       console.log("for each running");
       const $eventSection = $("<section>");
@@ -43,7 +42,7 @@ const loadEvents = (currentUser) => {
 
       $eventSection.appendTo($eventsArticle);
     });
-    $eventsArticle.prependTo($(".events"));
+    $eventsArticle.appendTo($(".events"));
   });
 };
 

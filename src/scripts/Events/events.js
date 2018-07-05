@@ -11,13 +11,17 @@ console.log("events page is working");
 /* Page Has Loaded:
 1. Add New Event Button
 */
+
+const $eventsHeader = $("<h3>").text("Events");
+$(".events").append($eventsHeader);
+
+const $newEventButton = $("<button>").attr("id", "add-event");
+$newEventButton.text("Add Event").click(createNewEvent);
+$(".events").append($newEventButton);
+
 loadEvents();
 
-/*
-Once the page has loaded, I need to add a button with an event listener that will run createNewEvent when clicked
-*/
-
-createNewEvent();
+//createNewEvent();
 
 }
 
