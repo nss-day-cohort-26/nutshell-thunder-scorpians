@@ -12,13 +12,12 @@ const $ = require("jquery")
 const moment = require("moment")
 const apiController = require("./apiController")
 
-$("<article>").attr("id", "test").appendTo("#news-test")
 //create New Article button
-const addNewsButton = $("<button>").attr("id", "add-news-button").text("New Article").appendTo($("#test"))
+const addNewsButton = $("<button>").attr("id", "add-news-button").text("New Article").appendTo($("#news-test"))
 //create Save Article button
 const saveNewsButton = $("<button>").addClass("save-news-button").text("Save Article")
 //create elements for news inputs and append to DOM
-const newsContainer = $("<section>")
+const newsContainer = $("<section>").attr("id", "newsContainer")
 $("#news-test").append(newsContainer)
 const addNews = $("<div>").attr("id", "news")
 newsContainer.append(addNews)
@@ -27,6 +26,7 @@ titleInput.attr("placeholder", "Enter article title")
 const synopsisInput = $("<input>").attr("id", "synopsis").text("Synopsis").appendTo(addNews)
 synopsisInput.attr("placeholder", "Enter article summary")
 const urlInput = $("<input>").attr("id", "url").text("URL").appendTo(addNews)
+const articleOutput = $("<section>").attr("id", "article-output")
 addNews.hide()
 urlInput.attr("placeholder", "Enter article URL")
 
@@ -41,7 +41,6 @@ addNewsButton.click(() => {
 const printArticles = () => {
     apiController.getArticleList()
     .then((articleList) => {
-        const articleOutput = $("<section>").attr("id", "article-output")
         articleList.forEach(articleText => {
             console.log("articleText", articleText)
             console.log("list.text", articleText.title);
@@ -76,11 +75,24 @@ $(saveNewsButton).click(() => {
     titleInput.val("")
     synopsisInput.val("")
     urlInput.val("")
-    printArticles()
+    }
+    if (newsContainer) {
+        newsContainer.empty()
+    apiController.getArticleList()
+    .then((articleList) => {
+        articleList.forEach(articleText => {
+            const titleText = $("<h3>").text(articleText.title)
+            const synopsisText = $("<h5>").text(articleText.synopsis)
+            const urlText = $("<a>").text(articleText.url)
+            const timeText = $("<p>").text(articleText.timestamp)
+            const newsText = $("<div>").append(titleText).append(synopsisText).append(urlText).append(timeText)
+            newsContainer.append(newsText)
+            });
+        })
     }
 })
 
-
+printArticles()
 //calling function to print to dom.  needs to be moved to save article button, clear dom and reprint
 
 console.log("working")

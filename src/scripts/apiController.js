@@ -138,7 +138,8 @@ const apiController = Object.create({}, {
                 url: `http://localhost:3000/articles/${id}`,
                 type: "DELETE"
             })
-        },
+        }
+    },
 
     messages: {
         // READ
@@ -161,8 +162,7 @@ const apiController = Object.create({}, {
                         "message": message
                     }
                 })
-            }
-        },
+            },
 
             // UPDATE
             update: function (msgId, userId, newMessage) {
