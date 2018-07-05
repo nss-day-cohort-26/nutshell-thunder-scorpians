@@ -12,10 +12,10 @@ Make a form
 const $ = require("jquery");
 const Event = require("./event-class");
 const apiController = require("../apiController");
+const loadEvents = require("./event-load");
 // Required by: event-form
 
 const currentUser = 1;
-const loadEvents = require("./event-load");
 
 const submitEvent = () => {
   const allInputs = $("#event-form input");
@@ -36,9 +36,13 @@ const submitEvent = () => {
     console.log(newEvent);
 
     // Make an api call here with the new event I just made
-    apiController.events.addNewEvent(newEvent).then(
-      allInputs.each((i, element) => { element.value = "" })
-    );
+
+    apiController.events.addNewEvent(newEvent).then(response => {
+      allInputs.each((i, element) => { element.value = "" });
+      $("#event-form").hide();
+      $("#add-event").show();
+      loadEvents();
+    });
 
   }
 };
