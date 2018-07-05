@@ -72,14 +72,37 @@
       "id": 2
     }
   ],
-  "articles": [
+
+  "messages": [
     {
-      "title": "asdf",
-      "synopsis": "wer",
-      "url": "sagargaw",
-      "timestamp": "2018-07-03 01:58:42 pm",
-      "id": 1
+      "userId": "2",
+      "message": "Duck",
+      "id": 2
+    },
+    {
+      "userId": "3",
+      "message": "Duck",
+      "id": 3
+    },
+    {
+      "userId": "1",
+      "message": "New message",
+      "id": 4
+    },
+    {
+      "userId": "1",
+      "message": "Ducky Ducky",
+      "id": 5
+    },
+    {
+      "userId": "1",
+      "message": "Moose Tracks",
+      "id": 6
+    },
+    {
+      "userId": "1",
+      "message": "Bear Facts",
+      "id": 7
     }
-  ],
-  "messages": []
+  ]
 }
