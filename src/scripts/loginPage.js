@@ -10,7 +10,7 @@ const messages = require("./messages")
 const loginControl = Object.create({},{
     createForms: {
         value: function(){
-            let headline = $("<h1>Welcome to Nutshell</h1><br><h2>Please enter username and email to login</h2>")
+            let headline = $("<h1>Welcome to Nutshell!</h1><br><h2>Please enter username and email to login</h2>")
             let userNameInput = $("<input type='text' placeholder='User Name'>")
             let emailInput = $("<input type='text' placeholder='E-Mail Address'>")
             let submitLoginBtn = $("<button>")
@@ -44,25 +44,18 @@ const loginControl = Object.create({},{
         value: function(userName, emailVal){
             apiController.getUserId(userName).then(user => {
                 console.log(user)
-                if (user.length === 0){
+                if (user.length === 0 || (user[0].email !== emailVal || user[0].name !== userName)){
                     alert("I'm sorry, that username or email is incorrect or non-existent. Please try again.")
                     return
                 }
                 else if (user[0].email === emailVal && user[0].name === userName){
                     sessionStorage.setItem("activeUser", user[0].id)
                     $("#login-stuff").remove()
-                    $("#header").append($(`<h1>Welcome to Nutshell ${user[0].name}!</h1>`))
+                    $("#header").append($(`<h1>Welcome to Nutshell, ${user[0].name}!</h1>`))
                     $(".grid__wrapper").css("display", "grid")
                     friends.displayFriendList()
                     task.printTasks()
-                    messages.read()
-                }
-                else if (user[0].email !== emailVal || user[0].name !== userName) {
-                    alert("Email or username does not match")
-                    // sessionStorage.setItem("activeUser", user[0].id)
-                    // $("body").children().remove()
-                    // $("body").append($(`<h1>Welcome to Nutshell ${user[0].name}!</h1>`))
-                    // friends.displayFriendList()
+                    // messages.buildMessenger()
                 }
             })
          }
