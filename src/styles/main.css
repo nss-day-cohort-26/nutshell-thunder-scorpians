@@ -1,4 +1,5 @@
 @import url("grid-layout.css");
+@import url("events.css");
 
 * {
   box-sizing: border-box;

@@ -28,7 +28,7 @@ const loadEvents = (currentUser) => {
     sortedEvents.forEach(event => {
       console.log("for each running");
       const $eventSection = $("<section>");
-      $("<h4>").text(event.name).appendTo($eventSection);
+      $("<h3>").text(event.name).appendTo($eventSection);
 
       if (parseInt(event.userId) === currentUser) {
         $eventSection.addClass("event event--yours");
