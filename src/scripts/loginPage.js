@@ -1,6 +1,8 @@
 const $ = require("jquery")
 const apiController = require("./apiController")
 const friends = require("./friends")
+const task = require("./task")
+const messages = require("./messages")
 
 const loginControl = Object.create({},{
     createForms: {
@@ -10,6 +12,7 @@ const loginControl = Object.create({},{
             let emailInput = $("<input type='text' placeholder='E-Mail Address'>")
             let submitLoginBtn = $("<button>")
             let registerBtn = $("<button>")
+            registerBtn.text("Register New Account")
             submitLoginBtn.text("Submit")
             submitLoginBtn.click(() => {
                 if (emailInput.val() === "" || userNameInput.val() === ""){
@@ -20,8 +23,17 @@ const loginControl = Object.create({},{
                     loginControl.submitLogin(userNameInput.val(), emailInput.val())
                 }
             })
-            $("#login-stuff").append(headline).append(userNameInput).append(emailInput) .append(submitLoginBtn)
+            $("#login-stuff").append(headline).append(userNameInput).append(emailInput).append(submitLoginBtn).append(registerBtn)
             registerBtn.click(() =>{
+                if (emailInput.val() === "" || userNameInput.val() === "") {
+                    alert("Please enter a valid username and email")
+                    return
+                }
+                else {
+                    console.log(userNameInput.val())
+                    console.log(emailInput.val())
+                    loginControl.registerUser(userNameInput.val(), emailInput.val())
+                }
             })
         }
     },
@@ -39,6 +51,8 @@ const loginControl = Object.create({},{
                     $("#header").append($(`<h1>Welcome to Nutshell ${user[0].name}!</h1>`))
                     $(".grid__wrapper").css("display", "grid")
                     friends.displayFriendList()
+                    task.printTasks()
+                    messages.read()
                 }
                 else if (user[0].email !== emailVal || user[0].name !== userName) {
                     alert("Email or username does not match")
@@ -52,8 +66,24 @@ const loginControl = Object.create({},{
     },
     registerUser: {
         value: function(userName, emailValue){
-
-        }
+            apiController.getUserId(userName).then(nameResponse =>{
+                apiController.getEmailAddr(emailValue).then(emailResponse =>{
+                    if (nameResponse.length === 0 && emailResponse.length === 0){
+                        let userObject = {
+                            name: userName,
+                            email: emailValue
+                        }
+                        apiController.addNewUser(userObject).then(response => {
+                            console.log(response)
+                        })
+                    }
+                 else {
+                        alert("Sorry, that username or email is already registered")
+                        return
+                    }
+                 })
+            })
+         }
     }
 })
 
