@@ -7,12 +7,12 @@ const messagesApi = apiController["messages"];
 // console.log(messagesApi.read)
 // const currentUser = sessionStorage.getItem("activeUser")
 
-let currentUser = null;
-if (sessionStorage.getItem("activeUser")) {
-    currentUser = sessionStorage.getItem("activeUser")
-} else {
-    currentUser = 1
-}
+// let currentUser = null;
+// if (sessionStorage.getItem("activeUser")) {
+//     currentUser = sessionStorage.getItem("activeUser")
+// } else {
+//     currentUser = 1
+// }
 
 
 // API

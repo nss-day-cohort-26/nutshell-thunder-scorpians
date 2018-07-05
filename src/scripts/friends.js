@@ -1,15 +1,23 @@
+//Friends functionality. This module is used to add friends and make dom components having to do with displaying and adding friends.
+//Seth Dana seth.dana@gmail.com
+
 const $ = require("jquery")
 const apiController = require("./apiController")
 const createObject = require("./objectConstructors")
 
-const currentUser = sessionStorage.getItem("activeUser")
+//Get current active user ID from session storage
+// const currentUser = sessionStorage.getItem("activeUser")
 
-const friendsList = $(".friends")
-const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
+//capture DIV from DOM to append stuff to
 
 const friendActions = Object.create({},{
     displayFriendList: {
         value: function(){
+            const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
+            addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.makeDomComponents() })
+            const friendsList = $("#friends")
+            console.log("im ran so far away")
+            const currentUser = sessionStorage.getItem("activeUser")
             $("#friendListContainer").remove()
             friendsList.append(addFriendBtn)
             addFriendBtn.show()
@@ -26,26 +34,29 @@ const friendActions = Object.create({},{
     },
     makeDomComponents: {
         value: function(){
-            const friendNameInput = $("<input type='text' placeholder='Enter Friend Name'></input>")
+            const addFriendBtn = $("#add-friend-btn")
+            const currentUser = sessionStorage.getItem("activeUser")
+            const friendNameInput = $("<input type='text' placeholder='Enter Friend Name' autofocus></input>")
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
-            friendsList.append(saveButton).append(friendNameInput)
-            saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput)})
+            $("#friendUL").prepend((saveButton)).append(friendNameInput)
+            //Event handlers for submit button click and or enter key in input field
+            saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)})
+            friendNameInput.keyup((event)=>{
+                if (event.which === 13) {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)}
+            })
         }
     },
     addFriend: {
-        value: function(friendName, saveButton, friendNameInput){
-            console.log(friendName)
-            // const friendNameInput = $("<input type='text' placeholder='Enter Friend Name'></input>")
-            // const saveButton = $("<button>")
-            // saveButton.text("Save Friend")
-            // friendsList.append(saveButton).append(friendNameInput)
+        value: function(friendName, saveButton, friendNameInput, addFriendBtn){
+            const currentUser = sessionStorage.getItem("activeUser")
             let friendsToCheck = []
-            apiController.getFriendsList(currentUser).then( (response) =>{friendsToCheck = response
-            // saveButton.click(() => {
-                // console.log("friends to check", friendsToCheck)
+            apiController.getFriendsList(currentUser).then( (response) =>{
+                //populate array with response from API
+                friendsToCheck = response
+                //map array to pull out only user names to check against
                 friendNameArray = friendsToCheck.map((currentValue, index) =>{return friendsToCheck[index].user.name})
-                // console.log(friendNameArray)
+                //if input field is empty
                 if (friendName === ""){
                     alert("Please enter a valid username")
                     if (saveButton){saveButton.remove()}
@@ -53,6 +64,7 @@ const friendActions = Object.create({},{
                     if (addFriendBtn){addFriendBtn.show()}
                     return
                 }
+                //Check whether or not friendship already exists
                 else if (friendNameArray.includes(friendName)){
                     alert(`You're already friends with ${friendName}`)
                     if (saveButton) { saveButton.remove() }
@@ -62,13 +74,15 @@ const friendActions = Object.create({},{
                 }
                 else {
                     apiController.getUserId(friendName).then(response => {
-                    console.log("getUserId Response", response[0].id)
-                    if (response.length === 0){
+                    //Get friend from database and run checks
+                    //check if friend exists in database
+                        if (response.length === 0){
                         alert(`I'm sorry, user ${friendName} doesn't exist`)
                         if (saveButton) { saveButton.remove() }
                         if (friendNameInput) { friendNameInput.remove() }
-                        // addFriendBtn.show()
+                        addFriendBtn.show()
                         }
+                    //check if user is adding themselves as a friend
                     else if (String(response[0].id) === currentUser){
                         alert("You cannot add yourself as a friend, friend.")
                         if (saveButton) { saveButton.remove() }
@@ -76,6 +90,7 @@ const friendActions = Object.create({},{
                         if (addFriendBtn) { addFriendBtn.show() }
                         return
                     }
+                    //add friend and reload DOM
                     else {
                         apiController.addNewFriend(currentUser, response[0].id)
                         if (friendNameInput){friendNameInput.remove()}
@@ -84,17 +99,9 @@ const friendActions = Object.create({},{
                         // addFriendBtn.show()
                         }
                     })
-                // )
-            // })
             }
             })
     }
 }
 })
-
-// addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend() })
-addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.makeDomComponents() })
-
-friendActions.displayFriendList()
-
 module.exports = friendActions
