@@ -51,79 +51,9 @@
       "id": 10
     }
   ],
-  "events": [
-    {
-      "userId": 1,
-      "name": "Nothing",
-      "date": "2018-03-05",
-      "location": "Anywhere"
-    }
-  ],
-  "tasks": [
-    {
-      "userId": "1",
-      "dueDate": "sdf",
-      "desc": "this",
-      "complete": "false",
-      "id": 1
-    },
-    {
-      "userId": "1",
-      "dueDate": "werwer",
-      "desc": "asdfs",
-      "complete": "false",
-      "id": 2
-    },
-    {
-      "userId": "1",
-      "dueDate": "gerge",
-      "desc": "twtwerasdfz",
-      "complete": "false",
-      "id": 3
-    }
-  ],
-  "friends": [
-    {
-      "userId": "2",
-      "friendId": "1",
-      "id": 1
-    },
-    {
-      "userId": "4",
-      "friendId": "1",
-      "id": 2
-    }
-  ],
-  "messages": [
-    {
-      "userId": "2",
-      "message": "Duck",
-      "id": 2
-    },
-    {
-      "userId": "3",
-      "message": "Duck",
-      "id": 3
-    },
-    {
-      "userId": "1",
-      "message": "New message",
-      "id": 4
-    },
-    {
-      "userId": "1",
-      "message": "Ducky Ducky",
-      "id": 5
-    },
-    {
-      "userId": "1",
-      "message": "Moose Tracks",
-      "id": 6
-    },
-    {
-      "userId": "1",
-      "message": "Bear Facts",
-      "id": 7
-    }
-  ]
+  "events": [],
+  "tasks": [],
+  "friends": [],
+  "messages": [],
+  "articles": []
 }
