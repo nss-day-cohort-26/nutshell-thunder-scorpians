@@ -63,6 +63,11 @@
       "userId": "4",
       "friendId": "1",
       "id": 2
+    },
+    {
+      "userId": "3",
+      "friendId": "1",
+      "id": 3
     }
   ],
   "messages": [
@@ -101,5 +106,6 @@
       "message": "Tucker",
       "id": 8
     }
-  ], "articles": []
+  ],
+  "articles": []
 }

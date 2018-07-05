@@ -87,7 +87,13 @@ var buildMessagesDOM = function (messages) {
 
             // CANCEL BUTTON
             const cancelButton = $("<button>").text("Cancel").on("click", (e) => {
-                Messages.read();
+                // Messages.read();
+                editInput.hide();
+                saveButton.hide();
+                cancelButton.hide();
+                deleteButton.hide();
+                editButton.show();
+                msgItem.children(".msgSpan").show();
             });
 
             // DELETE BUTTON
@@ -104,8 +110,10 @@ var buildMessagesDOM = function (messages) {
 
             // TOGGLE EDIT OPTIONS
             editButton.on("click", (e) => {
+                console.log(msgItem.children(".msgSpan").textContent);
                 msgItem.children(".msgSpan").hide();
                 e.target.style.display = "none";
+                editInput.attr("value", msgItem.children(".msgSpan").textContent);
                 editInput.show();
                 saveButton.show();
                 cancelButton.show();
