@@ -31,13 +31,16 @@ const friendActions = Object.create({},{
     },
     makeDomComponents: {
         value: function(){
-            const friendNameInput = $("<input type='text' placeholder='Enter Friend Name'></input>")
+            const friendNameInput = $("<input type='text' placeholder='Enter Friend Name' autofocus></input>")
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
             // $("<form type='submit'></form>").append(saveButton).append(friendNameInput)
             // friendsList.append(saveButton).append(friendNameInput)
             $("#friendUL").prepend((saveButton)).append(friendNameInput)
             saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput)})
+            friendNameInput.keyup((event)=>{
+                if (event.which === 13) {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput)}
+            })
         }
     },
     addFriend: {
