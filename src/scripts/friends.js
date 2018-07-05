@@ -30,63 +30,66 @@ const friendActions = Object.create({},{
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
             friendsList.append(saveButton).append(friendNameInput)
-            saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName)})
+            saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput)})
         }
     },
     addFriend: {
-        value: function(){
+        value: function(friendName, saveButton, friendNameInput){
+            console.log(friendName)
             // const friendNameInput = $("<input type='text' placeholder='Enter Friend Name'></input>")
             // const saveButton = $("<button>")
             // saveButton.text("Save Friend")
             // friendsList.append(saveButton).append(friendNameInput)
             let friendsToCheck = []
-            apiController.getFriendsList(currentUser).then( (response) =>{friendsToCheck = response})
+            apiController.getFriendsList(currentUser).then( (response) =>{friendsToCheck = response
             // saveButton.click(() => {
                 // console.log("friends to check", friendsToCheck)
                 friendNameArray = friendsToCheck.map((currentValue, index) =>{return friendsToCheck[index].user.name})
                 // console.log(friendNameArray)
-                if (friendNameInput.val() === ""){
+                if (friendName === ""){
                     alert("Please enter a valid username")
-                    saveButton.remove()
-                    friendNameInput.remove()
-                    addFriendBtn.show()
+                    if (saveButton){saveButton.remove()}
+                    if (friendNameInput){friendNameInput.remove()}
+                    if (addFriendBtn){addFriendBtn.show()}
                     return
                 }
-                else if (friendNameArray.includes(friendNameInput.val())){
-                    alert(`You're already friends with ${friendNameInput.val()}`)
-                    saveButton.remove()
-                    friendNameInput.remove()
-                    addFriendBtn.show()
+                else if (friendNameArray.includes(friendName)){
+                    alert(`You're already friends with ${friendName}`)
+                    if (saveButton) { saveButton.remove() }
+                    if (friendNameInput) { friendNameInput.remove() }
+                    if (addFriendBtn) { addFriendBtn.show() }
                     return
                 }
-                else {apiController.getUserId(friendNameInput.val()).then(response => {
+                else {
+                    apiController.getUserId(friendName).then(response => {
                     console.log("getUserId Response", response[0].id)
                     if (response.length === 0){
-                        alert(`I'm sorry, user ${friendNameInput.val()} doesn't exist`)
-                        friendNameInput.remove()
-                        saveButton.remove()
-                        friendActions.displayFriendList()
+                        alert(`I'm sorry, user ${friendName} doesn't exist`)
+                        if (saveButton) { saveButton.remove() }
+                        if (friendNameInput) { friendNameInput.remove() }
                         // addFriendBtn.show()
                         }
                     else if (String(response[0].id) === currentUser){
                         alert("You cannot add yourself as a friend, friend.")
-                        saveButton.remove()
-                        friendNameInput.remove()
-                        addFriendBtn.show()
+                        if (saveButton) { saveButton.remove() }
+                        if (friendNameInput) { friendNameInput.remove() }
+                        if (addFriendBtn) { addFriendBtn.show() }
                         return
                     }
                     else {
                         apiController.addNewFriend(currentUser, response[0].id)
-                        friendNameInput.remove()
-                        saveButton.remove()
+                        if (friendNameInput){friendNameInput.remove()}
+                        if (saveButton){saveButton.remove()}
                         friendActions.displayFriendList()
                         // addFriendBtn.show()
                         }
                     })
-                }
+                // )
             // })
-        }
+            }
+            })
     }
+}
 })
 
 // addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend() })
