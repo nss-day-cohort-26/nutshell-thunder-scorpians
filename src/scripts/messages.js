@@ -19,13 +19,15 @@ const Messages = {
         }
 
         messagesApi.read().then(msgArr => {
+            console.log(msgArr);
             buildMessagesDOM(msgArr, currentUser);
         })
     },
 
     // CREATE
-    create: function (userId, message, timeStamp) {
-        messagesApi.create(userId, message, timeStamp).then(this.read)
+    create: function (userId, message) {
+        const curTimeStamp = new Date();
+        messagesApi.create(userId, message, curTimeStamp).then(this.read)
     },
 
     // UPDATE
@@ -56,7 +58,7 @@ var buildMessagesDOM = function (messages, currentUser) {
 
 
     // ITERATE MESSAGES
-    if (messages) {
+    if (messages.length > 0) {
         messages.forEach(message => {
 
             //CREATE MESSAGE ITEM
@@ -167,8 +169,7 @@ var buildMessagesDOM = function (messages, currentUser) {
     const newMessageButton = $("<button>").append($("<i>").addClass("fa fa-paper-plane-o")).attr("id", "newMessageSubmitButton");
     newMessageButton.on("click", (e) => {
         const message = $("#newMessageInput").val();
-        const curTimeStamp = new Date();
-        Messages.create(currentUser, message, curTimeStamp);
+        Messages.create(currentUser, message);
     })
 
     // TOGGLE EDIT AND ADD FRIENDS OPTIONS ON AND OFF
@@ -206,5 +207,11 @@ var buildMessagesDOM = function (messages, currentUser) {
     messengerDiv.append(newMessageDiv);
 }
 
+const messengerExp = {
+    "buildMessenger": function() {
+        Messages.read()
+    }
+}
+
 // EXPORT READ FUNCTION
-module.exports = Messages.read();
+module.exports = messengerExp;

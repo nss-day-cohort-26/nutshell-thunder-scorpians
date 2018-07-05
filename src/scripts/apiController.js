@@ -146,7 +146,7 @@ const apiController = Object.create({}, {
         value: {
             // READ
             read: function () {
-                return $.ajax("http://localhost:3000/messages?_expand=user&_sort=timestamp")
+                return $.ajax("http://localhost:3000/messages?_expand=user&_sort=timeStamp")
                 // ADD
                 // USER
                 // DATA
