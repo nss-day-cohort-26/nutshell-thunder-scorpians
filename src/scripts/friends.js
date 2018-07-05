@@ -1,9 +1,14 @@
+//Friends functionality. This module is used to add friends and make dom components having to do with displaying and adding friends.
+//Seth Dana seth.dana@gmail.com
+
 const $ = require("jquery")
 const apiController = require("./apiController")
 const createObject = require("./objectConstructors")
 
+//Get current active user ID from session storage
 const currentUser = sessionStorage.getItem("activeUser")
 
+//capture DIV from DOM to append stuff to
 const friendsList = $(".friends")
 const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
 
@@ -29,23 +34,21 @@ const friendActions = Object.create({},{
             const friendNameInput = $("<input type='text' placeholder='Enter Friend Name'></input>")
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
-            friendsList.append(saveButton).append(friendNameInput)
+            // $("<form type='submit'></form>").append(saveButton).append(friendNameInput)
+            // friendsList.append(saveButton).append(friendNameInput)
+            $("#friendUL").prepend((saveButton)).append(friendNameInput)
             saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput)})
         }
     },
     addFriend: {
         value: function(friendName, saveButton, friendNameInput){
-            console.log(friendName)
-            // const friendNameInput = $("<input type='text' placeholder='Enter Friend Name'></input>")
-            // const saveButton = $("<button>")
-            // saveButton.text("Save Friend")
-            // friendsList.append(saveButton).append(friendNameInput)
             let friendsToCheck = []
-            apiController.getFriendsList(currentUser).then( (response) =>{friendsToCheck = response
-            // saveButton.click(() => {
-                // console.log("friends to check", friendsToCheck)
+            apiController.getFriendsList(currentUser).then( (response) =>{
+                //populate array with response from API
+                friendsToCheck = response
+                //map array to pull out only user names to check against
                 friendNameArray = friendsToCheck.map((currentValue, index) =>{return friendsToCheck[index].user.name})
-                // console.log(friendNameArray)
+                //if input field is empty
                 if (friendName === ""){
                     alert("Please enter a valid username")
                     if (saveButton){saveButton.remove()}
@@ -53,6 +56,7 @@ const friendActions = Object.create({},{
                     if (addFriendBtn){addFriendBtn.show()}
                     return
                 }
+                //Check whether or not friendship already exists
                 else if (friendNameArray.includes(friendName)){
                     alert(`You're already friends with ${friendName}`)
                     if (saveButton) { saveButton.remove() }
@@ -62,12 +66,12 @@ const friendActions = Object.create({},{
                 }
                 else {
                     apiController.getUserId(friendName).then(response => {
-                    console.log("getUserId Response", response[0].id)
-                    if (response.length === 0){
+                    //
+                        if (response.length === 0){
                         alert(`I'm sorry, user ${friendName} doesn't exist`)
                         if (saveButton) { saveButton.remove() }
                         if (friendNameInput) { friendNameInput.remove() }
-                        // addFriendBtn.show()
+                        addFriendBtn.show()
                         }
                     else if (String(response[0].id) === currentUser){
                         alert("You cannot add yourself as a friend, friend.")
