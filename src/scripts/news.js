@@ -26,7 +26,7 @@ titleInput.attr("placeholder", "Enter article title")
 const synopsisInput = $("<input>").attr("id", "synopsis").text("Synopsis").appendTo(addNews)
 synopsisInput.attr("placeholder", "Enter article summary")
 const urlInput = $("<input>").attr("id", "url").text("URL").appendTo(addNews)
-const articleOutput = $("<section>").attr("id", "article-output")
+const articleOutput = $("<section>").attr("id", "article-output").appendTo(newsContainer)
 addNews.hide()
 urlInput.attr("placeholder", "Enter article URL")
 
@@ -39,20 +39,30 @@ addNewsButton.click(() => {
 
 //append articles database to dom
 const printArticles = () => {
+    if (articleOutput) {
+        articleOutput.empty()
+    }
     apiController.getArticleList()
     .then((articleList) => {
         articleList.forEach(articleText => {
-            console.log("articleText", articleText)
-            console.log("list.text", articleText.title);
+            console.log("articletext", articleText);
             const titleText = $("<h3>").text(articleText.title)
             const synopsisText = $("<h5>").text(articleText.synopsis)
             const urlText = $("<a>").text(articleText.url)
             const timeText = $("<p>").text(articleText.timestamp)
-            const newsText = $("<div>").append(titleText).append(synopsisText).append(urlText).append(timeText)
-            newsContainer.append(articleOutput).append(newsText)
-            });
-        })
-    }
+            const newsText = $(`<div id=${articleText.id}>`).addClass("news-text-div").append(titleText).append(synopsisText).append(urlText).append(timeText)
+            newsText.prependTo(articleOutput).prependTo(newsContainer)
+            articleOutput.prepend(newsText)
+            const deleteNewsButton = $("<button>").addClass("delete-news-button").text("Delete Article")
+            deleteNewsButton.appendTo(newsText)
+            deleteNewsButton.click(() => {
+            apiController.deleteArticle(event.target.parentNode.id).then((response) => {
+                printArticles()
+                })
+            })
+        });
+    })
+}
 
 // Given a user has entered in all field values for storing a new article
 // When the user performs a gesture on the Save Article affordance
@@ -76,23 +86,13 @@ $(saveNewsButton).click(() => {
     synopsisInput.val("")
     urlInput.val("")
     }
-    if (newsContainer) {
-        newsContainer.empty()
-    apiController.getArticleList()
-    .then((articleList) => {
-        articleList.forEach(articleText => {
-            const titleText = $("<h3>").text(articleText.title)
-            const synopsisText = $("<h5>").text(articleText.synopsis)
-            const urlText = $("<a>").text(articleText.url)
-            const timeText = $("<p>").text(articleText.timestamp)
-            const newsText = $("<div>").append(titleText).append(synopsisText).append(urlText).append(timeText)
-            newsContainer.append(newsText)
-            });
-        })
-    }
+    //run print articles to update article list
+    printArticles()
 })
 
 printArticles()
+
+
 //calling function to print to dom.  needs to be moved to save article button, clear dom and reprint
 
 console.log("working")
