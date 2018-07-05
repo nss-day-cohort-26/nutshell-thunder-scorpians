@@ -127,6 +127,20 @@ const apiController = Object.create({}, {
             })
         }
     },
+    getArticleList: {
+        value: function() {
+            return $.ajax("http://localhost:3000/articles")
+        }
+    },
+    deleteArticle: {
+        value: function(id) {
+            return $.ajax({
+                url: `http://localhost:3000/articles/${id}`,
+                type: "DELETE"
+            })
+        }
+    },
+
     messages: {
         // READ
         value: {
