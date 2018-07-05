@@ -51,14 +51,7 @@
       "id": 10
     }
   ],
-  "events": [
-    {
-      "userId": 1,
-      "name": "Nothing",
-      "date": "2018-03-05",
-      "location": "Anywhere"
-    }
-  ],
+  "events": [],
   "tasks": [],
   "friends": [
     {
@@ -108,5 +101,5 @@
       "message": "Tucker",
       "id": 8
     }
-  ]
+  ], "articles": []
 }
