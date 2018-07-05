@@ -132,7 +132,7 @@ var buildMessagesDOM = function (messages) {
                 const pd = $(e.target).parent();
                 const us = pd.children(".user");
                 // console.log(us.text());
-                freinds.addFriend(us.text())
+                friends.addFriend(us.text())
             });
             addFriendButton.hide()
             msgItem.append(addFriendButton);
@@ -155,7 +155,7 @@ var buildMessagesDOM = function (messages) {
 
     const msgOptionButton = $("<button>").text("Options").attr("id", "msgOptionButton");
     msgOptionButton.on("click", (e) => {
-        if ($("#msgOptionsInstuctions").is(":visible")) {
+        if ($("#msgOptionsInstructions").is(":visible")) {
             $("#msgOptionsInstructions").hide();
         } else {
             $("#msgOptionsInstructions").show();
