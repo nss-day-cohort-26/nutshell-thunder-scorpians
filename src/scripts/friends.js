@@ -39,9 +39,8 @@ const friendActions = Object.create({},{
             const friendNameInput = $("<input type='text' placeholder='Enter Friend Name' autofocus></input>")
             const saveButton = $("<button>")
             saveButton.text("Save Friend")
-            // $("<form type='submit'></form>").append(saveButton).append(friendNameInput)
-            // friendsList.append(saveButton).append(friendNameInput)
             $("#friendUL").prepend((saveButton)).append(friendNameInput)
+            //Event handlers for submit button click and or enter key in input field
             saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)})
             friendNameInput.keyup((event)=>{
                 if (event.which === 13) {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)}
@@ -75,13 +74,15 @@ const friendActions = Object.create({},{
                 }
                 else {
                     apiController.getUserId(friendName).then(response => {
-                    //
+                    //Get friend from database and run checks
+                    //check if friend exists in database
                         if (response.length === 0){
                         alert(`I'm sorry, user ${friendName} doesn't exist`)
                         if (saveButton) { saveButton.remove() }
                         if (friendNameInput) { friendNameInput.remove() }
                         addFriendBtn.show()
                         }
+                    //check if user is adding themselves as a friend
                     else if (String(response[0].id) === currentUser){
                         alert("You cannot add yourself as a friend, friend.")
                         if (saveButton) { saveButton.remove() }
@@ -89,6 +90,7 @@ const friendActions = Object.create({},{
                         if (addFriendBtn) { addFriendBtn.show() }
                         return
                     }
+                    //add friend and reload DOM
                     else {
                         apiController.addNewFriend(currentUser, response[0].id)
                         if (friendNameInput){friendNameInput.remove()}
@@ -97,17 +99,9 @@ const friendActions = Object.create({},{
                         // addFriendBtn.show()
                         }
                     })
-                // )
-            // })
             }
             })
     }
 }
 })
-
-// addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.makeDomComponents() })
-// addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.addFriend() })
-
-friendActions.displayFriendList()
-
 module.exports = friendActions

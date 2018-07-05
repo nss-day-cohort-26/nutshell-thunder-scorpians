@@ -1,3 +1,6 @@
+//This module controls login and registration functions
+//Seth Dana seth.dana@gmail.com
+
 const $ = require("jquery")
 const apiController = require("./apiController")
 const friends = require("./friends")
