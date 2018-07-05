@@ -59,7 +59,29 @@
       "location": "Anywhere"
     }
   ],
-  "tasks": [],
+  "tasks": [
+    {
+      "userId": "1",
+      "dueDate": "sdf",
+      "desc": "this",
+      "complete": "false",
+      "id": 1
+    },
+    {
+      "userId": "1",
+      "dueDate": "werwer",
+      "desc": "asdfs",
+      "complete": "false",
+      "id": 2
+    },
+    {
+      "userId": "1",
+      "dueDate": "gerge",
+      "desc": "twtwerasdfz",
+      "complete": "false",
+      "id": 3
+    }
+  ],
   "friends": [
     {
       "userId": "2",
@@ -72,7 +94,6 @@
       "id": 2
     }
   ],
-
   "messages": [
     {
       "userId": "2",

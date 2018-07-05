@@ -1,3 +1,6 @@
+/* This module sets the grid layout of the page */
+/* Author: Elliot Huck */
+
 .grid__wrapper {
   display: grid;
 }
