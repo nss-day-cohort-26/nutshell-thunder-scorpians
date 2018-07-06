@@ -64,6 +64,7 @@ const loginControl = Object.create({},{
                     friends.displayFriendList()
                     task.printTasks()
                     events()
+                    messages.buildMessenger()
                 }
             })
          }
