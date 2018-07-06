@@ -1,5 +1,4 @@
 {
-
   "articles": [
     {
       "title": "test1",
@@ -18,23 +17,49 @@
   ],
   "events": [],
   "tasks": [],
-  "users": [],
+  "users": [
+    {
+      "name": "phil",
+      "email": "phil@phil.net",
+      "id": 1
+    },
+    {
+      "name": "Tom",
+      "email": "Tom@Tom.net",
+      "id": 2
+    }
+  ],
   "friends": [
     {
       "userId": "2",
       "friendId": "1",
       "id": 1
+    }
+  ],
+  "messages": [
+    {
+      "userId": "1",
+      "message": "asdf",
+      "timeStamp": "Fri Jul 06 2018 09:15:16 GMT-0500 (Central Daylight Time)",
+      "id": 1
     },
     {
-      "userId": "4",
-      "friendId": "1",
+      "userId": "2",
+      "message": "Tom's Message",
+      "timeStamp": "Fri Jul 06 2018 09:15:30 GMT-0500 (Central Daylight Time)",
       "id": 2
     },
     {
-      "userId": "3",
-      "friendId": "1",
+      "userId": "1",
+      "message": "asdf",
+      "timeStamp": "Fri Jul 06 2018 09:25:20 GMT-0500 (Central Daylight Time)",
       "id": 3
+    },
+    {
+      "userId": "1",
+      "message": "asdfgggg",
+      "timeStamp": "Fri Jul 06 2018 09:25:25 GMT-0500 (Central Daylight Time)",
+      "id": 4
     }
-  ],
-  "messages": []
+  ]
 }

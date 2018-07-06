@@ -140,7 +140,10 @@ var buildMessagesDOM = function (messages, currentUser) {
                     const pd = $(e.target).parent();
                     const us = pd.children(".msgUser");
                     // console.log(us.text());
-                    friends.addFriend(us.text())
+                    const ruSure = confirm(`Would you like to add user ${us.text()}?`);
+                    if (ruSure) {
+                        friends.addFriend(us.text());
+                    }
                 });
                 addFriendButton.hide()
                 // APPEND ADD FRIENDS BUTON
