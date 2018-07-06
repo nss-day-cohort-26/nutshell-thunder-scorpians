@@ -16,13 +16,11 @@ const friendActions = Object.create({},{
             const addFriendBtn = $("<button id='add-friend-btn'>Add Friend By Name</button>")
             addFriendBtn.click(() => { addFriendBtn.hide(); friendActions.makeDomComponents() })
             const friendsList = $("#friends")
-            console.log("im ran so far away")
             const currentUser = sessionStorage.getItem("activeUser")
             $("#friendListContainer").remove()
             friendsList.append(addFriendBtn)
             addFriendBtn.show()
             friendsList.append($("<div id='friendListContainer'><ul id='friendUL'></ul></div>"))
-            console.log("currentuserID", currentUser)
             let currentFriendsList = apiController.getFriendsList(currentUser).then((response) =>{
                 response.forEach(friend =>{
                     let delElement = $("<button class='button is-small delete'>")
@@ -31,16 +29,8 @@ const friendActions = Object.create({},{
                     let liElement = $(`<li id=${friend.id}>`)
                     liElement.text(`${friend.user.name}`)
                     liElement.prepend(delElement)
-                    // $(".friend-delete").click((e) =>{friendActions.deleteFriend(e)})
-                    // liElement.text(`${friend.user.name}`)
                     $("#friendUL").append(liElement)
                 })
-                // let friendNodeList = document.getElementsByClassName("friend-delete")
-                // console.log(friendNodeList)
-                // for (let i=0; i<friendNodeList.length; i++){
-                //     console.log("nodes", friendNodeList[i])
-                //     friendNodeList[i].click((e) => { friendActions.deleteFriend(e) })
-                // }
             })
         }
     },
