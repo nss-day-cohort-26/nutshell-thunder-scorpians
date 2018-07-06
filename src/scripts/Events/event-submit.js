@@ -35,8 +35,6 @@ const submitEvent = () => {
     const newEvent = new Event(currentUser, name, date, location);
     console.log(newEvent);
 
-    // Make an api call here with the new event I just made
-
     apiController.events.addNewEvent(newEvent).then(response => {
       allInputs.each((i, element) => { element.value = "" });
       $("#event-form").hide();
