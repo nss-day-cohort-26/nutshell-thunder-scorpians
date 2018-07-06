@@ -15,7 +15,8 @@ const Event = require("./event-class");
 // Required by: events, event-submit
 
 // Needs to accept the parameter for the currentUserId and his friends
-const loadEvents = (currentUser) => {
+const loadEvents = () => {
+  const currentUser = parseInt(sessionStorage.getItem("activeUser"));
   console.log("Load events running")
   console.log("Current user in load:", currentUser);
 
@@ -40,7 +41,7 @@ const loadEvents = (currentUser) => {
         const $eventSection = $("<section>");
         $("<h3>").text(event.name).appendTo($eventSection);
 
-        if (event.userId === currentUser) {
+        if (parseInt(event.userId) === currentUser) {
           $eventSection.addClass("event event--yours");
           $("<p>").text("Posted by: You").appendTo($eventSection);
         } else {

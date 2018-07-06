@@ -6,10 +6,8 @@ const loadEvents = require("./event-load");
 
 const events = () => {
   console.log("Events is running");
-  const currentUser = parseInt(sessionStorage.getItem("activeUser"));
-  console.log("Current user: ", currentUser);
   loadEventArticle();
-  loadEvents(currentUser);
+  loadEvents();
 
 }
 
