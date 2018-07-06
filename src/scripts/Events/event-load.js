@@ -41,17 +41,17 @@ const loadEvents = () => {
       sortedEvents.forEach(event => {
         console.log("Writing each event...");
         const $eventSection = $("<section>");
-        $("<h3>").text(event.name).appendTo($eventSection);
 
         if (parseInt(event.userId) === currentUser) {
           $eventSection.addClass("event event--yours");
-          $("<p>").text("Posted by: You").appendTo($eventSection);
+          // $("<p>").text("Posted by: You").appendTo($eventSection);
         } else {
           $eventSection.addClass("event event--others");
-          $("<p>").text("Posted by: A friend").appendTo($eventSection);
+          // $("<p>").text("Posted by: Friend").appendTo($eventSection);
         }
 
         $("<p>").text(event.date).appendTo($eventSection);
+        $("<p>").text(event.name).appendTo($eventSection);
         $("<p>").text(event.location).appendTo($eventSection);
 
         $("<button>").text("Edit").attr("id", `${event.id}edit`).appendTo($eventSection).click(editEvent);
