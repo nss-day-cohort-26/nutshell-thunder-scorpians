@@ -3,27 +3,6 @@
   "tasks": [],
   "friends": [],
   "messages": [],
-  "articles": [
-    {
-      "title": "Activists Arrested At Statue Of Liberty After Protesting Trump's Immigration Policies",
-      "synopsis": "Activists in two separate protests against the Trump administration's immigration policies were arrested at the Statue of Liberty on Wednesday — one group unfurling a banner calling for the abolition of U.S. Immigration and Customs Enforcement, while in another act of defiance, a woman climbed the statue's base to protest immigrant family separations.",
-      "url": "https://www.npr.org/2018/07/05/626052069/activists-arrested-protesting-trumps-immigration-policies-at-statue-of-liberty",
-      "timestamp": "2018-07-05 03:20:33 pm",
-      "id": 3
-    },
-    {
-      "title": " Thai cave rescue: Boys and coach not yet well enough to attempt escape",
-      "synopsis": "A medical assessment of the 12 boys and their football coach stuck in a cave in Northern Thailand has concluded that it is too dangerous to try to move the group out Thursday, according to a member of the Thai Navy SEALs who is not authorized to speak to the media. The SEALs have also started to pump oxygen into the chamber.",
-      "url": "https://www.cnn.com/2018/07/05/asia/thai-cave-rescue-intl/index.html",
-      "timestamp": "2018-07-05 03:25:28 pm",
-      "id": 4
-    },
-    {
-      "title": "Scott Pruitt resigns as EPA chief, Trump announces",
-      "synopsis": "Scott Pruitt has resigned as head of the Environmental Protection Agency after a string of controversies involving his leadership, President Trump announced Thursday on Twitter.",
-      "url": "http://www.foxnews.com/politics/2018/07/05/scott-pruitt-resigns-as-epa-chief-trump-announces.html",
-      "timestamp": "2018-07-05 03:29:52 pm",
-      "id": 5
-    }
-  ]
+  "articles": [],
+  "users": []
 }
