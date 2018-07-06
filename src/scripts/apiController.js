@@ -21,8 +21,8 @@ const apiController = Object.create({}, {
                 type: "POST",
                 data: {
                     userId: param.userId,
-                    dueDate: param.dueDate,
                     desc: param.taskDescription,
+                    dueDate: param.dueDate,
                     complete: param.complete
                 }
             })
@@ -48,8 +48,8 @@ const apiController = Object.create({}, {
                 type: "PUT",
                 data:{
                     userId: param.userId,
-                    dueDate: param.dueDate,
                     desc: param.desc,
+                    dueDate: param.dueDate,
                     complete: param.complete
                 }
             })

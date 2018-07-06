@@ -1,0 +1,24 @@
+.card > * {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+
+.edit {
+    position: absolute;
+    left: 25%;
+}
+
+.add-task {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 100% !important;
+    background-color: hsl(171, 100%, 41%);
+    position: sticky !important;
+    bottom: 0 !important;
+    left: 75%;
+}
