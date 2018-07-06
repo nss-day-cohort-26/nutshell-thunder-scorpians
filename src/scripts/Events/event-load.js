@@ -13,37 +13,49 @@ const $ = require("jquery");
 const apiController = require("../apiController");
 const Event = require("./event-class");
 // Required by: events, event-submit
-const currentUser = sessionStorage.getItem("activeUser");
 
 // Needs to accept the parameter for the currentUserId and his friends
-const loadEvents = (currentUser) => {
+const loadEvents = () => {
+  const currentUser = parseInt(sessionStorage.getItem("activeUser"));
   console.log("Load events running")
-  console.log("Current User: ", currentUser);
+  console.log("Current user in load:", currentUser);
+
   // New function here to get all the users friends
-
-  apiController.events.getAllEvents().then(sortedEvents => {
-    console.log(sortedEvents);
-    const $eventArticle = $("#event-article");
-    $eventArticle.empty();
-    sortedEvents.forEach(event => {
-      console.log("for each running");
-      const $eventSection = $("<section>");
-      $("<h3>").text(event.name).appendTo($eventSection);
-
-      if (parseInt(event.userId) === currentUser) {
-        $eventSection.addClass("event event--yours");
-        $("<p>").text("Posted by: You").appendTo($eventSection);
-      } else {
-        $eventSection.addClass("event event--others");
-        $("<p>").text("Posted by: A friend").appendTo($eventSection);
-      }
-
-      $("<p>").text(event.date).appendTo($eventSection);
-      $("<p>").text(event.location).appendTo($eventSection);
-
-      $eventSection.appendTo($eventArticle);
+  apiController.getFriendsList(currentUser).then(allFriends => {
+    let allFriendsArray = [];
+    allFriends.forEach(friend => {
+      const friendId = friend.user.id;
+      allFriendsArray.push(friendId);
     });
-    $eventArticle.appendTo($(".events"));
+    allFriendsArray = allFriendsArray.map(friendIdNumber => { return `userId=${friendIdNumber}&` });
+    const allFriendsString = allFriendsArray.join("");
+    console.log(allFriendsString);
+
+    apiController.events.getAllEvents(currentUser, allFriendsString).then(sortedEvents => {
+
+      console.log(sortedEvents);
+      const $eventArticle = $("#event-article");
+      $eventArticle.empty();
+      sortedEvents.forEach(event => {
+        console.log("for each running");
+        const $eventSection = $("<section>");
+        $("<h3>").text(event.name).appendTo($eventSection);
+
+        if (parseInt(event.userId) === currentUser) {
+          $eventSection.addClass("event event--yours");
+          $("<p>").text("Posted by: You").appendTo($eventSection);
+        } else {
+          $eventSection.addClass("event event--others");
+          $("<p>").text("Posted by: A friend").appendTo($eventSection);
+        }
+
+        $("<p>").text(event.date).appendTo($eventSection);
+        $("<p>").text(event.location).appendTo($eventSection);
+
+        $eventSection.appendTo($eventArticle);
+      });
+      $eventArticle.appendTo($(".events"));
+    });
   });
 };
 
