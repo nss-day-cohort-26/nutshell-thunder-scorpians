@@ -15,7 +15,7 @@ const taskObject = Object.create({},{
                 if (element.complete === "false") {
                     for (const key in element) {
                         // console.log(element);
-                        if (key === "desc" && element.complete === "false") {$("<p>").text(`${[key]}:${element[key]}`).appendTo($div);
+                        if (key === "desc" && element.complete === "false") {$("<p>").text(`${element[key]}`).appendTo($div);
                         const editBtn = $("<button>").addClass("button is-small is-info edit").text("Edit").appendTo($div).click(()=>{
                             // console.log($(event.target).siblings().eq(2))
                             // targets element.desc and "replaces" it with an input field filled with the value of it
@@ -41,7 +41,7 @@ const taskObject = Object.create({},{
                             }
                         })
                         }
-                        else if (key === "dueDate" && element.complete === "false") {$("<p>").text(`${[key]}:${element[key]}`).addClass("due-date").appendTo($div);}
+                        else if (key === "dueDate" && element.complete === "false") {$("<p>").text(`${element[key]}`).addClass("due-date").appendTo($div);}
                         // console.log(element[key]);
                     }
                     const $checkbox = $("<input>").addClass("checkbox").attr("type","checkbox").appendTo($p).click(()=>{
