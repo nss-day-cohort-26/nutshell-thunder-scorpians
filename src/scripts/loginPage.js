@@ -6,6 +6,7 @@ const apiController = require("./apiController")
 const friends = require("./friends")
 const task = require("./task")
 const messages = require("./messages")
+const events = require("./Events/events")
 
 const loginControl = Object.create({},{
     createForms: {
@@ -55,6 +56,7 @@ const loginControl = Object.create({},{
                     $(".grid__wrapper").css("display", "grid")
                     friends.displayFriendList()
                     task.printTasks()
+                    events()
                     // messages.buildMessenger()
                 }
             })
