@@ -62,14 +62,14 @@ const apiController = Object.create({}, {
                 type: "POST",
                 data: {
                     userId: userId1,
-                    friendId: userId2
+                    yourId: userId2
                 }
             })
         }
     },
     getFriendsList: {
         value: function(currentUserId){
-            return $.ajax(`http://localhost:3000/friends?_expand=user&friendId=${currentUserId}`)
+            return $.ajax(`http://localhost:3000/friends?_expand=user&yourId=${currentUserId}`)
         }
     },
     addNewFriend: {
@@ -79,8 +79,17 @@ const apiController = Object.create({}, {
                 type: "POST",
                 data: {
                     userId: friendToAddId,
-                    friendId: currentUserId
+                    yourId: currentUserId
                 }
+            })
+        }
+    },
+    deleteFriend: {
+        value: function(relId){
+            console.log("type of",typeof(relId))
+            return $.ajax({
+                url: `http://localhost:3000/friends/${relId}`,
+                type: "DELETE"
             })
         }
     },
