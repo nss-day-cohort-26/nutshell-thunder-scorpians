@@ -146,7 +146,8 @@ var buildMessagesDOM = function (messages, currentUser) {
                     // console.log(us.text());
                     const ruSure = confirm(`Would you like to add user ${us.text()}?`);
                     if (ruSure) {
-                        friends.addFriend(us.text());
+                        const addFriendBtn = $("#add-friend-btn")
+                        friends.addFriend(us.text(), addFriendBtn);
                     }
                 });
                 addFriendButton.hide()
