@@ -1,25 +1,33 @@
 
 const $ = require("jquery");
 const apiController = require("../apiController");
+const loadEventArticle = require("./event-article");
 const loadEvents = require("./event-load");
-const createNewEvent = require("./event-form");
 
-console.log("events page is working");
+const events = () => {
 
-
-
-/* Page Has Loaded:
-1. Add New Event Button
-*/
-const $eventsArticle = $("<article>").addClass("article--events");
+console.log("Events is running");
+loadEventArticle();
 loadEvents();
 
-/*
-Once the page has loaded, I need to add a button with an event listener that will run createNewEvent when clicked
-*/
+}
 
-createNewEvent();
+events();
+
+module.exports = events;
 
 /*
-After a new event is created, clicking the Submit button should reload all the events on the page
+
+MAKE EVENTS LOAD FOR ALL FRIENDS in event-load
+
+ADD AN EDIT/DELETE BUTTON TO EACH EVENT in event-load
+Given a user wants to change the details of an event
+When the user performs a gesture to edit an event
+Then the user should be presented with a form that has the event details pre-filled into the fields
+And there should be an affordance to save the new details
+
+GET USERID FROM SESSION STORAGE in event-submit
+
+CLEAN UP event-form
+
 */

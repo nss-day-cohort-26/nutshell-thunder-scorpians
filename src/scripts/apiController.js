@@ -89,6 +89,11 @@ const apiController = Object.create({}, {
             return $.ajax(`http://localhost:3000/users?name=${userName}`)
         }
     },
+    getEmailAddr: {
+        value: function(emailAddr){
+            return $.ajax(`http://localhost:3000/users?email=${emailAddr}`)
+        }
+    },
     queryUsers: {
         value: function(){
             return $.ajax("http://localhost:3000/users")
@@ -127,6 +132,20 @@ const apiController = Object.create({}, {
             })
         }
     },
+    getArticleList: {
+        value: function() {
+            return $.ajax("http://localhost:3000/articles")
+        }
+    },
+    deleteArticle: {
+        value: function(id) {
+            return $.ajax({
+                url: `http://localhost:3000/articles/${id}`,
+                type: "DELETE"
+            })
+        }
+    },
+
     messages: {
         // READ
         value: {
