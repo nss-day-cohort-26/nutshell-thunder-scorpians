@@ -25,10 +25,22 @@ const friendActions = Object.create({},{
             console.log("currentuserID", currentUser)
             let currentFriendsList = apiController.getFriendsList(currentUser).then((response) =>{
                 response.forEach(friend =>{
-                    let liElement = $("<li>")
+                    let delElement = $("<button class='button is-small delete'>")
+                    delElement.click((e) => { addFriendBtn.remove(); friendActions.deleteFriend(e) })
+                    // let liElement = $(`<li>${friend.user.name}</li>`)
+                    let liElement = $(`<li id=${friend.id}>`)
                     liElement.text(`${friend.user.name}`)
+                    liElement.prepend(delElement)
+                    // $(".friend-delete").click((e) =>{friendActions.deleteFriend(e)})
+                    // liElement.text(`${friend.user.name}`)
                     $("#friendUL").append(liElement)
                 })
+                // let friendNodeList = document.getElementsByClassName("friend-delete")
+                // console.log(friendNodeList)
+                // for (let i=0; i<friendNodeList.length; i++){
+                //     console.log("nodes", friendNodeList[i])
+                //     friendNodeList[i].click((e) => { friendActions.deleteFriend(e) })
+                // }
             })
         }
     },
@@ -101,7 +113,17 @@ const friendActions = Object.create({},{
                     })
             }
             })
+        }
+    },
+    deleteFriend: {
+        value: function(e){
+            // $("#add-friend-btn").remove()
+            let currentUser = sessionStorage.getItem("activeUser")
+            const relId = parseInt(e.target.parentNode.id)
+            apiController.deleteFriend(relId).then(response => {
+                friendActions.displayFriendList()
+            })
+        }
     }
-}
 })
 module.exports = friendActions
