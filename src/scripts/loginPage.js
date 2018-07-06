@@ -24,7 +24,7 @@ const loginControl = Object.create({},{
                     return
                 }
                 else {
-                    loginControl.submitLogin(userNameInput.val(), emailInput.val())
+                    loginControl.submitLogin(userNameInput.val().toLowerCase(), emailInput.val().toLowerCase())
                 }
             })
             $("#login-stuff").append(headline).append(userNameInput).append(emailInput).append(submitLoginBtn).append(registerBtn)
@@ -52,7 +52,11 @@ const loginControl = Object.create({},{
                 else if (user[0].email === emailVal && user[0].name === userName){
                     sessionStorage.setItem("activeUser", user[0].id)
                     $("#login-stuff").remove()
-                    $("#header").append($(`<h1>Welcome to Nutshell, ${user[0].name}!</h1>`))
+                    let mainUser = user[0].name
+                    let firstName = mainUser.split(" ")[0]
+                    let capitalLetter = firstName.charAt(0).toUpperCase() + firstName.slice(1)
+                    // mainUser = mainUser + user[0].name.slice(1)
+                    $("#header").append($(`<h1>Welcome to Nutshell, ${capitalLetter}!</h1>`))
                     $(".grid__wrapper").css("display", "grid")
                     friends.displayFriendList()
                     task.printTasks()
