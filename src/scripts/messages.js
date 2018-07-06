@@ -53,9 +53,9 @@ var buildMessagesDOM = function (messages, currentUser) {
     // ADD MESSENGER HEADER
     const messengerHeaderDiv = $("<div>").attr("id", "messengerHeaderDiv");
     messengerHeaderDiv.append($("<h2>").text("Messenger").addClass("messengerHeader"));
-    const msgOptionsInstuctions = $("<h4>").text("Use add/edit buttons to add friends and edit messages. Clicking Options will toggle buttons on and off.").addClass("messengerOptionsInstructions")
-    msgOptionsInstuctions.hide();
-    messengerHeaderDiv.append(msgOptionsInstuctions);
+    // const msgOptionsInstuctions = $("<h4>").text("Use add/edit buttons to add friends and edit messages. Clicking Options will toggle buttons on and off.").addClass("messengerOptionsInstructions")
+    // msgOptionsInstuctions.hide();
+    // messengerHeaderDiv.append(msgOptionsInstuctions);
     messengerDiv.append(messengerHeaderDiv);
 
     const messengerBodyDiv = $("<div>").attr("id", "messengerBodyDiv");
@@ -185,11 +185,11 @@ var buildMessagesDOM = function (messages, currentUser) {
     const msgOptionButton = $("<button>").append($("<i>").addClass("fa fa-cogs")).attr("id", "msgOptionButton");
     msgOptionButton.on("click", (e) => {
 
-        if ($("#msgOptionsInstructions").is(":visible")) {
-            $("#msgOptionsInstructions").hide();
-        } else {
-            $("#msgOptionsInstructions").show();
-        }
+        // if ($("#msgOptionsInstructions").is(":visible")) {
+        //     $("#msgOptionsInstructions").hide();
+        // } else {
+        //     $("#msgOptionsInstructions").show();
+        // }
 
         if ($(".editMsgButton")) {
             if ($(".editMsgButton").is(":visible")) {
@@ -210,9 +210,9 @@ var buildMessagesDOM = function (messages, currentUser) {
     })
 
     // APPEND NEW MESSAGE AREA TO MESSENER DIV
+    messengerHeaderDiv.append(msgOptionButton);
     newMessageDiv.append(newMessageInput);
     newMessageDiv.append(newMessageButton);
-    newMessageDiv.append(msgOptionButton);
     messengerDiv.append(newMessageDiv);
 
     console.log(messengerDiv.prop("scrollHeight"))
