@@ -119,9 +119,9 @@ const apiController = Object.create({}, {
         }
     },
     addNewArticle: {
-        value: function (title, synopsis, url, timeStamp) {
+        value: function (title, synopsis, url, timeStamp, currentUser, friendString) {
             return $.ajax({
-                url: "http://localhost:3000/articles",
+                url: `http://localhost:3000/articles?userId=${currentUser}&${friendString}_sort=timestamp&_order=desc`,
                 type: "POST",
                 data: {
                     title: title,
