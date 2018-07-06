@@ -1,6 +1,6 @@
 const $ = require("jquery");
 const apiController = require("./apiController");
-const $wrapper = $("#wrapper").addClass("container");
+const $wrapper = $("#wrapper");
 
 const taskObject = Object.create({},{
     printTasks:{
@@ -90,6 +90,5 @@ const taskObject = Object.create({},{
 })
 
 // console.log(taskObject);
-taskObject.printTasks()
 
 module.exports = taskObject;
