@@ -1,9 +1,8 @@
 const $ = require("jquery");
 const apiController = require("./apiController");
-const $wrapper = $("#wrapper");
+const $wrapper = $("#wrapper").addClass("container");
 
 const taskObject = Object.create({},{
-
     printTasks:{
         value: ()=>{ apiController.getTasks(sessionStorage.getItem("activeUser")).then((response)=>{
             console.log(sessionStorage.getItem("activeUser"))
@@ -12,6 +11,7 @@ const taskObject = Object.create({},{
                 // console.log(element);
                 // const $columns = $("<div>").addClass("columns").appendTo($wrapper);
                 const $div = $("<div>").addClass("card column").appendTo($wrapper);
+                const $p = $("<p>").text("Complete: ").attr("id","explain-checkbox").appendTo($div)
                 if (element.complete === "false") {
                     for (const key in element) {
                         // console.log(element);
@@ -41,10 +41,10 @@ const taskObject = Object.create({},{
                             }
                         })
                         }
-                        else if (key === "dueDate" && element.complete === "false") {$("<p>").text(`${[key]}:${element[key]}`).appendTo($div);}
+                        else if (key === "dueDate" && element.complete === "false") {$("<p>").text(`${[key]}:${element[key]}`).addClass("due-date").appendTo($div);}
                         // console.log(element[key]);
                     }
-                    const $checkbox = $("<input>").addClass("checkbox").attr("type","checkbox").appendTo($div).click(()=>{
+                    const $checkbox = $("<input>").addClass("checkbox").attr("type","checkbox").appendTo($p).click(()=>{
                         const checkboxDbUpdate = {
                             userId: element.userId,
                             dueDate: element.dueDate,
@@ -57,7 +57,7 @@ const taskObject = Object.create({},{
                         taskObject.printTasks()
                     })
                     })
-                    $deleteBtn = $("<button>").addClass("button is-small is-danger delete").text("").appendTo($div).click((e)=>{
+                    $deleteBtn = $("<button>").addClass("button is-medium is-danger delete").text("").appendTo($div).click((e)=>{
                         apiController.deleteTask(element.id);
                         $(e.target.parentNode).remove();
                         // console.log(e.target.parentNode);

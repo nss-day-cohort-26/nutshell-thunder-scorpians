@@ -2,16 +2,6 @@
     text-align: center;
 }
 
-.button {
-    position: absolute;
-    top: 50%;
-}
-
-.edit {
-    position: absolute;
-    left: 25%;
-}
-
 .add-task {
     border-width: 1px;
     border-style: solid;
@@ -20,5 +10,41 @@
     background-color: hsl(171, 100%, 41%);
     position: sticky !important;
     bottom: 0 !important;
-    left: 75%;
+    left:50%;
+    margin-top: 2rem;
+}
+
+#wrapper > p {
+    display: inline-block;
+}
+
+.edit {
+    float: right;
+    top: 1.5rem;
+}
+
+.checkbox {
+    bottom: 1rem;
+    float: right;
+    left: 1rem;
+}
+
+#explain-checkbox {
+    display: inline-block;
+    margin-right: 50rem;
+}
+
+.due-date{
+    padding-left: 2rem !important;
+}
+
+button.is-primary {
+    margin-left: 1rem;
+}
+
+@media only screen and (min-width:1088px) {
+    #explain-checkbox{
+        margin-right: 75rem;
+        display: inline-block;
+    }
 }
