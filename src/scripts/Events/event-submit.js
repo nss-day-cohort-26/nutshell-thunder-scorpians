@@ -15,9 +15,10 @@ const apiController = require("../apiController");
 const loadEvents = require("./event-load");
 // Required by: event-form
 
-const currentUser = 1;
 
 const submitEvent = () => {
+  const currentUser = parseInt(sessionStorage.getItem("activeUser"));
+
   const allInputs = $("#event-form input");
   console.log(allInputs);
   const allValues = []

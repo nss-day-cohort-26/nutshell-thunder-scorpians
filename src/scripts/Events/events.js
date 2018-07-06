@@ -5,20 +5,23 @@ const loadEventArticle = require("./event-article");
 const loadEvents = require("./event-load");
 
 const events = () => {
-
-console.log("Events is running");
-loadEventArticle();
-loadEvents();
+  console.log("Events is running");
+  const currentUser = parseInt(sessionStorage.getItem("activeUser"));
+  console.log("Current user: ", currentUser);
+  loadEventArticle();
+  loadEvents(currentUser);
 
 }
-
-events();
 
 module.exports = events;
 
 /*
 
 MAKE EVENTS LOAD FOR ALL FRIENDS in event-load
+When the active user is viewing the main view of the application
+Then the other user's news articles, and event list should appear in the current user's corresponding components
+And the other user's article and events should be styled with italicized font
+And the other user's article and events should be styled with a cornsilk background color
 
 ADD AN EDIT/DELETE BUTTON TO EACH EVENT in event-load
 Given a user wants to change the details of an event

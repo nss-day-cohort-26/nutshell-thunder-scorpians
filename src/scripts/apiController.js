@@ -113,8 +113,8 @@ const apiController = Object.create({}, {
                     }
                 });
             },
-            getAllEvents: () => {
-                return $.ajax("http://localhost:3000/events?userId=1&_sort=date&_order=asc");
+            getAllEvents: (currentUser, friendString) => {
+                return $.ajax(`http://localhost:3000/events?userId=${currentUser}&${friendString}_sort=date&_order=asc`);
             }
         }
     },
