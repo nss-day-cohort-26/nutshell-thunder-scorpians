@@ -65,12 +65,15 @@ const loginControl = Object.create({},{
             apiController.getUserId(userName).then(nameResponse =>{
                 apiController.getEmailAddr(emailValue).then(emailResponse =>{
                     if (nameResponse.length === 0 && emailResponse.length === 0){
+                        userName = userName.toLowerCase()
+                        emailValue = emailValue.toLowerCase()
                         let userObject = {
                             name: userName,
                             email: emailValue
                         }
                         apiController.addNewUser(userObject).then(response => {
                             console.log(response)
+                            loginControl.submitLogin(userName, emailValue)
                         })
                     }
                  else {
