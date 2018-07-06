@@ -7,7 +7,12 @@ const loadEvents = require("./event-load");
 const events = () => {
   console.log("Events is running");
   loadEventArticle();
-  loadEvents();
+  let loadAllEvents = new Promise((resolve, reject) => {
+    resolve(loadEvents());
+  });
+  loadAllEvents.then(resolve => {
+    console.log("events loaded");
+  });
 
 }
 

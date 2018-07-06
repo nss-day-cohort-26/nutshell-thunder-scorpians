@@ -54,8 +54,8 @@ const loadEvents = () => {
         $("<p>").text(event.name).appendTo($eventSection);
         $("<p>").text(event.location).appendTo($eventSection);
 
-        $("<button>").text("Edit").attr("id", `${event.id}edit`).appendTo($eventSection).click(editEvent);
-        $("<button>").text("Delete").attr("id", `${event.id}delete`).appendTo($eventSection).click((clickEvent) => { deleteEvent(clickEvent) });
+        $("<button>").text("Edit").attr("id", `${event.id}edit`).addClass("event__button--edit").appendTo($eventSection).click(editEvent);
+        $("<button>").text("Delete").attr("id", `${event.id}delete`).addClass("event__button--delete").appendTo($eventSection).click((clickEvent) => { deleteEvent(clickEvent) });
         $eventSection.attr("id", `${event.id}event`).appendTo($eventArticle);
       });
       $eventArticle.appendTo($(".events"));

@@ -4,6 +4,8 @@
 const $ = require("jquery");
 const Event = require("./event-class");
 const apiController = require("../apiController");
+const loadEvents = require("./event-load");
+// Required by: event-load
 
 const editEvent = (event) => {
   const buttonId = event.target.id;
@@ -52,7 +54,9 @@ const editEvent = (event) => {
       const newEvent = new Event(currentUser, name, date, location);
       console.log(newEvent);
 
-      apiController.events.editEvent(newEvent, editId);
+      apiController.events.editEvent(newEvent, editId).then(response => {
+        loadEvents();
+      });
     }
   });
 

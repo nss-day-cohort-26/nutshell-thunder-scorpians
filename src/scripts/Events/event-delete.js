@@ -3,6 +3,7 @@
 
 const $ = require("jquery");
 const apiController = require("../apiController");
+// Required by: event-load
 
 const deleteEvent = (event) => {
   const buttonId = event.target.id;
