@@ -21,8 +21,8 @@ const apiController = Object.create({}, {
                 type: "POST",
                 data: {
                     userId: param.userId,
-                    dueDate: param.dueDate,
                     desc: param.taskDescription,
+                    dueDate: param.dueDate,
                     complete: param.complete
                 }
             })
@@ -48,8 +48,8 @@ const apiController = Object.create({}, {
                 type: "PUT",
                 data:{
                     userId: param.userId,
-                    dueDate: param.dueDate,
                     desc: param.desc,
+                    dueDate: param.dueDate,
                     complete: param.complete
                 }
             })
@@ -62,14 +62,14 @@ const apiController = Object.create({}, {
                 type: "POST",
                 data: {
                     userId: userId1,
-                    friendId: userId2
+                    yourId: userId2
                 }
             })
         }
     },
     getFriendsList: {
         value: function(currentUserId){
-            return $.ajax(`http://localhost:3000/friends?_expand=user&friendId=${currentUserId}`)
+            return $.ajax(`http://localhost:3000/friends?_expand=user&yourId=${currentUserId}`)
         }
     },
     addNewFriend: {
@@ -79,8 +79,17 @@ const apiController = Object.create({}, {
                 type: "POST",
                 data: {
                     userId: friendToAddId,
-                    friendId: currentUserId
+                    yourId: currentUserId
                 }
+            })
+        }
+    },
+    deleteFriend: {
+        value: function(relId){
+            console.log("type of",typeof(relId))
+            return $.ajax({
+                url: `http://localhost:3000/friends/${relId}`,
+                type: "DELETE"
             })
         }
     },
@@ -113,13 +122,13 @@ const apiController = Object.create({}, {
                     }
                 });
             },
-            getAllEvents: () => {
-                return $.ajax("http://localhost:3000/events?userId=1&_sort=date&_order=asc");
+            getAllEvents: (currentUser, friendString) => {
+                return $.ajax(`http://localhost:3000/events?userId=${currentUser}&${friendString}_sort=date&_order=asc`);
             }
         }
     },
     addNewArticle: {
-        value: function (title, synopsis, url, timeStamp) {
+        value: function (title, synopsis, url, timeStamp, currentUser) {
             return $.ajax({
                 url: "http://localhost:3000/articles",
                 type: "POST",
@@ -127,14 +136,15 @@ const apiController = Object.create({}, {
                     title: title,
                     synopsis: synopsis,
                     url: url,
-                    timestamp: timeStamp
+                    timestamp: timeStamp,
+                    userId: currentUser
                 }
             })
         }
     },
     getArticleList: {
-        value: function() {
-            return $.ajax("http://localhost:3000/articles")
+        value: function(currentUser, friendString) {
+            return $.ajax(`http://localhost:3000/articles?userId=${currentUser}&${friendString}_sort=timestamp&_order=asc`)
         }
     },
     deleteArticle: {

@@ -3,40 +3,48 @@ const apiController = require("./apiController");
 const $wrapper = $("#wrapper");
 
 const taskObject = Object.create({},{
-
     printTasks:{
-        value: ()=>{ apiController.getTasks(1).then((response)=>{
+        value: ()=>{ apiController.getTasks(sessionStorage.getItem("activeUser")).then((response)=>{
+            console.log(sessionStorage.getItem("activeUser"))
             // console.log(response);
             response.forEach(element => {
                 // console.log(element);
-                const $div = $("<div>").appendTo($wrapper);
+                // const $columns = $("<div>").addClass("columns").appendTo($wrapper);
+                const $div = $("<div>").addClass("card column").appendTo($wrapper);
+                const $p = $("<p>").text("Complete: ").attr("id","explain-checkbox").appendTo($div)
                 if (element.complete === "false") {
-                    const editBtn = $("<button>").text("Edit").appendTo($div).click(()=>{
-
-                        // console.log($(event.target).siblings().eq(2))
-                        // targets element.desc and "replaces" it with an input field filled with the value of it
-                        const $replacement = $("<input>").attr("value",element.desc)
-                        $(event.target).siblings().eq(2).replaceWith($replacement)
-                        // console.log($(event.target).siblings().eq(2))
-                        if ($(event.target).siblings().eq(2).is("input")) {
-                            $(event.target).siblings().eq(2).keypress((e)=>{
-                                if (e.which === 13) {
-                                    const editBtnUpdateObj = {
-                                        userId: element.userId,
-                                        dueDate: element.dueDate,
-                                        desc: $replacement.val(),
-                                        complete: "false"
+                    for (const key in element) {
+                        // console.log(element);
+                        if (key === "desc" && element.complete === "false") {$("<p>").text(`${element[key]}`).appendTo($div);
+                        const editBtn = $("<button>").addClass("button is-small is-info edit").text("Edit").appendTo($div).click(()=>{
+                            // console.log($(event.target).siblings().eq(2))
+                            // targets element.desc and "replaces" it with an input field filled with the value of it
+                            const $replacement = $("<input>").attr("value",element.desc)
+                            $(event.target).siblings().eq(2).replaceWith($replacement)
+                            // console.log($(event.target).siblings().eq(2))
+                            if ($(event.target).siblings().eq(2).is("input")) {
+                                $(event.target).siblings().eq(2).keypress((e)=>{
+                                    if (e.which === 13) {
+                                        const editBtnUpdateObj = {
+                                            userId: element.userId,
+                                            dueDate: element.dueDate,
+                                            desc: $replacement.val(),
+                                            complete: "false"
+                                        }
+                                        console.log("yee");
+                                        apiController.editTask(element.id,editBtnUpdateObj).then((response)=>{
+                                            $wrapper.empty()
+                                            taskObject.printTasks()
+                                        })
                                     }
-                                    console.log("yee");
-                                    apiController.editTask(element.id,editBtnUpdateObj).then((response)=>{
-                                        $wrapper.empty()
-                                        taskObject.printTasks()
-                                    })
-                                }
-                            })
+                                })
+                            }
+                        })
                         }
-                    })
-                    const $checkbox = $("<input>").attr("type","checkbox").appendTo($div).click(()=>{
+                        else if (key === "dueDate" && element.complete === "false") {$("<p>").text(`${element[key]}`).addClass("due-date").appendTo($div);}
+                        // console.log(element[key]);
+                    }
+                    const $checkbox = $("<input>").addClass("checkbox").attr("type","checkbox").appendTo($p).click(()=>{
                         const checkboxDbUpdate = {
                             userId: element.userId,
                             dueDate: element.dueDate,
@@ -49,15 +57,7 @@ const taskObject = Object.create({},{
                         taskObject.printTasks()
                     })
                     })
-                }
-                for (const key in element) {
-                    // console.log(element);
-                    if (key === "desc" && element.complete === "false") {$("<p>").text(`${[key]}:${element[key]}`).appendTo($div);}
-                    else if (key === "dueDate" && element.complete === "false") {$("<p>").text(`${[key]}:${element[key]}`).appendTo($div);}
-                    // console.log(element[key]);
-                }
-                if (element.complete === "false") {
-                    $deleteBtn = $("<button>").text("Delete").appendTo($div).click((e)=>{
+                    $deleteBtn = $("<button>").addClass("button is-medium is-danger delete").text("").appendTo($div).click((e)=>{
                         apiController.deleteTask(element.id);
                         $(e.target.parentNode).remove();
                         // console.log(e.target.parentNode);
@@ -65,15 +65,15 @@ const taskObject = Object.create({},{
                     })
                 }
             })
-            const buildFormBtn = $("<button>").text("Add New Task").appendTo($wrapper).click(()=>{
+            const buildFormBtn = $("<button>").addClass("button is-small add-task").text("+").appendTo($wrapper).click(()=>{
                 const $buildFormDiv = $("<div>").appendTo($wrapper)
                 const descInput = $("<input>").attr("placeholder","description").appendTo($buildFormDiv)
-                const dueDateInput = $("<input>").attr("placeholder","due").appendTo($buildFormDiv)
+                const dueDateInput = $("<input>").attr("type","date").attr("placeholder","due").appendTo($buildFormDiv)
                 buildFormBtn.hide();
-                const $subBtn = $("<button>").text("Submit").appendTo($buildFormDiv).click(()=>{
+                const $subBtn = $("<button>").addClass("button is-small is-primary").text("Submit").appendTo($buildFormDiv).click(()=>{
                     $wrapper.empty()
                     const miniTaskObject = {
-                        userId: 1,
+                        userId: sessionStorage.getItem("activeUser"),
                         dueDate: dueDateInput.val(),
                         taskDescription: descInput.val(),
                         complete: "false"
@@ -90,6 +90,5 @@ const taskObject = Object.create({},{
 })
 
 // console.log(taskObject);
-taskObject.printTasks()
 
 module.exports = taskObject;

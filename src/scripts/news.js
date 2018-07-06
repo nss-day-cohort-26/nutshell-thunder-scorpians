@@ -1,4 +1,5 @@
 //Author - Robert Leedy
+//creates the news articles section
 
 //require jquery, moment for timestamp and apicontroller for api functions
 const $ = require("jquery")
@@ -24,6 +25,8 @@ const articleOutput = $("<section>").attr("id", "article-output").appendTo(newsC
 urlInput.attr("placeholder", "Enter article URL")
 //hide input fields on load
 addNews.hide()
+//get current user from session storage
+const currentUser = parseInt(sessionStorage.getItem("activeUser"));
 
 //event handler on New Article button.  hides button when pressed and shows input fields and save button
 addNewsButton.click(() => {
@@ -34,38 +37,58 @@ addNewsButton.click(() => {
 
 //function to append articles database to dom
 const printArticles = () => {
-    //empty dom if there is anything on it
-    if (articleOutput) {
-        articleOutput.empty()
-    }
-    //api call to get items in articles array
-    apiController.getArticleList()
-    .then((articleList) => {
-        //loop through those arrays
-        articleList.forEach(articleText => {
-            //create elements for each thing to be printed to dom
-            const titleText = $("<h3>").text(articleText.title)
-            const synopsisText = $("<h5>").text(articleText.synopsis)
-            const urlText = $("<a>").attr("href", articleText.url).text("Read the full article here")
-            const timeText = $("<p>").text(articleText.timestamp)
-            //assign to new div
-            const newsText = $(`<div id=${articleText.id}>`).addClass("news-text-div").append(titleText).append(synopsisText).append(urlText).append(timeText)
-            //append to parent elements
-            newsText.prependTo(articleOutput).prependTo(newsContainer)
-            articleOutput.prepend(newsText)
-            //create and append delete button to each article
-            const deleteNewsButton = $("<button>").addClass("delete-news-button").text("Delete Article")
-            deleteNewsButton.appendTo(newsText)
-            //api call to delete article on click
-            deleteNewsButton.click(() => {
-            apiController.deleteArticle(event.target.parentNode.id).then((response) => {
-                //reprint dom with updated list
-                printArticles()
-                })
-            })
+
+    apiController.getFriendsList(currentUser).then(allFriends => {
+        let allFriendsArray = [];
+        allFriends.forEach(friend => {
+            const friendId = friend.user.id;
+            allFriendsArray.push(friendId);
         });
-    })
+        allFriendsArray = allFriendsArray.map(friendIdNumber => { return `userId=${friendIdNumber}&` });
+        const allFriendsString = allFriendsArray.join("");
+
+        //empty dom if there is anything on it
+        if (articleOutput) {
+            articleOutput.empty()
+        }
+        //api call to get items in articles array
+        apiController.getArticleList(currentUser, allFriendsString)
+            .then((articleList) => {
+                //loop through those arrays
+                articleList.forEach(articleText => {
+                    //create elements for each thing to be printed to dom
+                    const titleText = $("<h3>").text(articleText.title)
+                    const synopsisText = $("<h5>").text(articleText.synopsis)
+                    const urlText = $("<a>").attr("href", articleText.url).text("Read the full article here")
+                    const timeText = $("<p>").text(articleText.timestamp)
+                    //assign to new div
+                    const newsText = $(`<div id=${articleText.id}>`).addClass("news-text-div").append(titleText).append(synopsisText).append(urlText).append(timeText)
+                    //append to parent elements
+                    newsText.prependTo(articleOutput).prependTo(newsContainer)
+                    articleOutput.prepend(newsText)
+                    //check to see if articles were posted by current user or a friend and assign a class depending
+                    if (parseInt(articleText.userId) === currentUser) {
+                        newsText.addClass("article article--yours");
+                        $("<p>").text("Posted by: You").appendTo(newsText);
+                    } else {
+                        newsText.addClass("article article--others");
+                        $("<p>").text("Posted by: A friend").appendTo(newsText);
+                    }
+                    //create and append delete button to each article
+                    const deleteNewsButton = $("<button>").addClass("delete-news-button").text("Delete Article")
+                    deleteNewsButton.appendTo(newsText)
+                    //api call to delete article on click
+                    deleteNewsButton.click(() => {
+                        apiController.deleteArticle(event.target.parentNode.id).then((response) => {
+                            //reprint dom with updated list
+                            printArticles()
+                        })
+                    })
+                });
+            })
+    });
 }
+
 
 //event handler on Save article button
 $(saveNewsButton).click(() => {
@@ -73,16 +96,16 @@ $(saveNewsButton).click(() => {
     if (titleInput.val() === "" || synopsisInput.val() === "" || urlInput.val() === "") {
         alert("Please fill in all fields.")
     } else {
-    //adds values of input fields to database
-    apiController.addNewArticle(titleInput.val(), synopsisInput.val(), urlInput.val(), moment().format("YYYY-MM-DD hh:mm:ss a"))
-    //hides input fields and button
-    $("#news").hide()
-    //shows New Article button
-    addNewsButton.show()
-    //clears input values
-    titleInput.val("")
-    synopsisInput.val("")
-    urlInput.val("")
+        //adds values of input fields to database
+        apiController.addNewArticle(titleInput.val(), synopsisInput.val(), urlInput.val(), moment().format("YYYY-MM-DD hh:mm:ss a"), currentUser)
+        //hides input fields and button
+        $("#news").hide()
+        //shows New Article button
+        addNewsButton.show()
+        //clears input values
+        titleInput.val("")
+        synopsisInput.val("")
+        urlInput.val("")
     }
     //run print articles to update article list
     printArticles()
@@ -91,4 +114,6 @@ $(saveNewsButton).click(() => {
 //export printArticles so it can be called on main
 module.exports = printArticles
 printArticles()
+
+
 
