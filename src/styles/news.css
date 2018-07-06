@@ -1,0 +1,19 @@
+.article * {
+    margin: 0;
+    padding:0;
+    padding-left: .25em;
+}
+.article {
+    border-bottom: 1px dashed black;
+    padding: .25 em;
+    font-size: .9em;
+}
+
+.article--yours {
+    background-color: lightcyan;
+}
+
+.article--others {
+    background-color: cornsilk;
+    font-style: italic;
+}

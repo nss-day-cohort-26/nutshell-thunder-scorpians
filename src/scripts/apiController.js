@@ -128,22 +128,23 @@ const apiController = Object.create({}, {
         }
     },
     addNewArticle: {
-        value: function (title, synopsis, url, timeStamp, currentUser, friendString) {
+        value: function (title, synopsis, url, timeStamp, currentUser) {
             return $.ajax({
-                url: `http://localhost:3000/articles?userId=${currentUser}&${friendString}_sort=timestamp&_order=desc`,
+                url: "http://localhost:3000/articles",
                 type: "POST",
                 data: {
                     title: title,
                     synopsis: synopsis,
                     url: url,
-                    timestamp: timeStamp
+                    timestamp: timeStamp,
+                    userId: currentUser
                 }
             })
         }
     },
     getArticleList: {
-        value: function() {
-            return $.ajax("http://localhost:3000/articles")
+        value: function(currentUser, friendString) {
+            return $.ajax(`http://localhost:3000/articles?userId=${currentUser}&${friendString}_sort=timestamp&_order=asc`)
         }
     },
     deleteArticle: {

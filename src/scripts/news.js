@@ -1,4 +1,5 @@
 //Author - Robert Leedy
+//creates the news articles section
 
 //require jquery, moment for timestamp and apicontroller for api functions
 const $ = require("jquery")
@@ -37,47 +38,54 @@ addNewsButton.click(() => {
 //function to append articles database to dom
 const printArticles = () => {
 
-apiController.getFriendsList(currentUser).then(allFriends => {
-    let allFriendsArray = [];
-    allFriends.forEach(friend => {
-        const friendId = friend.user.id;
-        allFriendsArray.push(friendId);
-    });
-    allFriendsArray = allFriendsArray.map(friendIdNumber => { return `userId=${friendIdNumber}&` });
-    const allFriendsString = allFriendsArray.join("");
-    console.log(allFriendsString);
+    apiController.getFriendsList(currentUser).then(allFriends => {
+        let allFriendsArray = [];
+        allFriends.forEach(friend => {
+            const friendId = friend.user.id;
+            allFriendsArray.push(friendId);
+        });
+        allFriendsArray = allFriendsArray.map(friendIdNumber => { return `userId=${friendIdNumber}&` });
+        const allFriendsString = allFriendsArray.join("");
 
-    //empty dom if there is anything on it
-    if (articleOutput) {
-        articleOutput.empty()
-    }
-    //api call to get items in articles array
-    apiController.getArticleList(currentUser, allFriendsString)
-        .then((articleList) => {
-            //loop through those arrays
-            articleList.forEach(articleText => {
-                //create elements for each thing to be printed to dom
-                const titleText = $("<h3>").text(articleText.title)
-                const synopsisText = $("<h5>").text(articleText.synopsis)
-                const urlText = $("<a>").attr("href", articleText.url).text("Read the full article here")
-                const timeText = $("<p>").text(articleText.timestamp)
-                //assign to new div
-                const newsText = $(`<div id=${articleText.id}>`).addClass("news-text-div").append(titleText).append(synopsisText).append(urlText).append(timeText)
-                //append to parent elements
-                newsText.prependTo(articleOutput).prependTo(newsContainer)
-                articleOutput.prepend(newsText)
-                //create and append delete button to each article
-                const deleteNewsButton = $("<button>").addClass("delete-news-button").text("Delete Article")
-                deleteNewsButton.appendTo(newsText)
-                //api call to delete article on click
-                deleteNewsButton.click(() => {
-                    apiController.deleteArticle(event.target.parentNode.id).then((response) => {
-                        //reprint dom with updated list
-                        printArticles()
+        //empty dom if there is anything on it
+        if (articleOutput) {
+            articleOutput.empty()
+        }
+        //api call to get items in articles array
+        apiController.getArticleList(currentUser, allFriendsString)
+            .then((articleList) => {
+                //loop through those arrays
+                articleList.forEach(articleText => {
+                    //create elements for each thing to be printed to dom
+                    const titleText = $("<h3>").text(articleText.title)
+                    const synopsisText = $("<h5>").text(articleText.synopsis)
+                    const urlText = $("<a>").attr("href", articleText.url).text("Read the full article here")
+                    const timeText = $("<p>").text(articleText.timestamp)
+                    //assign to new div
+                    const newsText = $(`<div id=${articleText.id}>`).addClass("news-text-div").append(titleText).append(synopsisText).append(urlText).append(timeText)
+                    //append to parent elements
+                    newsText.prependTo(articleOutput).prependTo(newsContainer)
+                    articleOutput.prepend(newsText)
+                    //check to see if articles were posted by current user or a friend and assign a class depending
+                    if (parseInt(articleText.userId) === currentUser) {
+                        newsText.addClass("article article--yours");
+                        $("<p>").text("Posted by: You").appendTo(newsText);
+                    } else {
+                        newsText.addClass("article article--others");
+                        $("<p>").text("Posted by: A friend").appendTo(newsText);
+                    }
+                    //create and append delete button to each article
+                    const deleteNewsButton = $("<button>").addClass("delete-news-button").text("Delete Article")
+                    deleteNewsButton.appendTo(newsText)
+                    //api call to delete article on click
+                    deleteNewsButton.click(() => {
+                        apiController.deleteArticle(event.target.parentNode.id).then((response) => {
+                            //reprint dom with updated list
+                            printArticles()
+                        })
                     })
-                })
-            });
-        })
+                });
+            })
     });
 }
 
@@ -89,7 +97,7 @@ $(saveNewsButton).click(() => {
         alert("Please fill in all fields.")
     } else {
         //adds values of input fields to database
-        apiController.addNewArticle(titleInput.val(), synopsisInput.val(), urlInput.val(), moment().format("YYYY-MM-DD hh:mm:ss a"))
+        apiController.addNewArticle(titleInput.val(), synopsisInput.val(), urlInput.val(), moment().format("YYYY-MM-DD hh:mm:ss a"), currentUser)
         //hides input fields and button
         $("#news").hide()
         //shows New Article button
