@@ -63,10 +63,7 @@ const loginControl = Object.create({},{
                     $(".grid__wrapper").css("display", "grid")
                     friends.displayFriendList()
                     task.printTasks()
-<<<<<<< HEAD
-=======
                     events()
->>>>>>> master
                     messages.buildMessenger()
                 }
             })

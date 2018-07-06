@@ -47,7 +47,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    min-height: 60%;
+    min-height: 100%;
 }
 
 #messengerBodyDiv .msgItem {
@@ -56,8 +56,18 @@
     /* height: 100%; */
 }
 
+#messengerBodyDiv .msgItem .other {
+    color: blue;
+    font-weight: bold;
+}
+
+#messengerBodyDiv .msgItem .me {
+    color: purple;
+    font-weight: bold;
+}
+
 #messageNewDiv {
-    display: sticky;
+    position: sticky;
     bottom: 0;
     height: 10%;
     display: flex;

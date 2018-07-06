@@ -75,6 +75,11 @@ var buildMessagesDOM = function (messages, currentUser) {
 
             const msgItem = $("<div>").attr("id", "msg" + messageId).addClass("msgItem");
             const userSpan = $("<span>").text(`${messageUserName}`).addClass("msgUser").addClass("msgText");
+            if (messageUserId === currentUser) {
+                userSpan.addClass("me");
+            } else {
+                userSpan.addClass("other");
+            }
             const seperatorSpan = $("<span>").text(": ").addClass("msgSeperator").addClass("msgText");
             const msgSpan = $("<span>").text(`${messageText}`).addClass("msgContent").addClass("msgText");
 
