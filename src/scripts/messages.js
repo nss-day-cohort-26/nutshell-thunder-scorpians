@@ -51,10 +51,14 @@ var buildMessagesDOM = function (messages, currentUser) {
     messengerDiv.empty();
 
     // ADD MESSENGER HEADER
-    messengerDiv.append($("<h2>").text("Messenger").addClass("messengerHeader"));
+    const messengerHeaderDiv = $("<div>").attr("id", "messengerHeaderDiv");
+    messengerHeaderDiv.append($("<h2>").text("Messenger").addClass("messengerHeader"));
     const msgOptionsInstuctions = $("<h4>").text("Use add/edit buttons to add friends and edit messages. Clicking Options will toggle buttons on and off.").addClass("messengerOptionsInstructions")
     msgOptionsInstuctions.hide();
-    messengerDiv.append(msgOptionsInstuctions);
+    messengerHeaderDiv.append(msgOptionsInstuctions);
+    messengerDiv.append(messengerHeaderDiv);
+
+    const messengerBodyDiv = $("<div>").attr("id", "messengerBodyDiv");
 
 
     // ITERATE MESSAGES
@@ -137,7 +141,7 @@ var buildMessagesDOM = function (messages, currentUser) {
 
                 const addFriendButton = $("<button>").append($("<i>").addClass("fa fa-plus")).addClass("addFriendButton").on("click", (e) => {
 
-                    const pd = $(e.target).parent();
+                    const pd = $(e.currentTarget).parent();
                     const us = pd.children(".msgUser");
                     // console.log(us.text());
                     const ruSure = confirm(`Would you like to add user ${us.text()}?`);
@@ -151,13 +155,15 @@ var buildMessagesDOM = function (messages, currentUser) {
             }
 
             //APPEND MESSAGE ITEM
-            messengerDiv.append(msgItem);
+            messengerBodyDiv.append(msgItem);
         });
 
     }
 
+    messengerDiv.append(messengerBodyDiv);
+
     // CREATE NEW MESSAGE AREA AT BOTTOM OF BOX
-    const newMessageDiv = $("<div>");
+    const newMessageDiv = $("<div>").attr("id", "messageNewDiv");
     const newMessageInput = $("<input>").attr("id", "newMessageInput");
 
     // NEW MESSAGE INPUT WITH 'PRESS ENTER' EVENT
@@ -208,6 +214,9 @@ var buildMessagesDOM = function (messages, currentUser) {
     newMessageDiv.append(newMessageButton);
     newMessageDiv.append(msgOptionButton);
     messengerDiv.append(newMessageDiv);
+
+    console.log(messengerDiv.prop("scrollHeight"))
+    messengerDiv.scrollTop(messengerDiv.prop("scrollHeight"));
 }
 
 const messengerExp = {
