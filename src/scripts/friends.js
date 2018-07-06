@@ -43,14 +43,14 @@ const friendActions = Object.create({},{
             saveButton.text("Save Friend")
             $("#friendUL").prepend((saveButton)).append(friendNameInput)
             //Event handlers for submit button click and or enter key in input field
-            saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)})
+            saveButton.click(() => { friendName = friendNameInput.val(); friendActions.addFriend(friendName, addFriendBtn, saveButton, friendNameInput)})
             friendNameInput.keyup((event)=>{
-                if (event.which === 13) {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)}
+                if (event.which === 13) { friendName = friendNameInput.val(); friendActions.addFriend(friendName, addFriendBtn, saveButton, friendNameInput)}
             })
         }
     },
     addFriend: {
-        value: function(friendName, saveButton, friendNameInput, addFriendBtn){
+        value: function (friendName, addFriendBtn, saveButton, friendNameInput){
             const currentUser = sessionStorage.getItem("activeUser")
             let friendsToCheck = []
             apiController.getFriendsList(currentUser).then( (response) =>{
@@ -98,6 +98,7 @@ const friendActions = Object.create({},{
                         if (friendNameInput){friendNameInput.remove()}
                         if (saveButton){saveButton.remove()}
                         friendActions.displayFriendList()
+                        addFriendBtn.remove()
                         // addFriendBtn.show()
                         }
                     })
