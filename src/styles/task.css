@@ -1,0 +1,50 @@
+.card > * {
+    text-align: center;
+}
+
+.add-task {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 100% !important;
+    background-color: hsl(171, 100%, 41%);
+    position: sticky !important;
+    bottom: 0 !important;
+    left:50%;
+    margin-top: 2rem;
+}
+
+#wrapper > p {
+    display: inline-block;
+}
+
+.edit {
+    float: right;
+    top: 1.5rem;
+}
+
+.checkbox {
+    bottom: 1rem;
+    float: right;
+    left: 1rem;
+}
+
+#explain-checkbox {
+    display: inline-block;
+    margin-right: 50rem;
+}
+
+.due-date{
+    padding-left: 2rem !important;
+}
+
+button.is-primary {
+    margin-left: 1rem;
+}
+
+@media only screen and (min-width:1088px) {
+    #explain-checkbox{
+        margin-right: 75rem;
+        display: inline-block;
+    }
+}

@@ -11,17 +11,18 @@
 }
 
 .event--yours {
-  background-color: lightblue;
+  background-color: lightcyan;
 }
 
 .event--others {
-  background-color: lightgray;
+  background-color: cornsilk;
+  font-style: italic;
 }
 
-.event:first-child {
+.event:first-of-type {
   font-weight: bold;
   font-size: 1.2em;
-  background-color: lightcoral;
+  background-color: lightpink;
   margin-top: .5em;
 }
 
