@@ -12,6 +12,8 @@
 const $ = require("jquery");
 const apiController = require("../apiController");
 const Event = require("./event-class");
+const editEvent = require("./event-edit");
+const deleteEvent = require("./event-delete");
 // Required by: events, event-submit
 
 // Needs to accept the parameter for the currentUserId and his friends
@@ -37,7 +39,7 @@ const loadEvents = () => {
       const $eventArticle = $("#event-article");
       $eventArticle.empty();
       sortedEvents.forEach(event => {
-        console.log("for each running");
+        console.log("Writing each event...");
         const $eventSection = $("<section>");
         $("<h3>").text(event.name).appendTo($eventSection);
 
@@ -51,6 +53,9 @@ const loadEvents = () => {
 
         $("<p>").text(event.date).appendTo($eventSection);
         $("<p>").text(event.location).appendTo($eventSection);
+
+        $("<button>").text("Edit").attr("id", `edit${event.id}`).appendTo($eventSection).click(editEvent);
+        $("<button>").text("Delete").attr("id", `delete${event.id}`).appendTo($eventSection).click(deleteEvent(event));
 
         $eventSection.appendTo($eventArticle);
       });
