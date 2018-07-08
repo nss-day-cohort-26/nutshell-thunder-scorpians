@@ -1,6 +1,7 @@
 #messagesDiv {
     padding: 0;
     margin:0;
+    overflow: hidden;
 } 
 
 #messengerHeaderDiv {
@@ -47,12 +48,27 @@
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    min-height: 100%;
+    max-width: 100%;
+    max-height: 80%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    overflow-y: scroll;
 }
+
+/* .content {
+    flex: 1;
+    display: flex;
+    overflow: auto;
+}
+
+.box {
+    min-height: min-content;  needs vendor prefixes 
+    display: flex;
+} */
 
 #messengerBodyDiv .msgItem {
     max-width: 95%;
-    display: block;
+    min-height: min-content;
     /* height: 100%; */
 }
 
@@ -76,6 +92,7 @@
     justify-content: space-between;
     background: black;
     padding: 2px;
+    overflow: hidden;
 }
 
 #messageNewDiv input {
