@@ -126,7 +126,6 @@ $(saveNewsButton).click(() => {
 
 //export printArticles so it can be called on main
 module.exports = printArticles
-//printArticles()
 
 
 
