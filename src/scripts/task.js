@@ -1,3 +1,6 @@
+// AUTHOR: Jordan Williams
+// PURPOSE: CRUD tasks specific to the user logged in at the time
+
 const $ = require("jquery");
 const apiController = require("./apiController");
 const $wrapper = $("#wrapper");
