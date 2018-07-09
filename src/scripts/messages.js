@@ -9,7 +9,7 @@ const friends = require("./friends");
 // API
 const Messages = {
     // READ
-    read: function () {
+    read: function (buildSource) {
 
         let currentUser = null;
         if (sessionStorage.getItem("activeUser")) {
@@ -19,15 +19,20 @@ const Messages = {
         }
 
         messagesApi.read().then(msgArr => {
-            console.log(msgArr);
             buildMessagesDOM(msgArr, currentUser);
+            if (buildSource === "createNew") {
+                $("#newMessageInput").focus();
+            }
+
         })
     },
 
     // CREATE
     create: function (userId, message) {
         const curTimeStamp = new Date();
-        messagesApi.create(userId, message, curTimeStamp).then(this.read)
+        messagesApi.create(userId, message, curTimeStamp).then(() => {
+            this.read("createNew");
+        })
     },
 
     // UPDATE
@@ -52,13 +57,11 @@ var buildMessagesDOM = function (messages, currentUser) {
 
     // ADD MESSENGER HEADER
     const messengerHeaderDiv = $("<div>").attr("id", "messengerHeaderDiv");
-    messengerHeaderDiv.append($("<h2>").text("Messenger").addClass("messengerHeader"));
-    // const msgOptionsInstuctions = $("<h4>").text("Use add/edit buttons to add friends and edit messages. Clicking Options will toggle buttons on and off.").addClass("messengerOptionsInstructions")
-    // msgOptionsInstuctions.hide();
-    // messengerHeaderDiv.append(msgOptionsInstuctions);
+    messengerHeaderDiv.append($("<h2>").text("Messages").addClass("messengerHeader"));
     messengerDiv.append(messengerHeaderDiv);
 
     const messengerBodyDiv = $("<div>").attr("id", "messengerBodyDiv");
+    const messengerBodyContent = $("<div>").attr("id", "messengerBodyContent");
 
 
     // ITERATE MESSAGES
@@ -73,7 +76,7 @@ var buildMessagesDOM = function (messages, currentUser) {
             const messageUserName = message["user"]["name"];
             const messageId = message["id"];
 
-            const msgItem = $("<div>").attr("id", "msg" + messageId).addClass("msgItem");
+            const msgItem = $("<p>").attr("id", "msg" + messageId).addClass("msgItem");
             const userSpan = $("<span>").text(`${messageUserName}`).addClass("msgUser").addClass("msgText");
             if (messageUserId === currentUser) {
                 userSpan.addClass("me");
@@ -94,10 +97,10 @@ var buildMessagesDOM = function (messages, currentUser) {
                 const editButton = $("<button>").addClass("editMsgButton").append($("<i>").addClass("fa fa-pencil"));
 
                 // EDIT INPUT
-                const editInput = $("<input>").attr("value", messageText)
+                const editInput = $("<input>").attr("value", messageText).addClass("editMsgInput");
 
                 // SAVE BUTTON
-                const saveButton = $("<button>").append($("<i>").addClass("fa fa-floppy-o")).on("click", (e) => {
+                const saveButton = $("<button>").append($("<i>").addClass("fa fa-floppy-o")).addClass("saveMsgEditsButton").on("click", (e) => {
                     Messages.update(messageId, messageUserId, editInput.val())
                 });
 
@@ -140,8 +143,11 @@ var buildMessagesDOM = function (messages, currentUser) {
 
                 // APPEND CONFIGURE BUTTONS
                 msgItem.children(".msgUser").before(editButton);
+                msgItem.children(".msgUser").before(saveButton);
                 msgItem.children(".msgUser").before(deleteButton);
-                msgItem.append(editInput).append(saveButton).append(cancelButton);
+                msgItem.children(".msgUser").before(cancelButton);
+
+                msgItem.append(editInput);
             } else { // IF MESSAGE BELONGS TO DIFFERENT USER, ALLOW ADD FRIEND
 
                 const addFriendButton = $("<button>").append($("<i>").addClass("fa fa-plus")).addClass("addFriendButton").on("click", (e) => {
@@ -152,7 +158,7 @@ var buildMessagesDOM = function (messages, currentUser) {
                     const ruSure = confirm(`Would you like to add user ${us.text()}?`);
                     if (ruSure) {
                         const addFriendBtn = $("#add-friend-btn")
-                        friends.addFriend(us.text(),addFriendBtn);
+                        friends.addFriend(us.text(), addFriendBtn);
                     }
                 });
                 addFriendButton.hide()
@@ -161,11 +167,11 @@ var buildMessagesDOM = function (messages, currentUser) {
             }
 
             //APPEND MESSAGE ITEM
-            messengerBodyDiv.append(msgItem);
+            messengerBodyContent.append(msgItem);
         });
 
     }
-
+    messengerBodyDiv.append(messengerBodyContent);
     messengerDiv.append(messengerBodyDiv);
 
     // CREATE NEW MESSAGE AREA AT BOTTOM OF BOX
@@ -177,6 +183,8 @@ var buildMessagesDOM = function (messages, currentUser) {
         if (event.which === 13) {
             const message = $("#newMessageInput").val();
             Messages.create(currentUser, message);
+            // $("#newMessageInput").focus();
+
         }
     })
 
@@ -185,17 +193,12 @@ var buildMessagesDOM = function (messages, currentUser) {
     newMessageButton.on("click", (e) => {
         const message = $("#newMessageInput").val();
         Messages.create(currentUser, message);
+        // $("#newMessageInput").focus();
     })
 
     // TOGGLE EDIT AND ADD FRIENDS OPTIONS ON AND OFF
     const msgOptionButton = $("<button>").append($("<i>").addClass("fa fa-cogs")).attr("id", "msgOptionButton");
     msgOptionButton.on("click", (e) => {
-
-        // if ($("#msgOptionsInstructions").is(":visible")) {
-        //     $("#msgOptionsInstructions").hide();
-        // } else {
-        //     $("#msgOptionsInstructions").show();
-        // }
 
         if ($(".editMsgButton")) {
             if ($(".editMsgButton").is(":visible")) {
@@ -221,12 +224,11 @@ var buildMessagesDOM = function (messages, currentUser) {
     newMessageDiv.append(newMessageButton);
     messengerDiv.append(newMessageDiv);
 
-    console.log(messengerDiv.prop("scrollHeight"))
-    messengerDiv.scrollTop(messengerDiv.prop("scrollHeight"));
+    messengerBodyDiv.scrollTop(messengerBodyDiv.prop("scrollHeight"));
 }
 
 const messengerExp = {
-    "buildMessenger": function() {
+    "buildMessenger": function () {
         Messages.read()
     }
 }
