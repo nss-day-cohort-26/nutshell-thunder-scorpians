@@ -1,49 +1,48 @@
+// This module reads a form and saves its input values to an object that is then put or posted to the api, depending on what button was clicked
 // Author: Elliot Huck
-/* Click New Event Button:
-Make a form
-  Form Submit:
-  1. Check that all inputs have been filled
-  2. Read the input fields
-  3. Call the API and Post
-    .then(
-      1. Reload all the events (run page load)
-*/
 
 const $ = require("jquery");
 const Event = require("./event-class");
 const apiController = require("../apiController");
 const loadEvents = require("./event-load");
-// Required by: event-form
+// Required by: event-handlers
 
+const submitEvent = (event) => {
 
-const submitEvent = () => {
-  const currentUser = parseInt(sessionStorage.getItem("activeUser"));
+  const buttonId = event.target.id;
+  const editId = parseInt(buttonId);
+  const $allInputs = $(`#${editId}event input`);
+  const allValues = [];
 
-  const allInputs = $("#event-form input");
-  console.log(allInputs);
-  const allValues = []
-  allInputs.each((i, element) => {
+  $allInputs.each((i, element) => {
     allValues.push(element.value);
   });
-  console.log(allValues);
+
   if (allValues.includes("")) {
-    alert("You must fill all input fields to submit a new event");
+    alert("You must fill all input fields to submit/save an event");
   } else {
-    console.log("Creating new event...");
-    const name = allValues[0];
-    const date = allValues[1];
+    // Creates a new object of the Event class that will be passed to the apiController
+    const currentUser = parseInt(sessionStorage.getItem("activeUser"));
+    const date = allValues[0];
+    const name = allValues[1];
     const location = allValues[2];
     const newEvent = new Event(currentUser, name, date, location);
-    console.log(newEvent);
 
-    apiController.events.addNewEvent(newEvent).then(response => {
-      allInputs.each((i, element) => { element.value = "" });
-      $("#event-form").hide();
-      $("#add-event").show();
-      loadEvents();
-    });
-
+    // Checks if the user is creating a new event or editing an existing one
+    if (editId === 0) {
+      // Creates a new event
+      apiController.events.addNewEvent(newEvent).then(response => {
+        $("#add-event").show();
+        loadEvents();
+      });
+    } else {
+      // Edits existing event with id of eventId
+      apiController.events.editEvent(newEvent, editId).then(response => {
+        loadEvents();
+      });
+    }
   }
+
 };
 
 module.exports = submitEvent;

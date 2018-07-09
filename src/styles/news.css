@@ -43,5 +43,15 @@ h3 {
 }
 
 #save-article-button {
-    margin-top: 1%
+    margin-left: 20vw;
+}
+
+.news-input {
+    width: 20vw;
+    border-radius: 8px;
+    border: 2px cornflowerblue solid;
+    padding-bottom: 1%;
+    display: block;
+    margin: auto;
+    margin-bottom: 1%;
 }

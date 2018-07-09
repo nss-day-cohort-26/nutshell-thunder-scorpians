@@ -10,7 +10,7 @@ const apiController = require("./apiController")
 const addNewsButton = $("<button>").attr("id", "add-news-button").text("Add Article")
 
 //create Save Article button
-const saveNewsButton = $("<button>").addClass("button is-small is-primary").attr("id", "save-article-button").text("Save Article")
+const saveNewsButton = $("<button>").attr("id", "save-article-button").text("Save Article")
 
 //create elements for news inputs and append to DOM
 const newsContainer = $("<section>").attr("id", "newsContainer").append(addNewsButton)
@@ -19,11 +19,11 @@ const addNews = $("<div>").attr("id", "news")
 newsContainer.append(addNews)
 
 //create input fields for articles
-const titleInput = $("<input>").attr("id", "title").text("Title").appendTo(addNews)
+const titleInput = $("<input>").attr("id", "title").addClass("news-input").text("Title").appendTo(addNews)
 titleInput.attr("placeholder", "Enter article title")
-const synopsisInput = $("<input>").attr("id", "synopsis").text("Synopsis").appendTo(addNews)
+const synopsisInput = $("<input>").attr("id", "synopsis").addClass("news-input").text("Synopsis").appendTo(addNews)
 synopsisInput.attr("placeholder", "Enter article summary")
-const urlInput = $("<input>").attr("id", "url").text("URL").appendTo(addNews)
+const urlInput = $("<input>").attr("id", "url").addClass("news-input").text("URL").appendTo(addNews)
 const articleOutput = $("<section>").attr("id", "article-output").appendTo(newsContainer)
 urlInput.attr("placeholder", "Enter article URL")
 
