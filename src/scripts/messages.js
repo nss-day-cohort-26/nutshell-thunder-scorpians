@@ -36,9 +36,9 @@ const Messages = {
     },
 
     // UPDATE
-    update: function (msgId, userId, newMessage) {
+    update: function (msgId, userId, newMessage, messageTimeStamp) {
 
-        messagesApi.update(msgId, userId, newMessage).then(this.read)
+        messagesApi.update(msgId, userId, newMessage, messageTimeStamp).then(this.read)
     },
 
     // DELETE
@@ -75,6 +75,7 @@ var buildMessagesDOM = function (messages, currentUser) {
             const messageUserId = message["userId"];
             const messageUserName = message["user"]["name"];
             const messageId = message["id"];
+            const messageTimeStamp = message["timeStamp"]
 
             const msgItem = $("<p>").attr("id", "msg" + messageId).addClass("msgItem");
             const userSpan = $("<span>").text(`${messageUserName}`).addClass("msgUser").addClass("msgText");
@@ -101,7 +102,7 @@ var buildMessagesDOM = function (messages, currentUser) {
 
                 // SAVE BUTTON
                 const saveButton = $("<button>").append($("<i>").addClass("fa fa-floppy-o")).addClass("saveMsgEditsButton").on("click", (e) => {
-                    Messages.update(messageId, messageUserId, editInput.val())
+                    Messages.update(messageId, messageUserId, editInput.val(), messageTimeStamp)
                 });
 
                 // CANCEL BUTTON
