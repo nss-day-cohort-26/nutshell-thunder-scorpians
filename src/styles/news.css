@@ -6,7 +6,6 @@
 .article {
     border-bottom: 1px dashed black;
     padding: .25 em;
-    font-size: .9em;
 }
 
 .article--yours {
@@ -16,4 +15,35 @@
 .article--others {
     background-color: cornsilk;
     font-style: italic;
+}
+
+h3 {
+    font-size: default;
+}
+
+#synopsis-text {
+    margin-bottom: 0;
+}
+
+#add-news-button {
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 100% !important;
+    background-color: hsl(171, 100%, 41%);
+    position: sticky !important;
+    top: 0 !important;
+    left:50%;
+}
+
+#delete-news {
+    margin: 1%;
+}
+
+#news-test {
+    padding: 0%;
+}
+
+#save-article-button {
+    margin-top: 1%
 }
