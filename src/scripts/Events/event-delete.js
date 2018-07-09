@@ -1,9 +1,9 @@
-// This module deletes an event from the database and then hides it from the DOM
+// This module deletes an event from the database and then removes it from the DOM
 // Author: Elliot Huck
 
 const $ = require("jquery");
 const apiController = require("../apiController");
-// Required by: event-load
+// Required by: event-handlers
 
 const deleteEvent = (event) => {
   const buttonId = event.target.id;

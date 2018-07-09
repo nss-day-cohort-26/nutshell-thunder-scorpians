@@ -1,8 +1,8 @@
 // This module loads all the events and prints them to the DOM
 // Author: Elliot Huck
 
-/* Page Load:
-1. Accept the current user's id number
+/* This module will
+1. Get the current user's id number
 2. Make the API call to get all events for the user and his friends, sorted by date and return the call
   .then(
     1. Build a DOM section element for each event in the response
@@ -11,10 +11,8 @@
 
 const $ = require("jquery");
 const apiController = require("../apiController");
-const Event = require("./event-class");
 // Required by: events, event-submit
 
-// Needs to accept the parameter for the currentUserId and his friends
 const loadEvents = () => {
 
     console.log("Loading all events...")
@@ -34,7 +32,6 @@ const loadEvents = () => {
 
       apiController.events.getAllEvents(currentUser, allFriendsString).then(sortedEvents => {
 
-        // console.log(sortedEvents);
         const $eventArticle = $("#event-article");
         $eventArticle.empty();
         sortedEvents.forEach(event => {

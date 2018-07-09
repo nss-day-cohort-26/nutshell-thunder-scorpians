@@ -2,14 +2,18 @@
 // Author: Elliot Huck
 
 const $ = require("jquery");
-const apiController = require("../apiController");
-
-const submitEvent = require("./event-submit");
-// Required by: events
+// Required by: event-handlers
 
 const createNewEvent = () => {
   $("#add-event").hide();
-  const $newEventForm = $("<article>").attr("id", "event-form");
+  const $newEventForm = $("<article>").attr("id", "0event");
+
+  const $dateSection = $("<section>");
+  const $dateLabel = $("<label>").attr("for", "event-date").text("Event date:");
+  const $dateInput = $("<input>").attr("type", "date").attr("id", "event-date");
+  $dateLabel.appendTo($dateSection);
+  $dateInput.appendTo($dateSection);
+  $dateSection.appendTo($newEventForm);
 
   const $nameSection = $("<section>");
   const $nameLabel = $("<label>").attr("for", "event-name").text("Event name:");
@@ -18,12 +22,6 @@ const createNewEvent = () => {
   $nameInput.appendTo($nameSection);
   $nameSection.appendTo($newEventForm);
 
-  const $dateSection = $("<section>");
-  const $dateLabel = $("<label>").attr("for", "event-date").text("Event date:");
-  const $dateInput = $("<input>").attr("type", "date").attr("id", "event-date");
-  $dateLabel.appendTo($dateSection);
-  $dateInput.appendTo($dateSection);
-  $dateSection.appendTo($newEventForm);
 
   const $locationSection = $("<section>");
   const $locationLabel = $("<label>").attr("for", "event-location").text("Event location:");
@@ -33,7 +31,8 @@ const createNewEvent = () => {
   $locationSection.appendTo($newEventForm);
 
   const $submitSection = $("<section>");
-  const $submitButton = $("<button>").text("Submit").on("click", submitEvent);
+  const $submitButton = $("<button>").attr("id", "0submit");
+  $submitButton.text("Submit");
   $submitButton.appendTo($submitSection);
   $submitSection.appendTo($newEventForm);
 

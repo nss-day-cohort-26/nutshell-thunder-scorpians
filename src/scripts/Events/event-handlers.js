@@ -3,20 +3,27 @@
 
 const $ = require("jquery");
 const addEvent = require("./event-form");
-const deleteEvent = require("./event-delete");
+const submitEvent = require("./event-submit");
 const editEvent = require("./event-edit");
+const deleteEvent = require("./event-delete");
 // Required by: events
 
 const addHandlers = () => {
   console.log("Adding event handlers...")
+
   const $eventDiv = $(".events");
   $eventDiv.click(event => {
-    console.log("Click event: ", event);
     const $buttonClicked = $(event.target);
+
+    // This switch checks which button was clicked
     switch (true) {
       case ($buttonClicked.hasClass("event__button--new")):
-        addEvent;
+        addEvent();
         break;
+      case ($buttonClicked.text() === "Submit" || $buttonClicked.text() === "Save changes"):
+        submitEvent(event);
+        break;
+      // This case reads the text because I am running a different function when you re-click this button to save the event after its text content has been changed
       case ($buttonClicked.text() === "Edit"):
         editEvent(event);
         break;
@@ -27,6 +34,7 @@ const addHandlers = () => {
         break;
     }
   });
+
   console.log("Event handlers added")
 }
 
