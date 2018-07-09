@@ -124,6 +124,24 @@ const apiController = Object.create({}, {
             },
             getAllEvents: (currentUser, friendString) => {
                 return $.ajax(`https://nutshell-scorpians.herokuapp.com/events?userId=${currentUser}&${friendString}_sort=date&_order=asc`);
+            },
+            editEvent: (editedEvent, editId) => {
+                return $.ajax({
+                    url: `https://nutshell-scorpians.herokuapp.com/events/${editId}`,
+                    type: "PUT",
+                    data: {
+                        userId: editedEvent.userId,
+                        name: editedEvent.name,
+                        date: editedEvent.date,
+                        location: editedEvent.location
+                    }
+                });
+            },
+            deleteEvent: (deleteId) => {
+                return $.ajax({
+                    url: `https://nutshell-scorpians.herokuapp.com/events/${deleteId}`,
+                    type: "DELETE"
+                });
             }
         }
     },
@@ -181,14 +199,15 @@ const apiController = Object.create({}, {
             },
 
             // UPDATE
-            update: function (msgId, userId, newMessage) {
+            update: function (msgId, userId, newMessage, messageTimeStamp) {
 
                 return $.ajax({
                     url: `https://nutshell-scorpians.herokuapp.com/Messages/${msgId}`,
                     method: "PUT",
                     data: {
                         "userId": userId,
-                        "message": newMessage
+                        "message": newMessage,
+                        "timeStamp": messageTimeStamp
                     }
                 })
             },

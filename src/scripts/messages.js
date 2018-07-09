@@ -6,10 +6,12 @@ const apiController = require("./apiController");
 const messagesApi = apiController["messages"];
 const friends = require("./friends");
 
+sessionStorage.setItem("messageChange", 1);
+
 // API
 const Messages = {
     // READ
-    read: function () {
+    read: function (buildSource) {
 
         let currentUser = null;
         if (sessionStorage.getItem("activeUser")) {
@@ -19,21 +21,33 @@ const Messages = {
         }
 
         messagesApi.read().then(msgArr => {
-            console.log(msgArr);
             buildMessagesDOM(msgArr, currentUser);
+            if (buildSource === "createNew") {
+                $("#newMessageInput").focus();
+            }
+
         })
     },
 
     // CREATE
     create: function (userId, message) {
         const curTimeStamp = new Date();
-        messagesApi.create(userId, message, curTimeStamp).then(this.read)
+        messagesApi.create(userId, message, curTimeStamp).then(() => {
+            this.read("createNew");
+            let sS = sessionStorage.getItem("messageChange");
+            sessionStorage.setItem("messageChange", ++sS);
+        })
     },
 
     // UPDATE
-    update: function (msgId, userId, newMessage) {
+    update: function (msgId, userId, newMessage, messageTimeStamp) {
 
-        messagesApi.update(msgId, userId, newMessage).then(this.read)
+        messagesApi.update(msgId, userId, newMessage, messageTimeStamp).then(() => {
+            this.read();
+            let sS = sessionStorage.getItem("messageChange");
+            sessionStorage.setItem("messageChange", ++sS);
+        })
+
     },
 
     // DELETE
@@ -52,13 +66,11 @@ var buildMessagesDOM = function (messages, currentUser) {
 
     // ADD MESSENGER HEADER
     const messengerHeaderDiv = $("<div>").attr("id", "messengerHeaderDiv");
-    messengerHeaderDiv.append($("<h2>").text("Messenger").addClass("messengerHeader"));
-    // const msgOptionsInstuctions = $("<h4>").text("Use add/edit buttons to add friends and edit messages. Clicking Options will toggle buttons on and off.").addClass("messengerOptionsInstructions")
-    // msgOptionsInstuctions.hide();
-    // messengerHeaderDiv.append(msgOptionsInstuctions);
+    messengerHeaderDiv.append($("<h2>").text("Messages").addClass("messengerHeader"));
     messengerDiv.append(messengerHeaderDiv);
 
     const messengerBodyDiv = $("<div>").attr("id", "messengerBodyDiv");
+    const messengerBodyContent = $("<div>").attr("id", "messengerBodyContent");
 
 
     // ITERATE MESSAGES
@@ -72,9 +84,15 @@ var buildMessagesDOM = function (messages, currentUser) {
             const messageUserId = message["userId"];
             const messageUserName = message["user"]["name"];
             const messageId = message["id"];
+            const messageTimeStamp = message["timeStamp"]
 
-            const msgItem = $("<div>").attr("id", "msg" + messageId).addClass("msgItem");
+            const msgItem = $("<p>").attr("id", "msg" + messageId).addClass("msgItem");
             const userSpan = $("<span>").text(`${messageUserName}`).addClass("msgUser").addClass("msgText");
+            if (messageUserId === currentUser) {
+                userSpan.addClass("me");
+            } else {
+                userSpan.addClass("other");
+            }
             const seperatorSpan = $("<span>").text(": ").addClass("msgSeperator").addClass("msgText");
             const msgSpan = $("<span>").text(`${messageText}`).addClass("msgContent").addClass("msgText");
 
@@ -89,11 +107,11 @@ var buildMessagesDOM = function (messages, currentUser) {
                 const editButton = $("<button>").addClass("editMsgButton").append($("<i>").addClass("fa fa-pencil"));
 
                 // EDIT INPUT
-                const editInput = $("<input>").attr("value", messageText)
+                const editInput = $("<input>").attr("value", messageText).addClass("editMsgInput");
 
                 // SAVE BUTTON
-                const saveButton = $("<button>").append($("<i>").addClass("fa fa-floppy-o")).on("click", (e) => {
-                    Messages.update(messageId, messageUserId, editInput.val())
+                const saveButton = $("<button>").append($("<i>").addClass("fa fa-floppy-o")).addClass("saveMsgEditsButton").on("click", (e) => {
+                    Messages.update(messageId, messageUserId, editInput.val(), messageTimeStamp)
                 });
 
                 // CANCEL BUTTON
@@ -135,8 +153,11 @@ var buildMessagesDOM = function (messages, currentUser) {
 
                 // APPEND CONFIGURE BUTTONS
                 msgItem.children(".msgUser").before(editButton);
+                msgItem.children(".msgUser").before(saveButton);
                 msgItem.children(".msgUser").before(deleteButton);
-                msgItem.append(editInput).append(saveButton).append(cancelButton);
+                msgItem.children(".msgUser").before(cancelButton);
+
+                msgItem.append(editInput);
             } else { // IF MESSAGE BELONGS TO DIFFERENT USER, ALLOW ADD FRIEND
 
                 const addFriendButton = $("<button>").append($("<i>").addClass("fa fa-plus")).addClass("addFriendButton").on("click", (e) => {
@@ -156,11 +177,11 @@ var buildMessagesDOM = function (messages, currentUser) {
             }
 
             //APPEND MESSAGE ITEM
-            messengerBodyDiv.append(msgItem);
+            messengerBodyContent.append(msgItem);
         });
 
     }
-
+    messengerBodyDiv.append(messengerBodyContent);
     messengerDiv.append(messengerBodyDiv);
 
     // CREATE NEW MESSAGE AREA AT BOTTOM OF BOX
@@ -172,6 +193,8 @@ var buildMessagesDOM = function (messages, currentUser) {
         if (event.which === 13) {
             const message = $("#newMessageInput").val();
             Messages.create(currentUser, message);
+            // $("#newMessageInput").focus();
+
         }
     })
 
@@ -180,17 +203,12 @@ var buildMessagesDOM = function (messages, currentUser) {
     newMessageButton.on("click", (e) => {
         const message = $("#newMessageInput").val();
         Messages.create(currentUser, message);
+        // $("#newMessageInput").focus();
     })
 
     // TOGGLE EDIT AND ADD FRIENDS OPTIONS ON AND OFF
     const msgOptionButton = $("<button>").append($("<i>").addClass("fa fa-cogs")).attr("id", "msgOptionButton");
     msgOptionButton.on("click", (e) => {
-
-        // if ($("#msgOptionsInstructions").is(":visible")) {
-        //     $("#msgOptionsInstructions").hide();
-        // } else {
-        //     $("#msgOptionsInstructions").show();
-        // }
 
         if ($(".editMsgButton")) {
             if ($(".editMsgButton").is(":visible")) {
@@ -216,15 +234,42 @@ var buildMessagesDOM = function (messages, currentUser) {
     newMessageDiv.append(newMessageButton);
     messengerDiv.append(newMessageDiv);
 
-    console.log(messengerDiv.prop("scrollHeight"))
-    messengerDiv.scrollTop(messengerDiv.prop("scrollHeight"));
+    messengerBodyDiv.scrollTop(messengerBodyDiv.prop("scrollHeight"));
 }
 
+// $(window).on("storage", function (e) {
+//     alert("eventFired");
+//     if (e.originalEvent.storageArea === sessionStorage) {
+//         alert("change1");
+//     }
+//     // else, event is caused by an update to localStorage, ignore it
+// });
+
+// window.addEventListener("storage", function(storageEvent){
+//     // the event seems not to fire on own state changes, only other windows
+//     console.log(storageEvent);
+//     App.controller.setLoginState(storageEvent.newValue);
+// }, false);
+
+// $(window).bind("storage", function (e) {
+//     alert("change2");
+// });
+
+// localStorage.setItem("someItem", "someValue");
+
+// $(window).bind("storage", function (e) {
+//     alert("change3");
+// });
+
+// sessionStorage.setItem("someItem", "someValue");
+
+
 const messengerExp = {
-    "buildMessenger": function() {
+    "buildMessenger": function () {
         Messages.read()
     }
 }
+
 
 // EXPORT READ FUNCTION
 module.exports = messengerExp;

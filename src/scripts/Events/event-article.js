@@ -6,16 +6,18 @@ const createNewEvent = require("./event-form");
 // Required by: events
 
 const loadEventArticle = () => {
+  console.log("Loading event article...")
   const $eventHeader = $("<h2>").attr("id", "event-header")
   $eventHeader.text("Events");
   $(".events").append($eventHeader);
 
-  const $newEventButton = $("<button>").attr("id", "add-event");
+  const $newEventButton = $("<button>").attr("id", "add-event").addClass("event__button--new");
   $newEventButton.text("Add Event").click(createNewEvent);
   $(".events").append($newEventButton);
 
   const $eventArticle = $("<article>").attr("id", "event-article");
   $(".events").append($eventArticle);
+  console.log("Event article loaded")
 }
 
 module.exports = loadEventArticle;

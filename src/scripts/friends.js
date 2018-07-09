@@ -50,7 +50,7 @@ const friendActions = Object.create({},{
         }
     },
     addFriend: {
-        value: function(friendName, saveButton, friendNameInput, addFriendBtn){
+        value: function (friendName, addFriendBtn, saveButton, friendNameInput){
             const currentUser = sessionStorage.getItem("activeUser")
             let friendsToCheck = []
             apiController.getFriendsList(currentUser).then( (response) =>{
@@ -98,6 +98,7 @@ const friendActions = Object.create({},{
                         if (friendNameInput){friendNameInput.remove()}
                         if (saveButton){saveButton.remove()}
                         friendActions.displayFriendList()
+                        addFriendBtn.remove()
                         // addFriendBtn.show()
                         }
                     })
