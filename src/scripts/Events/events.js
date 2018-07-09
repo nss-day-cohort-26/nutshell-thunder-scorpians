@@ -1,5 +1,6 @@
+// This module runs all the event functions: loads the event article, adds the event handlers, and then loads all the events
+// Author: Elliot Huck
 
-const $ = require("jquery");
 const loadEventArticle = require("./event-article");
 const loadEvents = require("./event-load");
 const eventHandlers = require("./event-handlers");
@@ -15,17 +16,13 @@ const events = () => {
 module.exports = events;
 
 /*
-This
-BUG WHERE IF YOU TRY TO EDIT AN EVENT WHILE CREATING A NEW ONE, THE ADD NEW EVENT BUTTON WILL NEVER RETURN
-CLEAN UP event-form
-SUBMIT AND SAVE BUTTON BOTH SAY SAVE
+Stretch goals:
+CLEAN UP & REFACTOR event-form
 CANCEL BUTTON WHEN ADDING NEW EVENT
 CANCEL BUTTON WHEN EDITING EVENT
-ONLY EDIT YOUR OWN EVENTS in load-events
 DON'T ADD PAST EVENTS
 HIDE PAST EVENTS
-SHOW WHO POSTED EACH EVENT
+SHOW NAMES FOR WHO POSTED EACH EVENT
 DESCRIPTIONS NEXT TO EACH FIELD ON EACH EVENT
 PARSE DATES TO BE MORE READABLE
-
 */

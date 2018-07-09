@@ -1,4 +1,4 @@
-// This module edits an event in the database and on the DOM
+// This module edits an event in the database and changes the text of the Edit button so that it will fire the event-submit function when clicked
 // Author: Elliot Huck
 
 const $ = require("jquery");

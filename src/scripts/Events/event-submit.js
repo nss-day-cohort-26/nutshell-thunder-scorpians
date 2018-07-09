@@ -1,20 +1,11 @@
+// This module reads a form and saves its input values to an object that is then put or posted to the api, depending on what button was clicked
 // Author: Elliot Huck
-/* Click New Event Button:
-Make a form
-  Form Submit:
-  1. Check that all inputs have been filled
-  2. Read the input fields
-  3. Call the API and Post
-    .then(
-      1. Reload all the events (run page load)
-*/
 
 const $ = require("jquery");
 const Event = require("./event-class");
 const apiController = require("../apiController");
 const loadEvents = require("./event-load");
 // Required by: event-handlers
-
 
 const submitEvent = (event) => {
 

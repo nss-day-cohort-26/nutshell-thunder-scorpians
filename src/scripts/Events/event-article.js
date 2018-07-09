@@ -1,4 +1,4 @@
-// This module loads the header, add event button, and event article that the other elements will interact with
+// This module loads the Events header, the New Event button, and the event <article> that all the events will be loaded to
 // Author: Elliot Huck
 
 const $ = require("jquery");

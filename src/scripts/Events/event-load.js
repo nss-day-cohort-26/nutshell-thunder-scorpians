@@ -1,13 +1,5 @@
-// This module loads all the events and prints them to the DOM
+// This module loads all the events for the user and his friends and prints them to the DOM sorted by date
 // Author: Elliot Huck
-
-/* This module will
-1. Get the current user's id number
-2. Make the API call to get all events for the user and his friends, sorted by date and return the call
-  .then(
-    1. Build a DOM section element for each event in the response
-    2. Put all DOM sections into an article and return the article
-*/
 
 const $ = require("jquery");
 const apiController = require("../apiController");
