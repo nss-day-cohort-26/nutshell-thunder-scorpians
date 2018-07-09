@@ -4,6 +4,11 @@
   padding-left: .25em;
 }
 
+#event-header {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
 .event {
   border-bottom: 1px dashed black;
   padding: .25 em;
@@ -22,7 +27,12 @@
 .event:first-of-type {
   font-weight: bold;
   font-size: 1.2em;
-  background-color: lightpink;
+  background-color: lightblue;
   margin-top: .5em;
+}
+
+.event p:last-of-type {
+  font-size: .8em;
+  font-style: italic;
 }
 

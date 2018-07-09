@@ -6,14 +6,13 @@ const $ = require("jquery");
 
 const loadEventArticle = () => {
   console.log("Loading event article...")
-
   // This section loads an h2 with the text "Events"
   const $eventHeader = $("<h2>").attr("id", "event-header")
   $eventHeader.text("Events");
   $(".events").append($eventHeader);
 
   // This section loads the button to add new events
-  const $newEventButton = $("<button>").attr("id", "add-event").addClass("event__button--new");
+  const $newEventButton = $("<button>").attr("id", "add-event");
   $newEventButton.text("New Event");
   $(".events").append($newEventButton);
 

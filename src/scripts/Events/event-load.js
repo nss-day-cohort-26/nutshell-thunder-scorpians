@@ -14,8 +14,10 @@ const apiController = require("../apiController");
 // Required by: events, event-submit
 
 const loadEvents = () => {
-
+  console.log($("#add-event").is(":hidden"))
+  $("#add-event").show();
   console.log("Loading all events...")
+
   const currentUser = parseInt(sessionStorage.getItem("activeUser"));
   console.log("Events for userId ", currentUser);
 
@@ -44,15 +46,15 @@ const loadEvents = () => {
 
         if (parseInt(event.userId) === currentUser) {
           $eventSection.addClass("event event--yours");
-          // $("<p>").text("Posted by: You").appendTo($eventSection);
+          $("<p>").text("Posted by: You").appendTo($eventSection);
         } else {
           $eventSection.addClass("event event--others");
-          // $("<p>").text("Posted by: Friend").appendTo($eventSection);
+          $("<p>").text("Posted by: A friend").appendTo($eventSection);
         }
         // Only adds edit/delete buttons if it's your event
         if ($eventSection.hasClass("event--yours")) {
-          $("<button>").text("Edit").attr("id", `${event.id}edit`).addClass("event__button--edit").appendTo($eventSection);
-          $("<button>").text("Delete").attr("id", `${event.id}delete`).addClass("event__button--delete").appendTo($eventSection);
+          $("<button>").text("Edit").attr("id", `${event.id}edit`).appendTo($eventSection);
+          $("<button>").text("Delete").attr("id", `${event.id}delete`).appendTo($eventSection);
         }
 
         $eventSection.attr("id", `${event.id}event`).appendTo($eventArticle);
