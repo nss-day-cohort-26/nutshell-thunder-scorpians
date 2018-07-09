@@ -68,7 +68,7 @@ const taskObject = Object.create({},{
                     })
                 }
             })
-            const buildFormBtn = $("<button>").addClass("button is-small add-task").text("+").appendTo($wrapper).click(()=>{
+            const buildFormBtn = $("<button>").addClass("button is-small add-task plus-button").text("+").appendTo($wrapper).click(()=>{
                 const $buildFormDiv = $("<div>").appendTo($wrapper)
                 const descInput = $("<input>").attr("placeholder","description").appendTo($buildFormDiv)
                 const dueDateInput = $("<input>").attr("type","date").attr("placeholder","due").appendTo($buildFormDiv)

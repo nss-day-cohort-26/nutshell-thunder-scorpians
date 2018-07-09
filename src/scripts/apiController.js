@@ -4,7 +4,7 @@ const apiController = Object.create({}, {
     addNewUser:{
         value: function(param) {
             return $.ajax({
-                url: "http://localhost:3000/users",
+                url: "https://nutshell-scorpians.herokuapp.com/users",
                 type: "POST",
                 // contentType: "application/json",
                 data: {
@@ -17,7 +17,7 @@ const apiController = Object.create({}, {
     addNewTask: {
         value: function(param){
             return $.ajax({
-                url: "http://localhost:3000/tasks",
+                url: "https://nutshell-scorpians.herokuapp.com/tasks",
                 type: "POST",
                 data: {
                     userId: param.userId,
@@ -30,13 +30,13 @@ const apiController = Object.create({}, {
     },
     getTasks:{
         value: function(userId) {
-            return $.ajax(`http://localhost:3000/tasks?userId=${userId}`)
+            return $.ajax(`https://nutshell-scorpians.herokuapp.com/tasks?userId=${userId}`)
         }
     },
     deleteTask:{
         value: function(id) {
             $.ajax({
-                url: `http://localhost:3000/tasks/${id}`,
+                url: `https://nutshell-scorpians.herokuapp.com/tasks/${id}`,
                 type: "DELETE"
             })
         }
@@ -44,7 +44,7 @@ const apiController = Object.create({}, {
     editTask:{
         value: function(id, param) {
             return $.ajax({
-                url:`http://localhost:3000/tasks/${id}`,
+                url:`https://nutshell-scorpians.herokuapp.com/tasks/${id}`,
                 type: "PUT",
                 data:{
                     userId: param.userId,
@@ -58,7 +58,7 @@ const apiController = Object.create({}, {
     addNewFriend: {
         value: function(userId1, userId2){
             return $.ajax({
-                url: "http://localhost:3000/friends",
+                url: "https://nutshell-scorpians.herokuapp.com/friends",
                 type: "POST",
                 data: {
                     userId: userId1,
@@ -69,13 +69,13 @@ const apiController = Object.create({}, {
     },
     getFriendsList: {
         value: function(currentUserId){
-            return $.ajax(`http://localhost:3000/friends?_expand=user&yourId=${currentUserId}`)
+            return $.ajax(`https://nutshell-scorpians.herokuapp.com/friends?_expand=user&yourId=${currentUserId}`)
         }
     },
     addNewFriend: {
         value: function(currentUserId, friendToAddId){
             return $.ajax({
-                url: "http://localhost:3000/friends",
+                url: "https://nutshell-scorpians.herokuapp.com/friends",
                 type: "POST",
                 data: {
                     userId: friendToAddId,
@@ -88,31 +88,31 @@ const apiController = Object.create({}, {
         value: function(relId){
             console.log("type of",typeof(relId))
             return $.ajax({
-                url: `http://localhost:3000/friends/${relId}`,
+                url: `https://nutshell-scorpians.herokuapp.com/friends/${relId}`,
                 type: "DELETE"
             })
         }
     },
     getUserId: {
         value: function(userName){
-            return $.ajax(`http://localhost:3000/users?name=${userName}`)
+            return $.ajax(`https://nutshell-scorpians.herokuapp.com/users?name=${userName}`)
         }
     },
     getEmailAddr: {
         value: function(emailAddr){
-            return $.ajax(`http://localhost:3000/users?email=${emailAddr}`)
+            return $.ajax(`https://nutshell-scorpians.herokuapp.com/users?email=${emailAddr}`)
         }
     },
     queryUsers: {
         value: function(){
-            return $.ajax("http://localhost:3000/users")
+            return $.ajax("https://nutshell-scorpians.herokuapp.com/users")
         }
     },
     events: {
         value: {
             addNewEvent: (eventObject) => {
                 return $.ajax({
-                    url: "http://localhost:3000/events",
+                    url: "https://nutshell-scorpians.herokuapp.com/events",
                     type: "POST",
                     data: {
                         userId: eventObject.userId,
@@ -123,14 +123,32 @@ const apiController = Object.create({}, {
                 });
             },
             getAllEvents: (currentUser, friendString) => {
-                return $.ajax(`http://localhost:3000/events?userId=${currentUser}&${friendString}_sort=date&_order=asc`);
+                return $.ajax(`https://nutshell-scorpians.herokuapp.com/events?userId=${currentUser}&${friendString}_sort=date&_order=asc`);
+            },
+            editEvent: (editedEvent, editId) => {
+                return $.ajax({
+                    url: `https://nutshell-scorpians.herokuapp.com/events/${editId}`,
+                    type: "PUT",
+                    data: {
+                        userId: editedEvent.userId,
+                        name: editedEvent.name,
+                        date: editedEvent.date,
+                        location: editedEvent.location
+                    }
+                });
+            },
+            deleteEvent: (deleteId) => {
+                return $.ajax({
+                    url: `https://nutshell-scorpians.herokuapp.com/events/${deleteId}`,
+                    type: "DELETE"
+                });
             }
         }
     },
     addNewArticle: {
         value: function (title, synopsis, url, timeStamp, currentUser) {
             return $.ajax({
-                url: "http://localhost:3000/articles",
+                url: "https://nutshell-scorpians.herokuapp.com/articles",
                 type: "POST",
                 data: {
                     title: title,
@@ -144,13 +162,13 @@ const apiController = Object.create({}, {
     },
     getArticleList: {
         value: function(currentUser, friendString) {
-            return $.ajax(`http://localhost:3000/articles?userId=${currentUser}&${friendString}_sort=timestamp&_order=asc`)
+            return $.ajax(`https://nutshell-scorpians.herokuapp.com/articles?userId=${currentUser}&${friendString}_sort=timestamp&_order=asc`)
         }
     },
     deleteArticle: {
         value: function(id) {
             return $.ajax({
-                url: `http://localhost:3000/articles/${id}`,
+                url: `https://nutshell-scorpians.herokuapp.com/articles/${id}`,
                 type: "DELETE"
             })
         }
@@ -161,7 +179,7 @@ const apiController = Object.create({}, {
         value: {
             // READ
             read: function () {
-                return $.ajax("http://localhost:3000/messages?_expand=user&_sort=timeStamp")
+                return $.ajax("https://nutshell-scorpians.herokuapp.com/messages?_expand=user&_sort=timeStamp")
                 // ADD
                 // USER
                 // DATA
@@ -170,7 +188,7 @@ const apiController = Object.create({}, {
             // CREATE
             create: function (userId, message, timestamp) {
                 return $.ajax({
-                    url: "http://localhost:3000/messages",
+                    url: "https://nutshell-scorpians.herokuapp.com/messages",
                     method: "POST",
                     data: {
                         "userId": userId,
@@ -181,14 +199,15 @@ const apiController = Object.create({}, {
             },
 
             // UPDATE
-            update: function (msgId, userId, newMessage) {
+            update: function (msgId, userId, newMessage, messageTimeStamp) {
 
                 return $.ajax({
-                    url: `http://localhost:3000/Messages/${msgId}`,
+                    url: `https://nutshell-scorpians.herokuapp.com/Messages/${msgId}`,
                     method: "PUT",
                     data: {
                         "userId": userId,
-                        "message": newMessage
+                        "message": newMessage,
+                        "timeStamp": messageTimeStamp
                     }
                 })
             },
@@ -196,7 +215,7 @@ const apiController = Object.create({}, {
             delete: function (msgId) {
 
                 return $.ajax({
-                    url: `http://localhost:3000/Messages/${msgId}`,
+                    url: `https://nutshell-scorpians.herokuapp.com/Messages/${msgId}`,
                     method: "DELETE"
                 })
 
