@@ -13,9 +13,9 @@ const taskObject = Object.create({},{
             response.forEach(element => {
                 // console.log(element);
                 // const $columns = $("<div>").addClass("columns").appendTo($wrapper);
-                const $div = $("<div>").addClass("card column").appendTo($wrapper);
-                const $p = $("<p>").text("Complete: ").attr("id","explain-checkbox").appendTo($div)
                 if (element.complete === "false") {
+                    const $div = $("<div>").addClass("card column").appendTo($wrapper);
+                    const $p = $("<p>").text("Complete: ").attr("id","explain-checkbox").appendTo($div)
                     for (const key in element) {
                         // console.log(element);
                         if (key === "desc" && element.complete === "false") {$("<p>").text(`${element[key]}`).appendTo($div);
@@ -44,9 +44,10 @@ const taskObject = Object.create({},{
                             }
                         })
                         }
-                        else if (key === "dueDate" && element.complete === "false") {$("<p>").text(`${element[key]}`).addClass("due-date").appendTo($div);}
+                        else if (key === "dueDate" && element.complete === "false") {$("<p>").text(`${element[key]}`).addClass("due-date").appendTo($div);
                         // console.log(element[key]);
                     }
+                }
                     const $checkbox = $("<input>").addClass("checkbox").attr("type","checkbox").appendTo($p).click(()=>{
                         const checkboxDbUpdate = {
                             userId: element.userId,
@@ -56,6 +57,7 @@ const taskObject = Object.create({},{
                         }
                         console.log(element.desc);
                         apiController.editTask(element.id,checkboxDbUpdate).then((response)=>{
+                        $div.empty()
                         $wrapper.empty()
                         taskObject.printTasks()
                     })
@@ -68,7 +70,7 @@ const taskObject = Object.create({},{
                     })
                 }
             })
-            const buildFormBtn = $("<button>").addClass("button is-small add-task plus-button").text("+").appendTo($wrapper).click(()=>{
+            const buildFormBtn = $("<button>").addClass("button is-small add-task").text("+").appendTo($wrapper).click(()=>{
                 const $buildFormDiv = $("<div>").appendTo($wrapper)
                 const descInput = $("<input>").attr("placeholder","description").appendTo($buildFormDiv)
                 const dueDateInput = $("<input>").attr("type","date").attr("placeholder","due").appendTo($buildFormDiv)
