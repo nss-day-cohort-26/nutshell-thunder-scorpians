@@ -10,7 +10,7 @@ const apiController = require("./apiController")
 const addNewsButton = $("<button>").attr("id", "add-news-button").addClass("button is-small add-task").text("+")
 
 //create Save Article button
-const saveNewsButton = $("<button>").addClass("button is-small is-primary").text("Save Article")
+const saveNewsButton = $("<button>").addClass("button is-small is-primary").attr("id", "save-article-button").text("Save Article")
 
 //create elements for news inputs and append to DOM
 const newsContainer = $("<section>").attr("id", "newsContainer").append(addNewsButton)

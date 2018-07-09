@@ -12,7 +12,7 @@
     /* position: sticky; */
     display: flex;
     flex-basis: 10%;
-    background-color: black;
+    background-color: cornflowerblue;
     justify-content: space-between;
     align-items: center;
     padding:3%;
@@ -124,7 +124,7 @@
 #messageNewDiv {
     display: flex;
     flex-basis: 10%;
-    background-color: black;
+    background-color: cornflowerblue;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
