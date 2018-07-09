@@ -7,15 +7,17 @@ const friends = require("./friends")
 const task = require("./task")
 const messages = require("./messages")
 const events = require("./Events/events")
+const news = require("./news")
+
 
 const loginControl = Object.create({},{
     createForms: {
         value: function(){
-            let headline = $("<h1>Welcome to Nutshell!</h1><br><h2>Please enter username and email to login</h2>")
-            let userNameInput = $("<input type='text' placeholder='User Name'>")
-            let emailInput = $("<input type='text' placeholder='E-Mail Address'>")
-            let submitLoginBtn = $("<button>")
-            let registerBtn = $("<button>")
+            let headline = $("<h1 class='main-headline'>Welcome to Nutshell!</h1><br><h2 class='secondary-headline'>Please enter username and email to login</h2>")
+            let userNameInput = $("<input type='text' placeholder='User Name' class='login-input'>")
+            let emailInput = $("<input type='text' placeholder='E-Mail Address' class='login-input'>")
+            let submitLoginBtn = $("<button class='login-button'>")
+            let registerBtn = $("<button class='login-button register'>")
             registerBtn.text("Register New Account")
             submitLoginBtn.text("Submit")
             submitLoginBtn.click(() => {
@@ -65,6 +67,7 @@ const loginControl = Object.create({},{
                     task.printTasks()
                     events()
                     messages.buildMessenger()
+                    news.printArticles()
                 }
             })
          }

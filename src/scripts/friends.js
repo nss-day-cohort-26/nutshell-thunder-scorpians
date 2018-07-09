@@ -23,7 +23,7 @@ const friendActions = Object.create({},{
             friendsList.append($("<div id='friendListContainer'><ul id='friendUL'></ul></div>"))
             let currentFriendsList = apiController.getFriendsList(currentUser).then((response) =>{
                 response.forEach(friend =>{
-                    let delElement = $("<button class='button is-small delete'>")
+                    let delElement = $("<button class='button is-small delete is-danger'>")
                     delElement.click((e) => { addFriendBtn.remove(); friendActions.deleteFriend(e) })
                     // let liElement = $(`<li>${friend.user.name}</li>`)
                     let liElement = $(`<li id=${friend.id}>`)
@@ -43,9 +43,9 @@ const friendActions = Object.create({},{
             saveButton.text("Save Friend")
             $("#friendUL").prepend((saveButton)).append(friendNameInput)
             //Event handlers for submit button click and or enter key in input field
-            saveButton.click(() => {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)})
+            saveButton.click(() => {friendName = friendNameInput.val().toLowerCase(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)})
             friendNameInput.keyup((event)=>{
-                if (event.which === 13) {friendName = friendNameInput.val(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)}
+                if (event.which === 13) {friendName = friendNameInput.val().toLowerCase(); friendActions.addFriend(friendName, saveButton, friendNameInput, addFriendBtn)}
             })
         }
     },
