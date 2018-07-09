@@ -18,6 +18,7 @@ const loginControl = Object.create({}, {
             let emailInput = $("<input type='text' placeholder='E-Mail Address' class='login-input'>")
             let submitLoginBtn = $("<button class='login-button'>")
             let registerBtn = $("<button class='login-button register'>")
+            let zuckImg = $("<img src='https://amp.businessinsider.com/images/5a85cda3d0307219008b47ce-960-480.jpg'>")
             registerBtn.text("Register New Account")
             submitLoginBtn.text("Submit")
             submitLoginBtn.click(() => {
@@ -32,7 +33,7 @@ const loginControl = Object.create({}, {
                 }
             })
             //put all the inputs and buttons on the DOM
-            $("#login-stuff").append(headline).append(userNameInput).append(emailInput).append(submitLoginBtn).append(registerBtn)
+            $("#login-stuff").append(headline).append(userNameInput).append(emailInput).append(submitLoginBtn).append(registerBtn).append(zuckImg)
             registerBtn.click(() => {
                 //Check if input fields are blank
                 if (emailInput.val() === "" || userNameInput.val() === "") {

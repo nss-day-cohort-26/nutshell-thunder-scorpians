@@ -7,12 +7,13 @@
 }
 
 .main-headline {
-    font-size: 5em;
-    text-shadow: .5px 1px 2px black;
-    text-shadow: -.5px -1px 2px black;
+    font-size: 6em;
+    text-shadow: .5px .5px 1px black;
+    /* text-shadow: -.5px -1px 2px black; */
     width: 80vw;
     border-bottom: solid 1px cornflowerblue;
     text-align: center;
+    font-weight: bolder;
 }
 
 .secondary-headline {
@@ -26,6 +27,11 @@
     border: 2px cornflowerblue solid;
     padding: 5px;
     margin-bottom: 5px;
+    outline: none;
+}
+
+.login-input:active {
+    outline: none;
 }
 
 .login-button {
@@ -37,6 +43,7 @@
     color: white;
     font-size: 1.5rem;
     transition: .5s;
+    outline: none;
 }
 
 .login-button:hover {
@@ -45,9 +52,14 @@
 }
 
 .login-button:active {
-    box-shadow: 2px -3px -2px black;
+    outline: none;
 }
 
 .register {
     width: 15vw;
+    margin-bottom: 1000px;
+}
+
+body{
+    background: url(https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjrlvrP05LcAhXpUd8KHWhhCDkQjRx6BAgBEAU&url=http%3A%2F%2Fwww.businessinsider.com%2Fmark-zuckerberg-third-richest-person-warren-buffett-2018-7&psig=AOvVaw1f3J9_MJ9wWFPzcG79nts9&ust=1531247504617975)
 }
