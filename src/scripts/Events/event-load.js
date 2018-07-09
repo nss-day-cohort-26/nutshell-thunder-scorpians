@@ -16,47 +16,52 @@ const Event = require("./event-class");
 
 // Needs to accept the parameter for the currentUserId and his friends
 const loadEvents = () => {
-  const currentUser = parseInt(sessionStorage.getItem("activeUser"));
-  console.log("Load events running")
-  console.log("Current user in load:", currentUser);
 
-  // New function here to get all the users friends
-  apiController.getFriendsList(currentUser).then(allFriends => {
-    let allFriendsArray = [];
-    allFriends.forEach(friend => {
-      const friendId = friend.user.id;
-      allFriendsArray.push(friendId);
-    });
-    allFriendsArray = allFriendsArray.map(friendIdNumber => { return `userId=${friendIdNumber}&` });
-    const allFriendsString = allFriendsArray.join("");
-    console.log(allFriendsString);
+    console.log("Loading all events...")
+    const currentUser = parseInt(sessionStorage.getItem("activeUser"));
+    console.log("Events for userId ", currentUser);
 
-    apiController.events.getAllEvents(currentUser, allFriendsString).then(sortedEvents => {
-
-      console.log(sortedEvents);
-      const $eventArticle = $("#event-article");
-      $eventArticle.empty();
-      sortedEvents.forEach(event => {
-        console.log("for each running");
-        const $eventSection = $("<section>");
-        $("<h3>").text(event.name).appendTo($eventSection);
-
-        if (parseInt(event.userId) === currentUser) {
-          $eventSection.addClass("event event--yours");
-          $("<p>").text("Posted by: You").appendTo($eventSection);
-        } else {
-          $eventSection.addClass("event event--others");
-          $("<p>").text("Posted by: A friend").appendTo($eventSection);
-        }
-
-        $("<p>").text(event.date).appendTo($eventSection);
-        $("<p>").text(event.location).appendTo($eventSection);
-
-        $eventSection.appendTo($eventArticle);
+    // New function here to get all the users friends
+    apiController.getFriendsList(currentUser).then(allFriends => {
+      let allFriendsArray = [];
+      allFriends.forEach(friend => {
+        const friendId = friend.user.id;
+        allFriendsArray.push(friendId);
       });
-      $eventArticle.appendTo($(".events"));
+      allFriendsArray = allFriendsArray.map(friendIdNumber => { return `userId=${friendIdNumber}&` });
+      const allFriendsString = allFriendsArray.join("");
+      console.log(allFriendsString);
+
+      apiController.events.getAllEvents(currentUser, allFriendsString).then(sortedEvents => {
+
+        // console.log(sortedEvents);
+        const $eventArticle = $("#event-article");
+        $eventArticle.empty();
+        sortedEvents.forEach(event => {
+          // console.log("Writing each event...");
+          const $eventSection = $("<section>");
+
+          if (parseInt(event.userId) === currentUser) {
+            $eventSection.addClass("event event--yours");
+            // $("<p>").text("Posted by: You").appendTo($eventSection);
+          } else {
+            $eventSection.addClass("event event--others");
+            // $("<p>").text("Posted by: Friend").appendTo($eventSection);
+          }
+
+          $("<p>").text(event.date).appendTo($eventSection);
+          $("<p>").text(event.name).appendTo($eventSection);
+          $("<p>").text(event.location).appendTo($eventSection);
+
+          $("<button>").text("Edit").attr("id", `${event.id}edit`).addClass("event__button--edit").appendTo($eventSection);
+          $("<button>").text("Delete").attr("id", `${event.id}delete`).addClass("event__button--delete").appendTo($eventSection);
+          $eventSection.attr("id", `${event.id}event`).appendTo($eventArticle);
+        });
+        $eventArticle.appendTo($(".events"));
+      });
     });
-  });
+    console.log("All events loaded");
+
 };
 
 module.exports = loadEvents;
