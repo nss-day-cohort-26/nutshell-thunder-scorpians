@@ -126,6 +126,7 @@
     padding: 0;
     border: 0;
     font-size: 1rem;
+    width: fit-content;
 }
 
 #messageNewDiv {
