@@ -6,6 +6,8 @@ const apiController = require("./apiController");
 const messagesApi = apiController["messages"];
 const friends = require("./friends");
 
+// sessionStorage.setItem("messageChange", 1);
+
 // API
 const Messages = {
     // READ
@@ -32,13 +34,20 @@ const Messages = {
         const curTimeStamp = new Date();
         messagesApi.create(userId, message, curTimeStamp).then(() => {
             this.read("createNew");
+            // let sS = sessionStorage.getItem("messageChange");
+            // sessionStorage.setItem("messageChange", ++sS);
         })
     },
 
     // UPDATE
     update: function (msgId, userId, newMessage, messageTimeStamp) {
 
-        messagesApi.update(msgId, userId, newMessage, messageTimeStamp).then(this.read)
+        messagesApi.update(msgId, userId, newMessage, messageTimeStamp).then(() => {
+            this.read();
+            // let sS = sessionStorage.getItem("messageChange");
+            // sessionStorage.setItem("messageChange", ++sS);
+        })
+
     },
 
     // DELETE
@@ -228,11 +237,33 @@ var buildMessagesDOM = function (messages, currentUser) {
     messengerBodyDiv.scrollTop(messengerBodyDiv.prop("scrollHeight"));
 }
 
+$(window).on("storage", function (e) {
+    alert("eventFired");
+    if (e.originalEvent.storageArea === sessionStorage) {
+        alert("change1");
+    }
+    // else, event is caused by an update to localStorage, ignore it
+});
+
+// $(window).bind("storage", function (e) {
+//     alert("change2");
+// });
+
+// localStorage.setItem("someItem", "someValue");
+
+// $(window).bind("storage", function (e) {
+//     alert("change3");
+// });
+
+// sessionStorage.setItem("someItem", "someValue");
+
+
 const messengerExp = {
     "buildMessenger": function () {
         Messages.read()
     }
 }
+
 
 // EXPORT READ FUNCTION
 module.exports = messengerExp;
