@@ -7,12 +7,13 @@
 }
 
 .main-headline {
-    font-size: 5em;
-    text-shadow: .5px 1px 2px black;
-    text-shadow: -.5px -1px 2px black;
+    font-size: 6em;
+    text-shadow: .5px .5px 1px black;
+    /* text-shadow: -.5px -1px 2px black; */
     width: 80vw;
     border-bottom: solid 1px cornflowerblue;
     text-align: center;
+    font-weight: bolder;
 }
 
 .secondary-headline {
@@ -26,6 +27,11 @@
     border: 2px cornflowerblue solid;
     padding: 5px;
     margin-bottom: 5px;
+    outline: none;
+}
+
+.login-input:active {
+    outline: none;
 }
 
 .login-button {
@@ -37,6 +43,7 @@
     color: white;
     font-size: 1.5rem;
     transition: .5s;
+    outline: none;
 }
 
 .login-button:hover {
@@ -45,9 +52,15 @@
 }
 
 .login-button:active {
-    box-shadow: 2px -3px -2px black;
+    outline: none;
 }
 
 .register {
     width: 15vw;
+    margin-bottom: 1000px;
+}
+
+.welcome {
+    position: fixed;
+    top: 50px;
 }

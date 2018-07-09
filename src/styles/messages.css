@@ -87,6 +87,7 @@
     padding: 0;
     border: 0;
     font-size: 1rem;
+    width: fit-content;
 }
 
 #messengerBodyDiv .msgItem .deleteMsgButton {
@@ -95,6 +96,8 @@
     padding: 0;
     border: 0;
     font-size: 1rem;
+    width: fit-content;
+
 }
 
 #messengerBodyDiv .msgItem .cancelMsgEditButton {
@@ -103,6 +106,8 @@
     padding: 0;
     border: 0;
     font-size: 1rem;
+    width: fit-content;
+
 }
 
 #messengerBodyDiv .msgItem .saveMsgEditsButton {
@@ -111,6 +116,8 @@
     padding: 0;
     border: 0;
     font-size: 1rem;
+    width: fit-content;
+
 }
 
 #messengerBodyDiv .msgItem .addFriendButton {
