@@ -199,14 +199,15 @@ const apiController = Object.create({}, {
             },
 
             // UPDATE
-            update: function (msgId, userId, newMessage) {
+            update: function (msgId, userId, newMessage, messageTimeStamp) {
 
                 return $.ajax({
                     url: `http://localhost:3000/Messages/${msgId}`,
                     method: "PUT",
                     data: {
                         "userId": userId,
-                        "message": newMessage
+                        "message": newMessage,
+                        "timeStamp": messageTimeStamp
                     }
                 })
             },

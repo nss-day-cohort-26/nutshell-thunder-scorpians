@@ -1,71 +1,142 @@
 #messagesDiv {
+    padding: 0;
+    margin:0;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: space-between;
-    padding: 0;
-    margin:0;
-}
+    overflow: hidden;
+} 
 
 #messengerHeaderDiv {
-    height: 12%;
+    /* position: sticky; */
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-basis: 10%;
+    background-color: black;
     justify-content: space-between;
-    background: black;
-    padding: 5px 5px 12px;
+    align-items: center;
+    padding:3%;
+    
 }
 
 #messengerHeaderDiv h2 {
-    margin: 0;
-    height: 95%;
-    font-size: 95%;
+    font-size: 1em;
     color: white;
+    max-width: 80%;
+    
 }
 
 #messengerHeaderDiv button {
-    margin: 0;
     border: 0;
-    height: 95%;
-    font-size: 95%;
+    font-size: 1rem;
     background-color: transparent;
+    max-width: 20%;
+    color: white;
 }
 
-#messengerHeaderDiv button i {
-    margin: 0;
-    text-align: center;
-    font-size: 95%;
-    color:white;
-}
-
-#messengerHeaderDiv button i::before {
-    margin: 0;
-    text-align: center;
-    font-size: 95%;
-    color:white;
-}
-
-#messengerBodyDiv.msgItem {
+#messengerBodyDiv {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    width: 100%;
+    flex-basis: 80%;
+    
+    overflow: auto;
 }
 
+#messengerBodyContent {
+    min-height: min-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+#messengerBodyDiv .msgItem {
+    overflow-wrap: break-word;
+    width: 100%;
+    padding: 0 3%;
+}
+
+#messengerBodyDiv .msgItem .msgContent {
+    
+    max-width: 95%;
+    min-height: min-content;
+    overflow-wrap: break-word;
+    /* height: 100%; */
+}
+
+#messengerBodyDiv .msgItem .editMsgInput {
+    width: 100%;
+}
+
+
+
+#messengerBodyDiv .msgItem .other {
+    color: blue;
+    font-weight: bold;
+}
+
+#messengerBodyDiv .msgItem .me {
+    color: purple;
+    font-weight: bold;
+}
+
+#messengerBodyDiv .msgItem .editMsgButton {
+    color: tan;
+    background-color:transparent;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+}
+
+#messengerBodyDiv .msgItem .deleteMsgButton {
+    color: red;
+    background-color:transparent;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+}
+
+#messengerBodyDiv .msgItem .cancelMsgEditButton {
+    color: black;
+    background-color:transparent;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+}
+
+#messengerBodyDiv .msgItem .saveMsgEditsButton {
+    color: blue;
+    background-color:transparent;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+}
+
+#messengerBodyDiv .msgItem .addFriendButton {
+    color: green;
+    background-color:transparent;
+    padding: 0;
+    border: 0;
+    font-size: 1rem;
+}
 
 #messageNewDiv {
-    height: 12%;
     display: flex;
+    flex-basis: 10%;
+    background-color: black;
+    justify-content: space-between;
+    align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
-    background: black;
-    padding: 5px;
+    padding: 3%;
+    overflow: hidden;
+    flex-basis: 10%;
 }
 
 #messageNewDiv input {
     margin: 0;
+    padding: 3px;
     border: 0;
     height: 95%;
     font-size: 95%;
@@ -77,8 +148,8 @@
 #messageNewDiv button {
     margin: 0;
     border: 0;
-    height: 95%;
-    font-size: 95%;
+    height: 100%;
+    font-size: 1rem;
     background-color: transparent;
 }
 
