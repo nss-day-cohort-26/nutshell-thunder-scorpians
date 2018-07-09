@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+#wrapper > .card > input {
+    margin-left: 4rem;
+}
+
 .add-task {
     border-width: 1px;
     border-style: solid;

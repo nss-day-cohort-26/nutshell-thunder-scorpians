@@ -20,10 +20,10 @@ const taskObject = Object.create({},{
                             // console.log($(event.target).siblings().eq(2))
                             // targets element.desc and "replaces" it with an input field filled with the value of it
                             const $replacement = $("<input>").attr("value",element.desc)
-                            $(event.target).siblings().eq(2).replaceWith($replacement)
+                            $(event.target).siblings().eq(1).replaceWith($replacement)
                             // console.log($(event.target).siblings().eq(2))
-                            if ($(event.target).siblings().eq(2).is("input")) {
-                                $(event.target).siblings().eq(2).keypress((e)=>{
+                            if ($(event.target).siblings().eq(1).is("input")) {
+                                $(event.target).siblings().eq(1).keypress((e)=>{
                                     if (e.which === 13) {
                                         const editBtnUpdateObj = {
                                             userId: element.userId,
