@@ -70,12 +70,12 @@ const taskObject = Object.create({},{
                     })
                 }
             })
-            const buildFormBtn = $("<button>").addClass("button is-small add-task").text("+").appendTo($wrapper).click(()=>{
+            const buildFormBtn = $("<button>").addClass("add-task").text("+").appendTo($wrapper).click(()=>{
                 const $buildFormDiv = $("<div>").appendTo($wrapper)
                 const descInput = $("<input>").attr("placeholder","description").appendTo($buildFormDiv)
                 const dueDateInput = $("<input>").attr("type","date").attr("placeholder","due").appendTo($buildFormDiv)
                 buildFormBtn.hide();
-                const $subBtn = $("<button>").addClass("button is-small is-primary").text("Submit").appendTo($buildFormDiv).click(()=>{
+                const $subBtn = $("<button>").text("Submit").appendTo($buildFormDiv).click(()=>{
                     $wrapper.empty()
                     const miniTaskObject = {
                         userId: sessionStorage.getItem("activeUser"),
