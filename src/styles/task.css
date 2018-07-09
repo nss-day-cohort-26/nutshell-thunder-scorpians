@@ -2,12 +2,13 @@
     text-align: center;
 }
 
+#wrapper > .card > input {
+    margin-left: 4rem;
+}
+
 .add-task {
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
-    border-radius: 50% !important;
-    background-color: hsl(171, 100%, 41%);
+    font-weight: bold;
+    font-size: 1rem;
     position: sticky !important;
     bottom: 0 !important;
     left:50%;
@@ -36,7 +37,7 @@
 }
 
 .due-date{
-    padding-left: 2rem !important;
+    margin-left: 5rem;
 }
 
 button.is-primary {
