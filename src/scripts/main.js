@@ -2,8 +2,9 @@ const createNewForm = require("./createInputForm")
 const friends = require("./friends")
 const makeData = require("./populateFakeData")
 const loginPage = require("./loginPage")
-
+const messages = require("./messages")
 // sessionStorage.setItem("activeUser", 1)
 // friends.displayFriendList()
+window.addEventListener("storage", messages.buildMessenger, false);
 loginPage.createForms()
 // makeData(5)
