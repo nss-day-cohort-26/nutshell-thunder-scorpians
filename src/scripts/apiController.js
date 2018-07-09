@@ -126,7 +126,7 @@ const apiController = Object.create({}, {
                 });
             },
             getAllEvents: (currentUser, friendString) => {
-                return $.ajax(`https://nutshell-scorpians.herokuapp.com/events?userId=${currentUser}&${friendString}_sort=date&_order=asc`);
+                return $.ajax(`https://nutshell-scorpians.herokuapp.com/events?userId=${currentUser}&${friendString}_sort=date&_order=desc`);
             },
             editEvent: (editedEvent, editId) => {
                 return $.ajax({

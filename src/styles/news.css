@@ -26,14 +26,12 @@ h3 {
 }
 
 #add-news-button {
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
-    border-radius: 100% !important;
-    background-color: hsl(171, 100%, 41%);
-    position: sticky !important;
-    top: 0 !important;
-    left:50%;
+    position: sticky;
+    top: 0;
+    display: block;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #delete-news {
@@ -45,5 +43,15 @@ h3 {
 }
 
 #save-article-button {
-    margin-top: 1%
+    margin-left: 20vw;
+}
+
+.news-input {
+    width: 20vw;
+    border-radius: 8px;
+    border: 2px cornflowerblue solid;
+    padding-bottom: 1%;
+    display: block;
+    margin: auto;
+    margin-bottom: 1%;
 }
