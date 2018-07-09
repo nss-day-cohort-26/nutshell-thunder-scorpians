@@ -8,13 +8,10 @@ const friends = require("./friends");
 
 
 
-sessionStorage.setItem("messageChange", 1);
+localStorage.setItem("messageChange", 1);
 
-const myFunction = function(){
-    alert("works");
-}
 
-window.addEventListener("storage", myFunction, false);
+// window.addEventListener("storage", , false);
 
 // windows.addEventListener("storage", (storageEvent) => {
 //     // the event seems not to fire on own state changes, only other windows
@@ -50,8 +47,8 @@ const Messages = {
         const curTimeStamp = new Date();
         messagesApi.create(userId, message, curTimeStamp).then(() => {
             this.read("createNew");
-            let sS = sessionStorage.getItem("messageChange");
-            sessionStorage.setItem("messageChange", ++sS);
+            let sS = localStorage.getItem("messageChange");
+            localStorage.setItem("messageChange", ++sS);
         })
     },
 
