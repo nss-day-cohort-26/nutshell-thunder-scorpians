@@ -1,3 +1,6 @@
+// This module holds all the api methods that each of the different sections requires
+// Authors: THE THUNDER SCORPIANS! (we each wrote the methods for our own sections)
+
 const $ = require("jquery")
 
 const apiController = Object.create({}, {
