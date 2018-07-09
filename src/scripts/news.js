@@ -64,7 +64,7 @@ const printArticles = () => {
                     //create elements for each thing to be printed to dom
                     const titleText = $("<h3>").addClass("title is-3").text(articleText.title)
                     const synopsisText = $("<h5>").addClass("subtitle").attr("id", "synopsis-text").text(articleText.synopsis)
-                    const urlText = $("<a>").attr("href", articleText.url).text("Read the full article here")
+                    const urlText = $("<a>").attr("href", articleText.url).attr("target", "_blank").text("Read the full article here")
                     const timeText = $("<p>").text(articleText.timestamp)
 
                     //assign to new div
