@@ -6,7 +6,7 @@ const apiController = require("./apiController");
 const messagesApi = apiController["messages"];
 const friends = require("./friends");
 
-// sessionStorage.setItem("messageChange", 1);
+sessionStorage.setItem("messageChange", 1);
 
 // API
 const Messages = {
@@ -34,8 +34,8 @@ const Messages = {
         const curTimeStamp = new Date();
         messagesApi.create(userId, message, curTimeStamp).then(() => {
             this.read("createNew");
-            // let sS = sessionStorage.getItem("messageChange");
-            // sessionStorage.setItem("messageChange", ++sS);
+            let sS = sessionStorage.getItem("messageChange");
+            sessionStorage.setItem("messageChange", ++sS);
         })
     },
 
@@ -44,8 +44,8 @@ const Messages = {
 
         messagesApi.update(msgId, userId, newMessage, messageTimeStamp).then(() => {
             this.read();
-            // let sS = sessionStorage.getItem("messageChange");
-            // sessionStorage.setItem("messageChange", ++sS);
+            let sS = sessionStorage.getItem("messageChange");
+            sessionStorage.setItem("messageChange", ++sS);
         })
 
     },
@@ -237,13 +237,19 @@ var buildMessagesDOM = function (messages, currentUser) {
     messengerBodyDiv.scrollTop(messengerBodyDiv.prop("scrollHeight"));
 }
 
-$(window).on("storage", function (e) {
-    alert("eventFired");
-    if (e.originalEvent.storageArea === sessionStorage) {
-        alert("change1");
-    }
-    // else, event is caused by an update to localStorage, ignore it
-});
+// $(window).on("storage", function (e) {
+//     alert("eventFired");
+//     if (e.originalEvent.storageArea === sessionStorage) {
+//         alert("change1");
+//     }
+//     // else, event is caused by an update to localStorage, ignore it
+// });
+
+// window.addEventListener("storage", function(storageEvent){
+//     // the event seems not to fire on own state changes, only other windows
+//     console.log(storageEvent);
+//     App.controller.setLoginState(storageEvent.newValue);
+// }, false);
 
 // $(window).bind("storage", function (e) {
 //     alert("change2");
