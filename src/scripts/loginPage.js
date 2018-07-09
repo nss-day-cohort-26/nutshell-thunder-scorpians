@@ -20,10 +20,15 @@ const loginControl = Object.create({}, {
             let registerBtn = $("<button class='login-button register'>")
             registerBtn.text("Register New Account")
             submitLoginBtn.text("Submit")
+            const goodEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
             submitLoginBtn.click(() => {
                 //Check to see if input fields are blank
                 if (emailInput.val() === "" || userNameInput.val() === "") {
                     alert("Please enter a valid username and email")
+                    return
+                }
+                else if (!goodEmail.test(emailInput.val())) {
+                    alert("You have entered an invalid email address!")
                     return
                 }
                 else {
@@ -37,6 +42,10 @@ const loginControl = Object.create({}, {
                 //Check if input fields are blank
                 if (emailInput.val() === "" || userNameInput.val() === "") {
                     alert("Please enter a valid username and email")
+                    return
+                }
+                else if (!goodEmail.test(emailInput.val())) {
+                    alert("You have entered an invalid email address!")
                     return
                 }
                 else {
