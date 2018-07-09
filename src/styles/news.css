@@ -26,14 +26,12 @@ h3 {
 }
 
 #add-news-button {
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
-    border-radius: 100% !important;
-    background-color: hsl(171, 100%, 41%);
-    position: sticky !important;
-    top: 0 !important;
-    left:50%;
+    position: sticky;
+    top: 0;
+    display: block;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 #delete-news {

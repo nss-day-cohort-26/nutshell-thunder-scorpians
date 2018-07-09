@@ -7,14 +7,14 @@ const moment = require("moment")
 const apiController = require("./apiController")
 
 //create New Article button
-const addNewsButton = $("<button>").attr("id", "add-news-button").addClass("button is-small add-task").text("+")
+const addNewsButton = $("<button>").attr("id", "add-news-button").text("Add Article")
 
 //create Save Article button
 const saveNewsButton = $("<button>").addClass("button is-small is-primary").attr("id", "save-article-button").text("Save Article")
 
 //create elements for news inputs and append to DOM
 const newsContainer = $("<section>").attr("id", "newsContainer").append(addNewsButton)
-$("#news-test").append(newsContainer).append(addNewsButton)
+$("#news-test").append(newsContainer).prepend(addNewsButton)
 const addNews = $("<div>").attr("id", "news")
 newsContainer.append(addNews)
 
@@ -64,7 +64,7 @@ const printArticles = () => {
                     //create elements for each thing to be printed to dom
                     const titleText = $("<h3>").addClass("title is-3").text(articleText.title)
                     const synopsisText = $("<h5>").addClass("subtitle").attr("id", "synopsis-text").text(articleText.synopsis)
-                    const urlText = $("<a>").attr("href", articleText.url).text("Read the full article here")
+                    const urlText = $("<a>").attr("href", articleText.url).attr("target", "_blank").text("Read the full article here")
                     const timeText = $("<p>").text(articleText.timestamp)
 
                     //assign to new div
