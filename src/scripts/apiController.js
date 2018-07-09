@@ -124,6 +124,24 @@ const apiController = Object.create({}, {
             },
             getAllEvents: (currentUser, friendString) => {
                 return $.ajax(`http://localhost:3000/events?userId=${currentUser}&${friendString}_sort=date&_order=asc`);
+            },
+            editEvent: (editedEvent, editId) => {
+                return $.ajax({
+                    url: `http://localhost:3000/events/${editId}`,
+                    type: "PUT",
+                    data: {
+                        userId: editedEvent.userId,
+                        name: editedEvent.name,
+                        date: editedEvent.date,
+                        location: editedEvent.location
+                    }
+                });
+            },
+            deleteEvent: (deleteId) => {
+                return $.ajax({
+                    url: `http://localhost:3000/events/${deleteId}`,
+                    type: "DELETE"
+                });
             }
         }
     },
