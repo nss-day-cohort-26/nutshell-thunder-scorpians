@@ -3,16 +3,13 @@ const $ = require("jquery");
 const apiController = require("../apiController");
 const loadEventArticle = require("./event-article");
 const loadEvents = require("./event-load");
+const eventHandlers = require("./event-handlers");
 
 const events = () => {
   console.log("Events is running");
   loadEventArticle();
-  let loadAllEvents = new Promise((resolve, reject) => {
-    resolve(loadEvents());
-  });
-  loadAllEvents.then(resolve => {
-    console.log("events loaded");
-  });
+  eventHandlers();
+  loadEvents();
 
 }
 

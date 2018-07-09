@@ -5,9 +5,10 @@ const $ = require("jquery");
 const Event = require("./event-class");
 const apiController = require("../apiController");
 const loadEvents = require("./event-load");
-// Required by: event-load
+// Required by: event-handlers
 
 const editEvent = (event) => {
+  console.log("Beginning event edit...");
   const buttonId = event.target.id;
   console.log(buttonId);
   const editId = parseInt(buttonId);
@@ -24,7 +25,7 @@ const editEvent = (event) => {
     }
     $item.wrap(`<section><input type="${type}" value="${$item.html()}"></input></section>`);
   });
-  $editButton.unbind("click", editEvent);
+  $editButton.unbind("click");
   $editButton.text("Save");
 
 
@@ -55,7 +56,9 @@ const editEvent = (event) => {
       console.log(newEvent);
 
       apiController.events.editEvent(newEvent, editId).then(response => {
+        console.log("Event edited");
         loadEvents();
+        console.log("Finished event edit; all events loaded");
       });
     }
   });
