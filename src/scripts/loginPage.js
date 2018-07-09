@@ -71,7 +71,7 @@ const loginControl = Object.create({}, {
                     let mainUser = user[0].name
                     let firstName = mainUser.split(" ")[0]
                     let capitalLetter = firstName.charAt(0).toUpperCase() + firstName.slice(1)
-                    $("#header").append($(`<h1>Welcome to Nutshell, ${capitalLetter}!</h1>`))
+                    $("#header").append($(`<h1 class='welcome'>Welcome to Nutshell, ${capitalLetter}!</h1>`))
                     $(".grid__wrapper").css("display", "grid")
                     friends.displayFriendList()
                     task.printTasks()

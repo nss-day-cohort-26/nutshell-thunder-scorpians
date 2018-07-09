@@ -59,3 +59,8 @@
     width: 15vw;
     margin-bottom: 1000px;
 }
+
+.welcome {
+    position: fixed;
+    top: 50px;
+}
