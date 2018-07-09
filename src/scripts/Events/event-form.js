@@ -32,7 +32,7 @@ const createNewEvent = () => {
 
   const $submitSection = $("<section>");
   const $submitButton = $("<button>").attr("id", "0submit");
-  $submitButton.text("Submit");
+  $submitButton.text("Save event");
   $submitButton.appendTo($submitSection);
   $submitSection.appendTo($newEventForm);
 

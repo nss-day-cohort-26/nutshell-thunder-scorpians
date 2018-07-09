@@ -15,49 +15,52 @@ const apiController = require("../apiController");
 
 const loadEvents = () => {
 
-    console.log("Loading all events...")
-    const currentUser = parseInt(sessionStorage.getItem("activeUser"));
-    console.log("Events for userId ", currentUser);
+  console.log("Loading all events...")
+  const currentUser = parseInt(sessionStorage.getItem("activeUser"));
+  console.log("Events for userId ", currentUser);
 
-    // New function here to get all the users friends
-    apiController.getFriendsList(currentUser).then(allFriends => {
-      let allFriendsArray = [];
-      allFriends.forEach(friend => {
-        const friendId = friend.user.id;
-        allFriendsArray.push(friendId);
-      });
-      allFriendsArray = allFriendsArray.map(friendIdNumber => { return `userId=${friendIdNumber}&` });
-      const allFriendsString = allFriendsArray.join("");
-      console.log(allFriendsString);
+  // New function here to get all the users friends
+  apiController.getFriendsList(currentUser).then(allFriends => {
+    let allFriendsArray = [];
+    allFriends.forEach(friend => {
+      const friendId = friend.user.id;
+      allFriendsArray.push(friendId);
+    });
+    allFriendsArray = allFriendsArray.map(friendIdNumber => { return `userId=${friendIdNumber}&` });
+    const allFriendsString = allFriendsArray.join("");
+    console.log(allFriendsString);
 
-      apiController.events.getAllEvents(currentUser, allFriendsString).then(sortedEvents => {
+    apiController.events.getAllEvents(currentUser, allFriendsString).then(sortedEvents => {
 
-        const $eventArticle = $("#event-article");
-        $eventArticle.empty();
-        sortedEvents.forEach(event => {
-          // console.log("Writing each event...");
-          const $eventSection = $("<section>");
+      const $eventArticle = $("#event-article");
+      $eventArticle.empty();
+      sortedEvents.forEach(event => {
+        // console.log("Writing each event...");
+        const $eventSection = $("<section>");
 
-          if (parseInt(event.userId) === currentUser) {
-            $eventSection.addClass("event event--yours");
-            // $("<p>").text("Posted by: You").appendTo($eventSection);
-          } else {
-            $eventSection.addClass("event event--others");
-            // $("<p>").text("Posted by: Friend").appendTo($eventSection);
-          }
+        $("<p>").text(event.date).appendTo($eventSection);
+        $("<p>").text(event.name).appendTo($eventSection);
+        $("<p>").text(event.location).appendTo($eventSection);
 
-          $("<p>").text(event.date).appendTo($eventSection);
-          $("<p>").text(event.name).appendTo($eventSection);
-          $("<p>").text(event.location).appendTo($eventSection);
-
+        if (parseInt(event.userId) === currentUser) {
+          $eventSection.addClass("event event--yours");
+          // $("<p>").text("Posted by: You").appendTo($eventSection);
+        } else {
+          $eventSection.addClass("event event--others");
+          // $("<p>").text("Posted by: Friend").appendTo($eventSection);
+        }
+        // Only adds edit/delete buttons if it's your event
+        if ($eventSection.hasClass("event--yours")) {
           $("<button>").text("Edit").attr("id", `${event.id}edit`).addClass("event__button--edit").appendTo($eventSection);
           $("<button>").text("Delete").attr("id", `${event.id}delete`).addClass("event__button--delete").appendTo($eventSection);
-          $eventSection.attr("id", `${event.id}event`).appendTo($eventArticle);
-        });
-        $eventArticle.appendTo($(".events"));
+        }
+
+        $eventSection.attr("id", `${event.id}event`).appendTo($eventArticle);
       });
+      $eventArticle.appendTo($(".events"));
     });
-    console.log("All events loaded");
+  });
+  console.log("All events loaded");
 
 };
 

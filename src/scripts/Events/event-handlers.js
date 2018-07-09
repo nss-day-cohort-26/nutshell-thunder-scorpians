@@ -17,17 +17,17 @@ const addHandlers = () => {
 
     // This switch checks which button was clicked
     switch (true) {
-      case ($buttonClicked.hasClass("event__button--new")):
+      case ($buttonClicked.text() === "New Event"):
         addEvent();
         break;
-      case ($buttonClicked.text() === "Submit" || $buttonClicked.text() === "Save changes"):
+      case ($buttonClicked.text().startsWith("Save")):
         submitEvent(event);
         break;
       // This case reads the text because I am running a different function when you re-click this button to save the event after its text content has been changed
       case ($buttonClicked.text() === "Edit"):
         editEvent(event);
         break;
-      case ($buttonClicked.hasClass("event__button--delete")):
+      case ($buttonClicked.text() === "Delete"):
         deleteEvent(event);
         break;
       default:
